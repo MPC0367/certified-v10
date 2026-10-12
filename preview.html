@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CERTIFIED_V10 — client preview of DJ schedules (demo data)</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B0B0C'/%3E%3Cpath d='M12 44h40' stroke='%23FF3117' stroke-width='7'/%3E%3Cpath d='M16 18l16 20 16-20' fill='none' stroke='%23EDEAE3' stroke-width='7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Anuphan:wght@400;500;600&family=Kanit:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<div class="notice notice--demo">
+  <p><strong data-i18n="preview.notice.strong">Client preview - demo schedules.</strong> <span data-i18n="preview.notice.text">These appearances are examples, not confirmed bookings.</span></p>
+</div>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo" href="index.html" data-keep-lang aria-label="Back to the main site" data-i18n-label="footer.back"><img src="img/logo.png" alt="" width="933" height="96"></a>
+    <div class="header__tools">
+      <button class="lang js-lang" type="button" hidden><span class="lang__en" aria-hidden="true">EN</span><span aria-hidden="true"> / </span><span class="lang__th" aria-hidden="true">ไทย</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="preview-head">
+      <h1 class="h2" data-i18n="preview.title">The next public set</h1>
+      <p class="lede" data-i18n="preview.lede">This page shows the per-DJ schedule working with fictional data and a demo clock. No real calendar is connected.</p>
+    </header>
+
+    <div class="clockbox">
+      <div>
+        <span class="clockbox__label" data-i18n="preview.clock">Demo clock, Bangkok time</span>
+        <span class="clockbox__value" id="clock">Mon 12 Oct 2026, 20:00 ICT</span>
+      </div>
+      <div id="controls" hidden>
+        <label class="clockbox__label" for="scenario" data-i18n="preview.scenario">Choose a schedule state to demonstrate</label>
+        <div class="controls">
+          <select id="scenario">
+            <option value="upcoming" data-i18n="preview.s.upcoming">Upcoming sets</option>
+            <option value="playing" data-i18n="preview.s.playing">Playing now</option>
+            <option value="cancelled" data-i18n="preview.s.cancelled">Cancelled set</option>
+            <option value="empty" data-i18n="preview.s.empty">No public sets</option>
+            <option value="unavailable" data-i18n="preview.s.unavailable">Schedule unavailable</option>
+            <option value="stale" data-i18n="preview.s.stale">Stale feed (61 minutes)</option>
+          </select>
+          <button class="btn" id="reset" type="button" data-i18n="preview.reset">Reset preview</button>
+        </div>
+      </div>
+    </div>
+
+    <noscript><p class="note">JavaScript is off. This preview needs JavaScript to show the demo schedules.</p></noscript>
+    <p class="stale" data-slot="stale" hidden></p>
+    <p class="vh" role="status" aria-live="polite" data-slot="announce"></p>
+
+    <div class="lineup__cols" aria-hidden="true">
+      <span data-i18n="lineup.col.member">Member</span>
+      <span data-i18n="lineup.col.next">Next public set</span>
+      <span data-i18n="lineup.col.count">Starts in</span>
+    </div>
+    <ul class="lineup__list">
+
+      <li class="artist" data-artist="mawon" data-state="none">
+        <div class="artist__row">
+          <div class="artist__id">
+            <picture>
+              <source type="image/avif" srcset="img/mawon-360.avif">
+              <source type="image/webp" srcset="img/mawon-360.webp">
+              <img class="artist__thumb" src="img/mawon-360.jpg" alt="" width="360" height="450" decoding="async">
+            </picture>
+            <div>
+              <h2 class="artist__name"><img src="img/lg-mawon.png" alt="MAWON" width="685" height="140"></h2>
+              <p class="artist__role" data-i18n="role.dj">DJ</p>
+            </div>
+          </div>
+          <div class="artist__set">
+            <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-slot="status">Demo</span></p>
+            <p class="artist__venue" data-slot="venue">Demo schedule</p>
+            <p class="artist__date" data-slot="date"></p>
+            <p class="artist__notice" data-slot="notice" hidden></p>
+          </div>
+          <div class="artist__side">
+            <p class="count__label" data-slot="count-label" hidden></p>
+            <p class="count__value" data-slot="count" aria-live="off" hidden></p>
+            <button class="link-btn artist__toggle" type="button" aria-controls="details-mawon" hidden><span data-i18n="lineup.details">Details</span><span class="vh">: MAWON</span></button>
+          </div>
+        </div>
+        <div class="artist__details" id="details-mawon">
+          <dl class="facts">
+            <div><dt data-i18n="d.role">Role</dt><dd data-i18n="role.dj">DJ</dd></div>
+            <div><dt data-i18n="d.next">Next public set</dt><dd><span data-slot="detail-set"></span> <span class="links" data-slot="detail-links" hidden></span></dd></div>
+          </dl>
+        </div>
+      </li>
+
+      <li class="artist" data-artist="ossy" data-state="none">
+        <div class="artist__row">
+          <div class="artist__id">
+            <picture>
+              <source type="image/avif" srcset="img/ossy-360.avif">
+              <source type="image/webp" srcset="img/ossy-360.webp">
+              <img class="artist__thumb" src="img/ossy-360.jpg" alt="" width="360" height="450" decoding="async">
+            </picture>
+            <div>
+              <h2 class="artist__name"><img src="img/lg-ossy.png" alt="OSSY" width="1040" height="140"></h2>
+              <p class="artist__role" data-i18n="role.dj">DJ</p>
+            </div>
+          </div>
+          <div class="artist__set">
+            <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-slot="status">Demo</span></p>
+            <p class="artist__venue" data-slot="venue">Demo schedule</p>
+            <p class="artist__date" data-slot="date"></p>
+            <p class="artist__notice" data-slot="notice" hidden></p>
+          </div>
+          <div class="artist__side">
+            <p class="count__label" data-slot="count-label" hidden></p>
+            <p class="count__value" data-slot="count" aria-live="off" hidden></p>
+            <button class="link-btn artist__toggle" type="button" aria-controls="details-ossy" hidden><span data-i18n="lineup.details">Details</span><span class="vh">: OSSY</span></button>
+          </div>
+        </div>
+        <div class="artist__details" id="details-ossy">
+          <dl class="facts">
+            <div><dt data-i18n="d.role">Role</dt><dd data-i18n="role.dj">DJ</dd></div>
+            <div><dt data-i18n="d.next">Next public set</dt><dd><span data-slot="detail-set"></span> <span class="links" data-slot="detail-links" hidden></span></dd></div>
+          </dl>
+        </div>
+      </li>
+
+      <li class="artist" data-artist="tew" data-state="none">
+        <div class="artist__row">
+          <div class="artist__id">
+            <picture>
+              <source type="image/avif" srcset="img/tew-360.avif">
+              <source type="image/webp" srcset="img/tew-360.webp">
+              <img class="artist__thumb" src="img/tew-360.jpg" alt="" width="360" height="450" decoding="async">
+            </picture>
+            <div>
+              <h2 class="artist__name"><img src="img/lg-tew.png" alt="TEW" width="827" height="140"></h2>
+              <p class="artist__role" data-i18n="role.dj">DJ</p>
+            </div>
+          </div>
+          <div class="artist__set">
+            <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-slot="status">Demo</span></p>
+            <p class="artist__venue" data-slot="venue">Demo schedule</p>
+            <p class="artist__date" data-slot="date"></p>
+            <p class="artist__notice" data-slot="notice" hidden></p>
+          </div>
+          <div class="artist__side">
+            <p class="count__label" data-slot="count-label" hidden></p>
+            <p class="count__value" data-slot="count" aria-live="off" hidden></p>
+            <button class="link-btn artist__toggle" type="button" aria-controls="details-tew" hidden><span data-i18n="lineup.details">Details</span><span class="vh">: TEW</span></button>
+          </div>
+        </div>
+        <div class="artist__details" id="details-tew">
+          <dl class="facts">
+            <div><dt data-i18n="d.role">Role</dt><dd data-i18n="role.dj">DJ</dd></div>
+            <div><dt data-i18n="d.next">Next public set</dt><dd><span data-slot="detail-set"></span> <span class="links" data-slot="detail-links" hidden></span></dd></div>
+          </dl>
+        </div>
+      </li>
+
+      <li class="artist" data-artist="wichaya" data-state="none">
+        <div class="artist__row">
+          <div class="artist__id">
+            <picture>
+              <source type="image/avif" srcset="img/wichaya-360.avif">
+              <source type="image/webp" srcset="img/wichaya-360.webp">
+              <img class="artist__thumb" src="img/wichaya-360.jpg" alt="" width="360" height="450" decoding="async">
+            </picture>
+            <div>
+              <h2 class="artist__name"><img src="img/lg-wichaya.png" alt="WICHAYA" width="594" height="140"></h2>
+              <p class="artist__role" data-i18n="role.dj">DJ</p>
+            </div>
+          </div>
+          <div class="artist__set">
+            <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-slot="status">Demo</span></p>
+            <p class="artist__venue" data-slot="venue">Demo schedule</p>
+            <p class="artist__date" data-slot="date"></p>
+            <p class="artist__notice" data-slot="notice" hidden></p>
+          </div>
+          <div class="artist__side">
+            <p class="count__label" data-slot="count-label" hidden></p>
+            <p class="count__value" data-slot="count" aria-live="off" hidden></p>
+            <button class="link-btn artist__toggle" type="button" aria-controls="details-wichaya" hidden><span data-i18n="lineup.details">Details</span><span class="vh">: WICHAYA</span></button>
+          </div>
+        </div>
+        <div class="artist__details" id="details-wichaya">
+          <dl class="facts">
+            <div><dt data-i18n="d.role">Role</dt><dd data-i18n="role.dj">DJ</dd></div>
+            <div><dt data-i18n="d.next">Next public set</dt><dd><span data-slot="detail-set"></span> <span class="links" data-slot="detail-links" hidden></span></dd></div>
+          </dl>
+        </div>
+      </li>
+
+      <li class="artist" data-artist="maxlerr" data-state="none">
+        <div class="artist__row">
+          <div class="artist__id">
+            <picture>
+              <source type="image/avif" srcset="img/maxlerr-360.avif">
+              <source type="image/webp" srcset="img/maxlerr-360.webp">
+              <img class="artist__thumb" src="img/maxlerr-360.jpg" alt="" width="360" height="450" decoding="async">
+            </picture>
+            <div>
+              <h2 class="artist__name"><img src="img/lg-maxlerr.png" alt="MAXLERR" width="610" height="140"></h2>
+              <p class="artist__role" data-i18n="role.mc">MC</p>
+            </div>
+          </div>
+          <div class="artist__set">
+            <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-slot="status">Demo</span></p>
+            <p class="artist__venue" data-slot="venue">Demo schedule</p>
+            <p class="artist__date" data-slot="date"></p>
+            <p class="artist__notice" data-slot="notice" hidden></p>
+          </div>
+          <div class="artist__side">
+            <p class="count__label" data-slot="count-label" hidden></p>
+            <p class="count__value" data-slot="count" aria-live="off" hidden></p>
+            <button class="link-btn artist__toggle" type="button" aria-controls="details-maxlerr" hidden><span data-i18n="lineup.details">Details</span><span class="vh">: MAXLERR</span></button>
+          </div>
+        </div>
+        <div class="artist__details" id="details-maxlerr">
+          <dl class="facts">
+            <div><dt data-i18n="d.role">Role</dt><dd data-i18n="role.mc">MC</dd></div>
+            <div><dt data-i18n="d.next">Next public set</dt><dd><span data-slot="detail-set"></span> <span class="links" data-slot="detail-links" hidden></span></dd></div>
+          </dl>
+        </div>
+      </li>
+
+    </ul>
+
+    <footer class="preview-foot">
+      <p data-i18n="preview.foot">Every date, venue and assignment on this page is fictional. No messages, tickets or bookings are sent. Live publication needs client-approved public event data.</p>
+      <p><a href="index.html" data-keep-lang data-i18n="footer.back">Back to the main site</a></p>
+    </footer>
+  </div>
+</main>
+
+<script src="schedule.js" defer></script>
+<script src="i18n.js" defer></script>
+<script src="schedule-ui.js" defer></script>
+<script src="preview.js" defer></script>
+</body>
+</html>

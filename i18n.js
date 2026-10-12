@@ -1,179 +1,358 @@
-/* ============================================================
-   CERTIFIED_V10 — Thai dictionary
-   English is authored in index.html and captured at runtime.
-   Brand names, venue names, DJ/MC/BPM stay Latin (matches usage).
-   ============================================================ */
-window.CV_TH = {
-  "a11y.skip": "ข้ามไปยังเนื้อหา",
+/* CERTIFIED_V10 — language layer.
+   English is authored in the HTML. TH holds the Thai for static text
+   (data-i18n, data-i18n-alt, data-i18n-label). STR holds both languages for
+   text that scripts generate. The Thai is a draft pending native review.
+   Brand, artist and venue names stay in Latin script. */
+(function () {
+  "use strict";
 
-  "nav.lineup": "ไลน์อัพ",
-  "nav.dyno": "เทสต์",
-  "nav.shows": "โชว์",
-  "nav.rooms": "ร้าน",
-  "nav.book": "จองเลย",
+  var TH = {
+    "skip": "ข้ามไปยังเนื้อหา",
+    "notice.text": "เว็บไซต์คอนเซ็ปต์อิสระ ไม่ใช่เว็บไซต์ทางการของ Certified_V10",
+    "notice.link": "เกี่ยวกับเว็บไซต์นี้",
+    "preview.notice.strong": "ตัวอย่างสำหรับลูกค้า - ใช้ข้อมูลสมมติ",
+    "preview.notice.text": "งานที่แสดงเป็นเพียงตัวอย่าง ไม่ใช่งานที่ยืนยันแล้ว",
 
-  "sheet.spec": "สเปคชีท",
-  "sheet.dyno": "แท่นไดโน่",
-  "sheet.lineup": "ไลน์อัพ",
-  "sheet.rooms": "ร้านที่รับรอง",
-  "sheet.record": "บันทึกผลงาน",
-  "sheet.shows": "งานถัดไป",
-  "sheet.book": "จองยูนิตนี้",
+    "nav.label": "เมนูหลัก",
+    "nav.shows": "งานแสดง",
+    "nav.djs": "ดีเจ",
+    "nav.about": "เกี่ยวกับ",
+    "nav.past": "ผลงานที่ผ่านมา",
+    "nav.hire": "ว่าจ้างคอลเลกทีฟ",
+    "menu.open": "เปิดเมนู",
+    "menu.close": "ปิดเมนู",
+    "menu.title": "เมนู",
+    "home.label": "Certified_V10 หน้าแรก",
 
-  "hero.kicker": "เอกสารเลขที่ CV10-BKK · ยูนิต DJ & MC · กรุงเทพฯ",
-  "hero.sub": "ยูนิต DJ และ MC จากกรุงเทพฯ ที่มีหน้าที่เดียว — พาคืนในคลับไปให้ถึงเรดไลน์ เฮาส์ ฮิปฮอป และเพลงฮิตที่ทั้งฟลอร์ร้องได้ทุกคำ",
-  "hero.book": "จองยูนิตนี้",
-  "hero.s1k": "จุดเริ่มต้น",
-  "hero.s1v": "อาฟเตอร์ปาร์ตี้กรุงเทพฯ",
-  "hero.s2k": "พิสัยทำการ",
-  "hero.s2v": "กรุงเทพฯ ⇄ บริสเบน",
-  "hero.s3k": "เอาต์พุต",
-  "hero.s3v": "เต็มฟลอร์ ทุกรอบ",
-  "hero.cue": "เลื่อนลง — ประตูเปิด 22:30",
-  "hero.next": "งานถัดไป — Wingstop Vol.2",
-  "hero.live": "กำลังเล่นอยู่ตอนนี้",
+    "hero.eyebrow": "ดีเจคอลเลกทีฟจากกรุงเทพฯ",
+    "hero.claim": "ดีเจสี่คน หนึ่งคอลเลกทีฟ",
+    "hero.body": "Certified_V10 รวม OSSY, WICHAYA, MAWON และ TEW โดยมี MAXLERR เป็น MC สำหรับคลับไนต์และงานอีเวนต์ ดูงานสาธารณะครั้งถัดไปของแต่ละคน หรือสอบถามสำหรับงานของคุณ",
+    "hero.cta.shows": "ดูงานที่กำลังจะมาถึง",
+    "hero.cta.hire": "ว่าจ้างคอลเลกทีฟ",
+    "hero.next.label": "งานถัดไปของคอลเลกทีฟ",
+    "hero.photo.alt": "สมาชิกทั้งห้าคนของ Certified_V10 ยืนอยู่ในสตูดิโอพื้นหลังสีขาว",
+    "hero.photo.cap": "คอลเลกทีฟในสตูดิโอ ปี 2026 ภาพ: มีเดียแพ็กของ Certified_V10",
 
-  "spec.label": "สเปคชีท",
-  "spec.t1": "นี่คือเครื่องยนต์",
-  "spec.t2": "ไม่ใช่แค่ไลน์อัพ",
-  "spec.p1": "งานจ้างทั่วไปให้เพลงประกอบกับร้านหนึ่งคืน แต่ Certified_V10 ให้ระบบขับเคลื่อนทั้งชุด — ดีเจอัดแรงดันทีละแทร็ก MC คุมคันเร่งของฟลอร์ และโฮสต์ดูแลให้ทุกโต๊ะอยู่ในรอบเดียวกัน มันคือความต่างระหว่างคืนที่คุณ “ไปมา” กับคืนที่พาคุณไปที่ไหนสักแห่ง",
-  "spec.p2": "ยูนิตนี้เกิดจากวัยรุ่นกรุงเทพฯ และเล่นให้วัยรุ่นกรุงเทพฯ — จากอาฟเตอร์ปาร์ตี้ที่คนล้นห้องสู่คลับแถวหน้าของเมือง จนกะหลังเครื่องเล่นธรรมดา ๆ กลายเป็นอีเวนต์ที่มีชื่อตัวเองอยู่บนใบปลิว",
-  "spec.r1k": "ยูนิต",
-  "spec.r2k": "ประเภท",
-  "spec.r2v": "ทีม DJ · MC · โฮสต์",
-  "spec.r3k": "เชื้อเพลิง",
-  "spec.r3v": "เฮาส์ / ฮิปฮอป / เพลงไทยเต็มฟลอร์",
-  "spec.r4k": "เรดไลน์",
-  "spec.r5k": "ตลาด",
-  "spec.r5v": "วัยรุ่นกรุงเทพฯ → ทั่วเมือง",
-  "spec.r6k": "สถานะ",
-  "spec.stamp": "ผ่านการรับรอง ✓",
+    "shows.title": "งานที่กำลังจะมาถึง",
+    "shows.lede": "งานสาธารณะที่ยืนยันแล้วของคอลเลกทีฟ เวลาที่แสดงเป็นเวลาท้องถิ่นของสถานที่จัดงาน",
+    "shows.official": "Certified_V10 บน Instagram",
+    "recent.label": "งานล่าสุด",
+    "recent.status": "จบแล้ว",
+    "recent.date.k": "วันที่",
+    "recent.venue.k": "สถานที่",
+    "recent.venue.v": "สามย่านมิตรทาวน์ กรุงเทพฯ",
+    "recent.head.k": "เฮดไลเนอร์",
+    "recent.lineup.k": "ไลน์อัพ",
+    "recent.link": "ดูประกาศบน Instagram",
+    "recent.poster.alt": "โปสเตอร์ทางการของงาน Certified × Wingstop Vol. 2 วันที่ 29 ส.ค. 2026 ที่สามย่านมิตรทาวน์",
+    "recent.poster.cap": "อาร์ตเวิร์กทางการจาก @certified_v10",
 
-  "dyno.label": "แท่นไดโน่",
-  "dyno.t1": "หนึ่งคืนเต็ม",
-  "dyno.t2": "วัดกันบนหน้าปัด",
-  "dyno.lede": "เครื่องยนต์ทุกตัวต้องขึ้นแท่นเทสต์ นี่คือหนึ่งกะของ Certified บนไดโน่ — ตั้งแต่เปิดประตูยันปิดร้าน วัดเป็น BPM เลื่อนลงเพื่อสตาร์ท",
-  "dyno.clock": "เวลาบนฟลอร์",
-  "dyno.phaseWord": "เฟส",
-  "dyno.p1n": "สตาร์ท",
-  "dyno.p2n": "ไต่รอบ",
-  "dyno.p3n": "เรดไลน์",
-  "dyno.p4n": "ปล่อยรอบ",
-  "dyno.p1t": "ประตูเปิด ควันเริ่มลอย ดีเจเปิดรอบต่ำ ๆ อุ่นห้องเหมือนน้ำมันไหลผ่านเครื่อง — คุณไม่รู้ตัวว่าโดนดึงเข้าไป จนอยู่ข้างในเรียบร้อยแล้ว",
-  "dyno.p2t": "ฟลอร์เริ่มแน่น มิกซ์เริ่มกระชับ เอดิตของเพลงที่ทุกคนร้องได้ ตัดก่อนถึงท่อนฮุคหนึ่งห้อง — กดดันแบบตั้งใจ",
-  "dyno.p3t": "MC คุมคันเร่ง คอนเฟตติ CO2 แล้วท่อนฮุคก็มาถึงจริง ๆ — ทั้งร้านหายใจพร้อมกันหนึ่งจังหวะ นี่แหละสิ่งที่ยูนิตนี้ถูกรับรองมาให้ทำ",
-  "dyno.p4t": "ดับเครื่องแล้วแต่ฟลอร์ยังร้อน เพลงช้าให้สายแข็ง ไฟเปิดครึ่งดวง ทุกคนถกกันว่าจะไปกินอะไรต่อ — เครื่องดี ๆ ตอนเย็นลงก็ยังเสียงดัง",
-  "dyno.a1": "ควันและลำแสงสีขาวหนึ่งลำเหนือฟลอร์ว่างตอนประตูเปิด",
-  "dyno.a2": "ร่างคนเต้นเบลอเป็นสายใต้เลเซอร์สีขาวบาง ๆ",
-  "dyno.a3": "คอนเฟตติค้างกลางอากาศด้วยแฟลชเหนือฟลอร์แน่นช่วงพีค",
-  "dyno.a4": "คอนเฟตติโปรยลงบนฟลอร์ที่กำลังว่างตอนตีสี่",
+    "lineup.title": "พบกับดีเจ",
+    "lineup.lede": "ดูงานสาธารณะครั้งถัดไปของดีเจแต่ละคน วันและเวลาเป็นเวลากรุงเทพฯ เว้นแต่จะระบุเป็นอย่างอื่น",
+    "lineup.col.member": "สมาชิก",
+    "lineup.col.next": "งานสาธารณะครั้งถัดไป",
+    "lineup.col.count": "เริ่มใน",
+    "lineup.details": "รายละเอียด",
+    "lineup.noscript": "ตารางงานตามที่เผยแพร่เมื่อ 12 ต.ค. 2026 เปิด JavaScript เพื่อดูข้อมูลล่าสุด",
+    "lineup.preview": "ตัวอย่างสำหรับลูกค้า: ดูส่วนนี้พร้อมตารางงานสมมติ",
+    "role.dj": "ดีเจ",
+    "role.mc": "MC",
+    "d.role": "บทบาท",
+    "d.known": "เป็นที่รู้จักจาก",
+    "d.next": "งานสาธารณะครั้งถัดไป",
+    "d.listen": "ฟังเพลง",
+    "d.listen.link": "Certified_V10 บน YouTube",
+    "d.credit": "ภาพ: มีเดียแพ็กของ Certified_V10",
+    "d.mawon.known": "เซ็ตพลังงานแบบเฟสติวัล",
+    "d.ossy.known": "สายฮิปฮอป",
+    "d.wichaya.known": "เพลงที่ทั้งฟลอร์ร้องตามได้",
+    "thumb.mawon": "ภาพถ่ายของ MAWON",
+    "thumb.ossy": "ภาพถ่ายของ OSSY",
+    "thumb.tew": "ภาพถ่ายของ TEW",
+    "thumb.wichaya": "ภาพถ่ายของ WICHAYA",
+    "thumb.maxlerr": "ภาพถ่ายของ MAXLERR",
 
-  "rooms.label": "ร้านที่รับรอง",
-  "rooms.t1": "ฟลอร์ที่เครื่องนี้",
-  "rooms.t2": "ลงวิ่งประจำ",
-  "rooms.lede": "เรสซิเดนซี กะรับเชิญ และเทคโอเวอร์ทั่วแถวหน้าของเมือง — จากสตริปสุขุมวิท 24 ถึงย่านรัชโยธิน",
-  "rooms.v1a": "สุขุมวิท 24",
-  "rooms.v1t": "ห้องฮิปฮอป",
-  "rooms.v2a": "24 BLVD · สุขุมวิท 24",
-  "rooms.v2t": "ฟลอร์ EDM",
-  "rooms.v3a": "รัชโยธิน",
-  "rooms.v3t": "ชั่วโมงเพลงไทย",
-  "rooms.v4a": "สุขุมวิท 49",
-  "rooms.v4t": "ห้องเปิดใหม่",
-  "rooms.v5a": "กรุงเทพฯ",
-  "rooms.v5t": "คลับไนต์",
-  "rooms.v6a": "ทองหล่อ",
-  "rooms.v6t": "ฟลอร์เต้น",
-  "rooms.note": "+ ฟอร์แมตเทคโอเวอร์สำหรับร้านที่ยังไม่อยู่ในลิสต์",
-  "rooms.decksAlt": "มือบนครอสเฟดเดอร์ของมิกเซอร์ หน้าจอเรืองแสง ฝูงชนไฟแดงเบลออยู่ด้านหลัง",
-  "rooms.decksCap": "รายละเอียดหน้างาน — ครอสเฟดเดอร์, 01:14",
+    "about.title": "เกี่ยวกับคอลเลกทีฟ",
+    "about.p1": "Certified_V10 คือดีเจคอลเลกทีฟจากกรุงเทพฯ ที่จัดปาร์ตี้มาตั้งแต่ปี 2023 ดีเจสี่คนใช้บูธเดียวกัน และมี MC หนึ่งคนคอยคุมบรรยากาศของห้อง",
+    "about.p2": "แนวเพลงมีทั้งเฮาส์ ฮิปฮอป และเพลงไทยที่ฟลอร์กรุงเทพฯ ร้องตามได้ทุกท่อน",
+    "about.caption": "เป็นเครื่องยนต์ ไม่ใช่แค่ไลน์อัพ: ห้าคน หนึ่งคืน เล่นเป็นทีมเดียว",
+    "about.base.k": "ฐาน",
+    "about.base.v": "กรุงเทพฯ ประเทศไทย",
+    "about.since.k": "เริ่มตั้งแต่",
+    "about.members.k": "สมาชิก",
+    "about.members.v": "OSSY, WICHAYA, MAWON, TEW (ดีเจ) และ MAXLERR (MC)",
+    "about.sound.k": "แนวเพลง",
+    "about.sound.v": "เฮาส์ ฮิปฮอป เพลงไทย",
+    "about.formats.k": "รูปแบบงาน",
+    "about.formats.v": "คลับไนต์ เวทีอีเวนต์ งานแบรนด์",
+    "about.listen": "ฟังบน YouTube",
 
-  "lineup.label": "ไลน์อัพ",
-  "lineup.t1": "ห้าสูบ",
-  "lineup.t2": "หนึ่งเครื่องยนต์",
-  "lineup.lede": "ดีเจสี่คนกับหนึ่งเสียงคุมฟลอร์ ทุกกะของ Certified วิ่งด้วยระบบขับเคลื่อนเดียวกัน — ดีเจอัดแรงดันขึ้นไปเรื่อย ๆ ส่วน MC คือคนตัดสินว่าทั้งร้านจะปล่อยมันตอนไหน",
-  "lineup.unitAlt": "สมาชิก Certified_V10 ทั้งห้าคนยืนรวมกันในสตูดิโอ",
-  "lineup.unitCap": "ยูนิตเต็มทีม — ไฟล์สตูดิโอ 2026",
-  "lineup.dj": "ดีเจ — เซเลคเตอร์",
-  "lineup.dj2": "ดีเจ — เซเลคเตอร์",
-  "lineup.dj3": "ดีเจ — เซเลคเตอร์",
-  "lineup.dj4": "ดีเจ — เซเลคเตอร์",
-  "lineup.mc": "MC — คันเร่ง",
+    "sound.title": "หนึ่งคืนเป็นอย่างไร",
+    "sound.lede": "สี่ช่วง ตั้งแต่เปิดประตูจนปิดร้าน เลือกช่วงที่ต้องการดู",
+    "sound.tabs": "ช่วงของคืน",
+    "sound.bpm": "จังหวะโดยประมาณ",
+    "sound.around": "ประมาณ",
+    "sound.illus": "ภาพประกอบ",
+    "sound.note": "เวลาและจังหวะเป็นค่าประมาณของคืนทั่วไป ไม่ใช่เซ็ตลิสต์ตายตัว ภาพในส่วนนี้เป็นภาพประกอบที่สร้างขึ้น ไม่ใช่ภาพจากงานจริง",
+    "sound.p1.name": "สตาร์ท",
+    "sound.p2.name": "ไต่รอบ",
+    "sound.p3.name": "เรดไลน์",
+    "sound.p4.name": "ปล่อยรอบ",
+    "sound.p1.text": "เปิดประตู ดีเจเริ่มที่จังหวะต่ำ ๆ เพื่ออุ่นห้อง ฟลอร์จึงค่อย ๆ เต็มโดยไม่ทันสังเกต",
+    "sound.p2.text": "ฟลอร์เริ่มแน่น มิกซ์เริ่มกระชับ เพลงที่ทุกคนรู้จักถูกดึงไว้หนึ่งห้องก่อนถึงท่อนฮุค",
+    "sound.p3.text": "MC คุมห้อง ท่อนฮุคมาถึง และทั้งฟลอร์ขยับไปพร้อมกัน นี่คือจุดพีคของคืน",
+    "sound.p4.text": "จังหวะลดลง เพลงช้าสำหรับคนที่ยังอยู่ ไฟเปิดครึ่งหนึ่ง คืนค่อย ๆ จบลง",
 
-  "shows.label": "งานถัดไป",
-  "shows.lede": "สองคืนกับ Wingstop ที่สามย่านมิตรทาวน์ — YOUNGOHM ขึ้นบิล ยูนิตเต็มทีมคุมเครื่องเล่น และแรนช์ราดทุกอย่าง",
-  "shows.d": "วัน",
-  "shows.h": "ชม.",
-  "shows.m": "นาที",
-  "shows.s": "วิ",
-  "shows.pre": "นับถอยหลังสู่คืนแรก — ศุกร์ 29 ส.ค.",
-  "shows.live": "กำลังเล่นอยู่ตอนนี้ — ที่สามย่านมิตรทาวน์",
-  "shows.done": "จบงานแล้ว — รอวันใหม่ทาง IG",
-  "shows.k1": "วันจัดงาน",
-  "shows.v1": "ศุกร์ 29 + เสาร์ 30 ส.ค. 2026",
-  "shows.k2": "สถานที่",
-  "shows.v2": "สามย่านมิตรทาวน์ — กรุงเทพฯ",
-  "shows.k3": "เฮดไลเนอร์",
-  "shows.k4": "ไลน์อัพ",
-  "shows.k5": "บัตร",
-  "shows.v5": "Early bird 499 · Regular 599 · Walk-in 799 บาท",
-  "shows.k6": "เดรสโค้ด",
-  "shows.v6": "เขียว-ขาว — ส่วนดำแดง ให้พวกเราใส่เอง",
-  "shows.cta": "บัตรและรายละเอียด — DM",
-  "shows.posterAlt": "โปสเตอร์จริงของงาน Certified × Wingstop Vol. 2 — 29 ส.ค. 2026 สามย่านมิตรทาวน์",
-  "shows.posterCap": "อาร์ตเวิร์กจริง — จาก @certified_v10",
+    "past.title": "ผลงานที่ผ่านมา",
+    "past.lede": "งานที่คัดมาบางส่วน ระบุบทบาทและวันที่เฉพาะที่ยืนยันได้",
+    "past.col.what": "งาน",
+    "past.col.role": "บทบาท",
+    "past.col.when": "เมื่อไร",
+    "past.col.source": "ที่มา",
+    "past.tbc": "รอยืนยันวันที่",
+    "past.r1.role": "งานของคอลเลกทีฟ ร่วมกับ YOUNGOHM",
+    "past.r1.where": "สามย่านมิตรทาวน์ กรุงเทพฯ",
+    "past.r2.title": "เทคโอเวอร์ที่ MIL",
+    "past.r2.role": "คลับเทคโอเวอร์",
+    "past.r2.where": "กรุงเทพฯ",
+    "past.r3.title": "ปาร์ตี้พรีฮาโลวีน",
+    "past.r3.role": "ร่วมกับ onenightstory.project และ rospa.club",
+    "past.r3.where": "Shanghai Mansion กรุงเทพฯ",
+    "past.r4.role": "การแสดง",
+    "past.r4.where": "กรุงเทพฯ",
+    "past.r5.title": "บริสเบน ออสเตรเลีย",
+    "past.r5.role": "ร่วมกับ Brisbane Thai Society",
+    "past.src.ig": "โพสต์ Instagram",
+    "past.src.bio": "โปรไฟล์ Instagram",
+    "past.src.owner": "ข้อมูลที่ได้รับมา รอการยืนยัน",
+    "past.r2.when": "พ.ค. 2026",
+    "rooms.title": "สถานที่ที่เคยเล่น",
+    "rooms.note": "รายชื่อนี้คือเครดิตงานที่ผ่านมา ไม่ใช่รายชื่อเรสซิเดนซีหรือตารางงานคืนนี้ ดูว่าดีเจแต่ละคนเล่นที่ไหนครั้งถัดไปได้ในรายชื่อดีเจ ข้อมูลเครดิตได้รับมาสำหรับคอนเซ็ปต์นี้ และยังรอการยืนยันวันที่",
+    "rooms.area.s24": "สุขุมวิท 24",
+    "rooms.area.ratch": "รัชโยธิน",
+    "rooms.area.s49": "สุขุมวิท 49",
+    "rooms.area.bkk": "กรุงเทพฯ",
+    "rooms.area.thonglor": "ทองหล่อ",
 
-  "record.chip": "บันทึกภาคสนาม — CU–TU After Party",
-  "record.label": "บันทึกผลงาน",
-  "record.t1": "จบเกมในสนาม",
-  "record.t2": "เกมจริงเพิ่งเริ่ม",
-  "record.p1": "ปีละครั้ง แมตช์ CU–TU ลงตัดสินศึกฟุตบอลประเพณีที่เก่าแก่ที่สุดของไทย — แล้วทั้งสองฝั่งก็ต้องการสิ่งเดียวกัน: ฟลอร์ที่ดังพอจะลืมสกอร์ นั่นคือกะของ Certified",
-  "record.p2": "CU–TU After Party คือเวทีที่ทำให้ยูนิตนี้มีชื่อ และเป็นที่ที่วัยรุ่นครึ่งกรุงเทพฯ ได้รู้ว่าโลโก้นี้ “เสียงเป็นยังไง” ความเคยชินนี้ยังเดินทางไกล — เมื่อแก๊งนี้ไปถึงบริสเบน Certified ก็ไปถึงพร้อมกัน",
-  "record.s1": "สอง",
-  "record.s1s": "ฝั่ง",
-  "record.s2": "หนึ่ง",
-  "record.s2s": "ฟลอร์",
-  "record.s3": "ศูนย์",
-  "record.s3s": "ที่นั่ง",
-  "record.l1": "กะเฮดไลน์ · ทุกปี",
-  "record.l2": "เทคโอเวอร์เต็มร้าน",
-  "record.l3": "คอลแลบไนต์",
-  "record.l4": "เทคโอเวอร์ Thai Society",
-  "record.wideAlt": "ฝูงชนเฟสติวัลยามค่ำคืน ไฟฉายโทรศัพท์นับพันชูขึ้นเหมือนดวงดาว",
+    "hire.title": "พา Certified_V10 ไปงานของคุณ",
+    "hire.lede": "บอกวันที่ เมือง สถานที่ และรูปแบบงานของคุณ ทีมงานจะยืนยันคิวว่าง ไลน์อัพ และค่าตัวโดยตรง",
+    "hire.send": "สิ่งที่ควรส่งมา",
+    "hire.i1": "วันที่จัดงาน",
+    "hire.i2": "เมืองและสถานที่",
+    "hire.i3": "รูปแบบงาน",
+    "hire.i4": "ดีเจที่ต้องการ หรือทั้งคอลเลกทีฟ",
+    "hire.i5": "ความยาวของเซ็ต",
+    "hire.i6": "ช่องทางติดต่อของคุณ",
+    "hire.cta": "สอบถามทาง Instagram",
+    "hire.reassure": "การสอบถามยังไม่ใช่การจองวัน ปุ่มนี้จะเปิด Instagram และการส่งข้อความเป็นเพียงการเริ่มสอบถาม",
+    "draft.title": "ร่างข้อความสอบถาม",
+    "draft.help": "แก้ไขร่างนี้ แล้วคัดลอกไปวางในข้อความของคุณ เว็บไซต์นี้ไม่ส่งและไม่บันทึกข้อมูลใด ๆ",
+    "draft.copy": "คัดลอกร่างข้อความ",
 
-  "book.label": "ว่าจ้าง",
-  "book.t1": "ว่าจ้าง",
-  "book.t2": "ทั้งยูนิต",
-  "book.lede": "กะคลับ เวทีเฟสติวัล งานเปิดตัวแบรนด์ ฟลอร์ส่วนตัว — ถ้ามีซาวด์ซิสเต็ม ก็รับรองให้ได้ คุยวันและฟอร์แมตทาง DM",
-  "book.ig": "DM ทางอินสตาแกรม",
-  "book.tt": "TikTok — @certified_v10",
-  "book.c1k": "สิ่งที่มาถึง",
-  "book.c1v": "ดีเจ + MC + โฮสต์",
-  "book.c2k": "ฟอร์แมต",
-  "book.c2v": "กะประจำ / เทคโอเวอร์ / เฟสติวัล",
-  "book.c3k": "เอกสาร",
-  "book.c3v": "DM เดียว ที่เหลือเราจัดการ",
-  "book.mcAlt": "MC ในเงามืดชูแขนถือไมค์ ย้อนแสงไฟขาวจ้ากลางควันสีแดง",
-  "book.mcCap": "ตำแหน่งคันเร่ง — MC, 01:30",
+    "footer.nav": "ส่วนท้าย",
+    "footer.follow": "ติดตาม",
+    "footer.site": "เว็บไซต์นี้",
+    "footer.prov.title": "เกี่ยวกับเว็บไซต์นี้",
+    "footer.prov.1": "เว็บไซต์คอนเซ็ปต์อิสระ ไม่ใช่เว็บไซต์ทางการของคอลเลกทีฟ และไม่มีการเชื่อมต่อปฏิทินหรือระบบขายบัตร",
+    "footer.prov.2": "ภาพสมาชิก ภาพหมู่ โลโก้ และโปสเตอร์งาน มาจากมีเดียแพ็กและ Instagram ของ Certified_V10 ภาพในส่วน “หนึ่งคืนเป็นอย่างไร” เป็นภาพประกอบที่สร้างขึ้น",
+    "footer.prov.3": "เว็บไซต์นี้ไม่เก็บข้อมูลส่วนบุคคลและไม่ใช้คุกกี้ ภาษาที่เลือกจะถูกจำไว้ในเบราว์เซอร์ของคุณ ฟอนต์โหลดจาก Google Fonts",
+    "footer.back": "กลับไปยังเว็บไซต์หลัก",
 
-  "footer.tag": "กรุงเทพฯ — หลังเที่ยงคืน",
-  "footer.follow": "ติดตาม",
-  "footer.page": "เอกสาร",
-  "footer.spec": "สเปคชีท",
-  "footer.dyno": "แท่นไดโน่",
-  "footer.lineupL": "ไลน์อัพ",
-  "footer.rooms": "ร้านที่รับรอง",
-  "footer.recordL": "บันทึกผลงาน",
-  "footer.showsL": "งานถัดไป",
-  "footer.d1": "© 2026 คอนเซ็ปต์ Certified_V10 — งานออกแบบศึกษาอิสระ ไม่ใช่เว็บไซต์อย่างเป็นทางการของกลุ่ม",
-  "footer.d2": "ภาพถ่ายทั้งหมดเป็นงานสร้างสรรค์ที่เจนเนอเรตขึ้นใหม่สำหรับคอนเซ็ปต์นี้ ชื่อสถานที่ปรากฏในฐานะเครดิตการแสดงสาธารณะ",
+    "preview.title": "งานสาธารณะครั้งถัดไป",
+    "preview.lede": "หน้านี้แสดงการทำงานของตารางงานรายดีเจด้วยข้อมูลสมมติและนาฬิกาจำลอง ยังไม่มีการเชื่อมต่อปฏิทินจริง",
+    "preview.clock": "นาฬิกาจำลอง เวลากรุงเทพฯ",
+    "preview.scenario": "เลือกสถานะตารางงานที่ต้องการสาธิต",
+    "preview.s.upcoming": "งานที่กำลังจะมาถึง",
+    "preview.s.playing": "กำลังเล่นอยู่",
+    "preview.s.cancelled": "ยกเลิกงาน",
+    "preview.s.empty": "ไม่มีงานสาธารณะ",
+    "preview.s.unavailable": "ตารางงานไม่พร้อมแสดง",
+    "preview.s.stale": "ข้อมูลเก่า (61 นาที)",
+    "preview.reset": "รีเซ็ตตัวอย่าง",
+    "preview.noscript": "ปิด JavaScript อยู่ ตัวอย่างนี้ต้องใช้ JavaScript เพื่อแสดงตารางงานสมมติ",
+    "preview.foot": "วันที่ สถานที่ และการจัดคิวทั้งหมดในหน้านี้เป็นข้อมูลสมมติ ไม่มีการส่งข้อความ ขายบัตร หรือจองใด ๆ การเผยแพร่จริงต้องใช้ข้อมูลงานสาธารณะที่ลูกค้าอนุมัติ"
+  };
 
-  "hud.open": "เปิดม่าน",
-  "hud.spec": "สเปคชีท",
-  "hud.dyno": "แท่นเทสต์",
-  "hud.lineup": "ไลน์อัพ",
-  "hud.rooms": "ร้านที่รับรอง",
-  "hud.record": "บันทึกผลงาน",
-  "hud.shows": "งานถัดไป",
-  "hud.book": "ว่าจ้าง"
-};
+  var STR = {
+    en: {
+      "lang.switch": "Switch to Thai (ภาษาไทย)",
+      "status.live": "Playing now",
+      "status.tonight": "Tonight",
+      "status.upcoming": "Upcoming",
+      "status.none": "Not announced",
+      "status.unavailable": "Unavailable",
+      "status.cancelled": "Cancelled",
+      "status.postponed": "Postponed",
+      "demo": "demo",
+      "none.line": "No public set announced.",
+      "none.hint": "This does not indicate booking availability.",
+      "unavail.line": "Schedule temporarily unavailable.",
+      "unavail.hint": "Check the official channel for the latest details.",
+      "conflict.line": "Schedule is being updated.",
+      "count.starts": "Starts in",
+      "count.status": "Set status",
+      "count.on": "On now, ends {time}",
+      "count.soon": "Less than a minute",
+      "count.days": "{d}d {h}h",
+      "count.hours": "{h}h {m}m",
+      "count.mins": "{m} min",
+      "notice.cancelled": "Cancelled: {venue}, {date}. A new date has not been announced.",
+      "notice.postponed": "Postponed: {venue}, {date}. A new date has not been announced.",
+      "stale": "Last updated {time}. Check the official channel.",
+      "detail.set": "{venue}. Starts {start}. Ends {end}.",
+      "detail.demo": "Example booking, not a confirmed appearance.",
+      "link.tickets": "Tickets",
+      "link.details": "Event details",
+      "link.map": "Map",
+      "announce.live": "{name} is playing now at {venue}.",
+      "shows.empty": "No upcoming show has been confirmed here yet. Check the official channel for new dates.",
+      "shows.lineup": "Lineup: {names}",
+      "hero.none": "None confirmed yet",
+      "hero.unavail": "Schedule temporarily unavailable",
+      "draft.template": "Hello Certified_V10,\n\nDate(s): \nCity and venue: \nEvent format: \nPreferred DJ or the full collective: \nSet duration: \nContact: \n",
+      "draft.ok": "Draft copied.",
+      "draft.fail": "Copying was blocked. The draft is selected so you can copy it yourself.",
+      "preview.changed": "Demo changed to {name}. No live schedule is connected.",
+      "preview.clock.suffix": "demo time"
+    },
+    th: {
+      "lang.switch": "เปลี่ยนเป็นภาษาอังกฤษ (English)",
+      "status.live": "กำลังเล่นอยู่",
+      "status.tonight": "คืนนี้",
+      "status.upcoming": "เร็ว ๆ นี้",
+      "status.none": "ยังไม่ประกาศ",
+      "status.unavailable": "ไม่พร้อมแสดง",
+      "status.cancelled": "ยกเลิก",
+      "status.postponed": "เลื่อน",
+      "demo": "ตัวอย่าง",
+      "none.line": "ยังไม่มีประกาศงานสาธารณะ",
+      "none.hint": "ไม่ได้หมายความว่ามีคิวว่างรับงาน",
+      "unavail.line": "ตารางงานไม่พร้อมแสดงชั่วคราว",
+      "unavail.hint": "ดูรายละเอียดล่าสุดได้ที่ช่องทางทางการ",
+      "conflict.line": "กำลังอัปเดตตารางงาน",
+      "count.starts": "เริ่มใน",
+      "count.status": "สถานะ",
+      "count.on": "กำลังเล่น จบ {time}",
+      "count.soon": "ไม่ถึงหนึ่งนาที",
+      "count.days": "{d} วัน {h} ชม.",
+      "count.hours": "{h} ชม. {m} นาที",
+      "count.mins": "{m} นาที",
+      "notice.cancelled": "ยกเลิก: {venue} {date} ยังไม่ประกาศวันใหม่",
+      "notice.postponed": "เลื่อน: {venue} {date} ยังไม่ประกาศวันใหม่",
+      "stale": "อัปเดตล่าสุด {time} โปรดตรวจสอบที่ช่องทางทางการ",
+      "detail.set": "{venue} เริ่ม {start} จบ {end}",
+      "detail.demo": "งานตัวอย่าง ไม่ใช่งานที่ยืนยันแล้ว",
+      "link.tickets": "บัตร",
+      "link.details": "รายละเอียดงาน",
+      "link.map": "แผนที่",
+      "announce.live": "{name} กำลังเล่นอยู่ที่ {venue}",
+      "shows.empty": "ยังไม่มีงานที่ยืนยันแล้วในขณะนี้ ติดตามวันใหม่ได้ที่ช่องทางทางการ",
+      "shows.lineup": "ไลน์อัพ: {names}",
+      "hero.none": "ยังไม่มีงานที่ยืนยัน",
+      "hero.unavail": "ตารางงานไม่พร้อมแสดงชั่วคราว",
+      "draft.template": "สวัสดี Certified_V10\n\nวันที่จัดงาน: \nเมืองและสถานที่: \nรูปแบบงาน: \nดีเจที่ต้องการ หรือทั้งคอลเลกทีฟ: \nความยาวของเซ็ต: \nช่องทางติดต่อ: \n",
+      "draft.ok": "คัดลอกร่างข้อความแล้ว",
+      "draft.fail": "ไม่สามารถคัดลอกอัตโนมัติได้ ร่างข้อความถูกเลือกไว้ให้คัดลอกเอง",
+      "preview.changed": "เปลี่ยนตัวอย่างเป็น {name} ยังไม่มีการเชื่อมต่อตารางงานจริง",
+      "preview.clock.suffix": "เวลาจำลอง"
+    }
+  };
+
+  var ATTRS = [["data-i18n-alt", "alt"], ["data-i18n-label", "aria-label"]];
+  var lang = "en";
+  var listeners = [];
+  var originals = new WeakMap();
+
+  function supported(value) { return value === "en" || value === "th" ? value : null; }
+
+  function fromUrl() {
+    try { return supported(new URLSearchParams(location.search).get("lang")); }
+    catch (e) { return null; }
+  }
+
+  function saved() {
+    try { return supported(localStorage.getItem("cv-lang")); }
+    catch (e) { return null; }
+  }
+
+  function t(key, vars) {
+    var s = STR[lang][key];
+    if (s == null) s = STR.en[key];
+    if (s == null) return key;
+    if (!vars) return s;
+    return s.replace(/\{(\w+)\}/g, function (_, k) { return vars[k] != null ? vars[k] : ""; });
+  }
+
+  function remember(el) {
+    var o = originals.get(el);
+    if (!o) { o = { attrs: {} }; originals.set(el, o); }
+    return o;
+  }
+
+  function apply() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var o = remember(el);
+      if (o.text === undefined) o.text = el.textContent;
+      var th = TH[el.getAttribute("data-i18n")];
+      el.textContent = lang === "th" && th != null ? th : o.text;
+    });
+    ATTRS.forEach(function (pair) {
+      document.querySelectorAll("[" + pair[0] + "]").forEach(function (el) {
+        var o = remember(el);
+        if (o.attrs[pair[1]] === undefined) o.attrs[pair[1]] = el.getAttribute(pair[1]) || "";
+        var th = TH[el.getAttribute(pair[0])];
+        el.setAttribute(pair[1], lang === "th" && th != null ? th : o.attrs[pair[1]]);
+      });
+    });
+    document.querySelectorAll(".js-lang").forEach(function (btn) {
+      btn.setAttribute("aria-label", t("lang.switch"));
+    });
+    /* Links between this site's pages carry the language with them. */
+    document.querySelectorAll("a[data-keep-lang]").forEach(function (a) {
+      var url = new URL(a.getAttribute("href"), location.href);
+      url.searchParams.set("lang", lang);
+      a.setAttribute("href", url.pathname.split("/").pop() + url.search + url.hash);
+    });
+  }
+
+  function set(next, opts) {
+    next = supported(next);
+    if (!next) return;
+    opts = opts || {};
+    lang = next;
+    apply();
+    if (opts.save) { try { localStorage.setItem("cv-lang", lang); } catch (e) { /* storage blocked */ } }
+    if (opts.url) {
+      try {
+        var url = new URL(location.href);
+        url.searchParams.set("lang", lang);
+        history.replaceState(history.state, "", url.pathname + url.search + url.hash);
+      } catch (e) { /* history unavailable */ }
+    }
+    listeners.forEach(function (fn) { fn(lang); });
+  }
+
+  function init() {
+    lang = fromUrl() || saved() || "en";
+    apply();
+    document.querySelectorAll(".js-lang").forEach(function (btn) {
+      btn.hidden = false;
+      btn.addEventListener("click", function () {
+        set(lang === "en" ? "th" : "en", { save: true, url: true });
+      });
+    });
+    window.addEventListener("popstate", function () {
+      var wanted = fromUrl();
+      if (wanted && wanted !== lang) set(wanted, {});
+    });
+  }
+
+  window.CVI18n = {
+    init: init,
+    set: set,
+    t: t,
+    onChange: function (fn) { listeners.push(fn); },
+    get lang() { return lang; }
+  };
+})();
