@@ -749,7 +749,9 @@ body.shot .hero__cue em { animation: none; }
 }
 .nextset__demo { color: var(--muted); font-size: 10px; margin-top: 4px; }
 .nextset-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.op__dropin .nextset { margin: 0 2px; padding-bottom: 22px; }
+/* in the mobile dropdown the block sits under the name, in the name's column, above the photo */
+.op__dropin .nextset { margin: 0 0 0 76px; padding: 14px 0 24px; }
+@media (max-width: 640px) { .op__dropin .nextset { margin-left: 64px; } }
 /* the desktop photo leaves room for the block under it */
 .lineup__frame { max-height: max(160px, calc(100svh - var(--nav-h) - var(--hud-h) - 4vh - 190px)); }
 
@@ -1236,7 +1238,7 @@ body.shot .hero__cue em { animation: none; }
   <div class="footer__fine meta">
     <p data-i18n="footer.d1">© 2026 Certified_V10 concept. Independent design study — not the collective's official site.</p>
     <p data-i18n="footer.d2">Photography is original generated artwork, art-directed for this concept. Venue names appear as public performance credits.</p>
-    <p id="build-tag">Build R14 · 13 Oct 2026</p>
+    <p id="build-tag">Build R15 · 13 Oct 2026</p>
   </div>
 </footer>
 
@@ -1679,7 +1681,7 @@ window.CV_TH = {
       var block = doc.createElement("div");
       block.className = "nextset";
       buildSet(block);
-      if (dropin) dropin.appendChild(block);
+      if (dropin) dropin.insertBefore(block, dropin.firstChild);
       var sr = doc.createElement("span");
       sr.className = "nextset-sr";
       if (head) head.appendChild(sr);
