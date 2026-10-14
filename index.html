@@ -947,6 +947,17 @@ body.shot .hero__cue em { animation: none; }
 html.intro-on .hero .l { transition-delay: 1.55s; }
 html.intro-on .hero [data-rev] { transition-delay: calc(1.65s + var(--d, 0s)); }
 
+/* ============================================================
+   R26 — hero → spec: the paper sheet slides up over the hero
+   ============================================================ */
+.hero { position: sticky; top: 0; z-index: 0; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background: var(--carbon); opacity: calc(var(--cover, 0) * .72);
+}
+.hero__media { transform: scale(calc(1 + var(--cover, 0) * .06)); transform-origin: 50% 40%; }
+.spec { z-index: 1; box-shadow: 0 -26px 70px -8px rgba(0, 0, 0, .62); }
+
 </style>
 <noscript><style>.l{transform:none}[data-rev]{opacity:1;transform:none}.rooms__more{grid-template-rows:1fr;visibility:visible}.rooms__toggle{display:none}.more__body{grid-template-rows:1fr!important;visibility:visible!important}.more__btn{display:none!important}</style></noscript>
 <script type="application/ld+json">
@@ -993,6 +1004,8 @@ html.intro-on .hero [data-rev] { transition-delay: calc(1.65s + var(--d, 0s)); }
 
 <main id="main">
 
+<!-- hero + spec share this wrapper: the hero holds while the paper slides over it, and lets go with it -->
+<div class="curtain">
 <!-- ============ 00 · HERO ============ -->
 <section class="hero" id="top" data-hud="hud.open">
   <figure class="hero__media" aria-hidden="true">
@@ -1059,6 +1072,7 @@ html.intro-on .hero [data-rev] { transition-delay: calc(1.65s + var(--d, 0s)); }
     <div class="spec__row spec__row--last"><dt class="meta" data-i18n="spec.r6k">Status</dt><dd><span class="stamp stamp--inline" data-i18n="spec.stamp">Certified ✓</span></dd></div>
   </dl>
 </section>
+</div>
 
 <!-- ============ 02 · LINEUP ============ -->
 <section class="lineup" id="lineup" data-hud="hud.lineup">
@@ -1451,7 +1465,7 @@ html.intro-on .hero [data-rev] { transition-delay: calc(1.65s + var(--d, 0s)); }
   <div class="footer__fine meta">
     <p data-i18n="footer.d1">© 2026 Certified_V10 concept. Independent design study — not the collective's official site.</p>
     <p data-i18n="footer.d2">Photography is original generated artwork, art-directed for this concept. Venue names appear as public performance credits.</p>
-    <p id="build-tag">Build R25 · 15 Oct 2026</p>
+    <p id="build-tag">Build R26 · 15 Oct 2026</p>
   </div>
   <!-- the studio credit: the last line of every site O2 builds -->
   <p class="o2row">
@@ -2150,7 +2164,24 @@ window.CV_TH = {
 
   /* ---------- main loop ---------- */
   var vh = window.innerHeight;
-  window.addEventListener("resize", function () { vh = window.innerHeight; buildTicks(); });
+  /* hero → spec: a hero taller than the window holds only once its bottom is in view;
+     --cover runs 0 → 1 while the spec sheet slides over it */
+  var heroEl = doc.querySelector(".hero"), heroH = 0, heroCover = -1;
+  function heroMeasure() {
+    if (!heroEl) return;
+    heroH = heroEl.offsetHeight;
+    heroEl.style.top = Math.min(0, vh - heroH) + "px";
+  }
+  function heroFrame(y) {
+    if (!heroEl || !heroH) return;
+    var start = Math.max(0, heroH - vh);
+    var c = Math.max(0, Math.min(1, (y - start) / Math.max(1, vh)));
+    c = Math.round(c * 400) / 400;
+    if (c !== heroCover) { heroCover = c; heroEl.style.setProperty("--cover", c); }
+  }
+  heroMeasure();
+  window.addEventListener("load", heroMeasure);
+  window.addEventListener("resize", function () { vh = window.innerHeight; buildTicks(); heroMeasure(); });
 
   function frame() {
     if (!doc.hidden) {
@@ -2158,6 +2189,7 @@ window.CV_TH = {
       onNavScroll(y);
       var docH = Math.max(1, root.scrollHeight - vh);
       hudHead.style.width = Math.min(100, y / docH * 100) + "%";
+      heroFrame(y);
 
       if (!SHOT) spotFrame(); /* runs under reduced-motion too — the expand is instant there, but the content stays reachable */
     }
