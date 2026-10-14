@@ -886,6 +886,29 @@ body.shot .hero__cue em { animation: none; }
   .rooms .more { margin-bottom: 18px; }
 }
 
+/* ============================================================
+   R23 — phones: one DJ open at a time, handed over in place
+   ============================================================ */
+@media (max-width: 900px) {
+  html.no-anchor, html.no-anchor body { overflow-anchor: none; }
+  .op__dropin { transition: opacity .25s ease; }
+  .op.is-spot.is-leaving { background: transparent; }
+  .op.is-spot.is-leaving .op__name img { transform: none; }
+  .op.is-leaving .op__dropin { opacity: 0; }
+  .op.is-snap .op__drop { transition: none; }
+}
+
+/* Next shift, single column: countdown, then the poster, then the details */
+@media (max-width: 900px) {
+  .shows__grid { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .shows__main { display: contents; }
+  .shows__grid .count { order: 1; }
+  .shows__grid .count__status { order: 2; }
+  .shows__grid .shows__poster { order: 3; align-self: flex-start; margin-top: 30px; }
+  .shows__grid .shows__table { order: 4; }
+  .shows__grid .shows__cta { order: 5; }
+}
+
 </style>
 <noscript><style>.l{transform:none}[data-rev]{opacity:1;transform:none}.rooms__more{grid-template-rows:1fr;visibility:visible}.rooms__toggle{display:none}.more__body{grid-template-rows:1fr!important;visibility:visible!important}.more__btn{display:none!important}</style></noscript>
 <script type="application/ld+json">
@@ -1384,7 +1407,7 @@ body.shot .hero__cue em { animation: none; }
   <div class="footer__fine meta">
     <p data-i18n="footer.d1">© 2026 Certified_V10 concept. Independent design study — not the collective's official site.</p>
     <p data-i18n="footer.d2">Photography is original generated artwork, art-directed for this concept. Venue names appear as public performance credits.</p>
-    <p id="build-tag">Build R22 · 14 Oct 2026</p>
+    <p id="build-tag">Build R23 · 14 Oct 2026</p>
   </div>
   <!-- the studio credit: the last line of every site O2 builds -->
   <p class="o2row">
@@ -1912,38 +1935,101 @@ window.CV_TH = {
   });
 
   /* ---------- lineup spotlight (mobile scroll) ----------
-     A row opens when its header, scrolling down, reaches the middle of the
-     screen, and closes when it drops back below the middle on the way up.
-     Rows already passed stay open above, so nothing above the reading line
-     ever changes height: iOS Safari has no scroll anchoring, and a collapse
-     above would throw the next DJ up the screen. */
+     One DJ open at a time: the row whose header most recently crossed the
+     middle of the screen, scrolling either way. Once the whole lineup has
+     left the screen every row closes, and a row only opens again when its
+     header comes back to the middle. A row closing above the reader must not
+     move what they are reading, and no browser can be trusted to hold it
+     (iOS Safari has no scroll anchoring; Chrome's may anchor on the closing
+     row), so browser anchoring is off on phones: the row fades out at once
+     and collapses when scrolling settles, with the scroll corrected in the
+     same frame — never mid-fling, where a scripted scroll stops the momentum. */
   var mqSpot = window.matchMedia("(max-width: 900px)");
   var ops = Array.prototype.slice.call(doc.querySelectorAll(".op"));
   var heads = ops.map(function (r) { return r.querySelector(".op__head"); });
+  var lineupSec = doc.getElementById("lineup");
+  var belowLineup = lineupSec ? lineupSec.nextElementSibling : null;
   var spotSide = ops.map(function () { return 0; }); /* 1 = header above the middle, -1 = below, 0 = not measured yet */
-  var SPOT_BACK = 48;   /* px a header must sink below the middle before its row closes (no flicker at the line) */
   var spotFreeze = 0;   /* an in-page jump glides over the rows without opening them */
-  function setOpen(k, on) { ops[k].classList.toggle("is-spot", on); }
-  function setSpot(i) { ops.forEach(function (r, k) { setOpen(k, k === i); }); } /* QA: exactly row i open, -1 none */
-  window.__cvSpot = setSpot;
-  function spotSideOf(k, c, mid) {
-    if (spotSide[k] === 1) return c > mid + SPOT_BACK ? -1 : 1;
-    return c <= mid ? 1 : -1;
+  var spotCur = -1;
+  root.classList.add("no-anchor");
+  var touching = false, lastScrollT = 0, settleT = 0;
+
+  function closeNow(k) { ops[k].classList.remove("is-spot", "is-leaving"); }
+  /* open row i (-1: none); rows above the reader close in place */
+  function openRow(i, lineupAbove) {
+    spotCur = i;
+    ops.forEach(function (r, k) {
+      if (k === i) { r.classList.add("is-spot"); r.classList.remove("is-leaving"); return; }
+      if (!r.classList.contains("is-spot")) return;
+      var above = i >= 0 ? k < i : !!lineupAbove;
+      if (above) r.classList.add("is-leaving");
+      else closeNow(k);
+    });
+    spotSettle();
   }
+  function spotSettle() {
+    if (touching || performance.now() - lastScrollT < 160) return;
+    var leaving = ops.filter(function (r) { return r.classList.contains("is-leaving"); });
+    if (!leaving.length) return;
+    var anchor = spotCur >= 0 ? heads[spotCur] : belowLineup;
+    var before = anchor ? anchor.getBoundingClientRect().top : 0;
+    leaving.forEach(function (r) { r.classList.add("is-snap"); r.classList.remove("is-spot", "is-leaving"); });
+    if (anchor) {
+      var d = anchor.getBoundingClientRect().top - before;
+      if (Math.abs(d) > 0.5) {
+        var sb = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto"; /* html scrolls smoothly by default; this correction must land in the same frame */
+        window.scrollBy(0, d);
+        root.style.scrollBehavior = sb;
+      }
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      leaving.forEach(function (r) { r.classList.remove("is-snap"); });
+    }); });
+  }
+  function setSpot(i) { /* QA: exactly row i open, -1 none */
+    spotCur = i;
+    ops.forEach(function (r, k) { r.classList.toggle("is-spot", k === i); r.classList.remove("is-leaving"); });
+  }
+  window.__cvSpot = setSpot;
+
+  /* rows whose header crossed the middle since the last look */
+  var crossUp = -1, crossDown = 1e9;
   function spotMark(k, side) {
-    if (side === spotSide[k]) return;
-    if (spotSide[k] !== 0 && performance.now() >= spotFreeze) setOpen(k, side === 1);
+    if (spotSide[k] !== 0 && side !== spotSide[k]) {
+      if (side === 1) crossUp = Math.max(crossUp, k);   /* scrolling down: the lowest row to rise past the middle */
+      else crossDown = Math.min(crossDown, k);          /* scrolling up: the highest row to sink past it */
+    }
     spotSide[k] = side;
   }
+  function spotApply(where) {
+    var up = crossUp, down = crossDown;
+    crossUp = -1; crossDown = 1e9;
+    if (performance.now() < spotFreeze) return;
+    if (where !== "in") {
+      if (spotCur !== -1) openRow(-1, where === "above");
+      return;
+    }
+    if (up >= 0) openRow(up);
+    else if (down < 1e9) openRow(down);
+  }
+
   doc.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]');
     if (a) spotFreeze = performance.now() + 1600;
   });
   var lastGeom = 0;
+  function lineupWhere() {
+    if (!lineupSec) return "in";
+    var lr = lineupSec.getBoundingClientRect();
+    return lr.bottom <= 0 ? "above" : lr.top >= vh ? "below" : "in";
+  }
   function spotFrame() {
     if (!ops.length) return;
     if (!mqSpot.matches) {
-      ops.forEach(function (r, k) { if (r.classList.contains("is-spot")) setOpen(k, false); spotSide[k] = 0; });
+      if (spotCur !== -1 || ops.some(function (r) { return r.classList.contains("is-spot"); })) setSpot(-1);
+      spotSide = spotSide.map(function () { return 0; });
       return;
     }
     if (vh > 2200) return; /* grow-to-content iframe (host scrolls the parent): the IO driver owns the spotlight */
@@ -1951,13 +2037,19 @@ window.CV_TH = {
     var mid = vh / 2;
     for (var k = 0; k < ops.length; k++) {
       var hd = heads[k].getBoundingClientRect();
-      spotMark(k, spotSideOf(k, hd.top + hd.height / 2, mid));
+      spotMark(k, hd.top + hd.height / 2 <= mid ? 1 : -1);
     }
+    spotApply(lineupWhere());
+    spotSettle();
   }
   /* belt and braces: some mobile webviews throttle rAF inside iframes —
      drive the spotlight from scroll events too */
   if (!SHOT) {
-    window.addEventListener("scroll", function () { vh = window.innerHeight; spotFrame(); }, { passive: true });
+    var settleSoon = function () { clearTimeout(settleT); settleT = setTimeout(spotSettle, 200); };
+    window.addEventListener("scroll", function () { lastScrollT = performance.now(); vh = window.innerHeight; spotFrame(); settleSoon(); }, { passive: true });
+    window.addEventListener("touchstart", function () { touching = true; }, { passive: true });
+    window.addEventListener("touchend", function () { touching = false; settleSoon(); }, { passive: true });
+    window.addEventListener("touchcancel", function () { touching = false; settleSoon(); }, { passive: true });
     window.addEventListener("touchmove", spotFrame, { passive: true });
     setTimeout(spotFrame, 400);
   }
@@ -1972,9 +2064,10 @@ window.CV_TH = {
         var k = heads.indexOf(en.target);
         if (k < 0) return;
         var r = en.boundingClientRect, rb = en.rootBounds;
-        if (rb) spotMark(k, spotSideOf(k, r.top + r.height / 2, rb.top + rb.height / 2));
+        if (rb) spotMark(k, r.top + r.height / 2 <= rb.top + rb.height / 2 ? 1 : -1);
         else if (en.isIntersecting) spotMark(k, 1);
       });
+      spotApply("in");
     }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
     heads.forEach(function (hd) { if (hd) spotIO.observe(hd); });
   }
