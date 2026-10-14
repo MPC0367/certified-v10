@@ -859,8 +859,35 @@ body.shot .hero__cue em { animation: none; }
   .hero__specs-next .hero__next-time { font-size: 15px; color: var(--bone); }
 }
 
+/* ============================================================
+   R22 — phones: section descriptions fold behind "Read more"
+   (the wrappers take no part in the layout on wider screens)
+   ============================================================ */
+.more, .more__body, .more__in { display: contents; }
+.more__btn { display: none; }
+@media (max-width: 640px) {
+  .more { display: block; margin-top: 12px; }
+  .more__body {
+    display: grid; grid-template-rows: 0fr; visibility: hidden;
+    transition: grid-template-rows .5s var(--ease), visibility 0s linear .5s;
+  }
+  .more.is-open .more__body { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .5s var(--ease), visibility 0s; }
+  .more__in { display: block; overflow: hidden; min-height: 0; }
+  .more__in > * { margin-top: 0; margin-bottom: 0; padding-top: 6px; padding-bottom: 6px; }
+  .more__btn {
+    display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
+    font-family: var(--font-meta); font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--bone-70); transition: color .25s ease;
+  }
+  .more__btn em { font-style: normal; color: var(--red); font-size: 13px; transition: transform .35s var(--ease); }
+  .more.is-open .more__btn em { transform: rotate(180deg); }
+  .more__btn:hover, .more__btn:focus-visible { color: var(--red); }
+  .spec .more__btn { color: #3A3833; }
+  .rooms .more { margin-bottom: 18px; }
+}
+
 </style>
-<noscript><style>.l{transform:none}[data-rev]{opacity:1;transform:none}.rooms__more{grid-template-rows:1fr;visibility:visible}.rooms__toggle{display:none}</style></noscript>
+<noscript><style>.l{transform:none}[data-rev]{opacity:1;transform:none}.rooms__more{grid-template-rows:1fr;visibility:visible}.rooms__toggle{display:none}.more__body{grid-template-rows:1fr!important;visibility:visible!important}.more__btn{display:none!important}</style></noscript>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MusicGroup","name":"Certified_V10","alternateName":"CERTIFIED","genre":["House","Hip hop","Thai pop"],"foundingLocation":{"@type":"City","name":"Bangkok"},"sameAs":["https://www.instagram.com/certified_v10/","https://www.tiktok.com/@certified_v10","https://www.youtube.com/@certified_v10"]}
 </script>
@@ -947,9 +974,14 @@ body.shot .hero__cue em { animation: none; }
     <span class="lm"><span class="l" data-i18n="spec.t1">An engine,</span></span>
     <span class="lm"><span class="l" data-i18n="spec.t2">not a lineup.</span></span>
   </h2>
+  <div class="more" data-more>
+    <div class="more__body" id="more-spec"><div class="more__in">
   <div class="spec__cols">
     <p data-rev data-i18n="spec.p1">Most bookings give a room a soundtrack. Certified_V10 gives it a drivetrain — selectors building pressure track by track, MCs riding the floor's throttle, hosts keeping every table inside the run. The difference between a night you attended and a night that took you somewhere.</p>
     <p data-rev style="--d:.1s" data-i18n="spec.p2">Built by and for Bangkok's young nightlife crowd, the unit went from packed afterparties to the city's front-row clubs — and turned an ordinary shift behind the decks into a social event with its own name on the flyer.</p>
+  </div>
+    </div></div>
+    <button class="more__btn" type="button" aria-expanded="false" aria-controls="more-spec"><span>Read more</span><em aria-hidden="true">↓</em></button>
   </div>
   <dl class="spec__table" data-rev>
     <div class="spec__row"><dt class="meta" data-i18n="spec.r1k">Unit</dt><dd>CERTIFIED_V10</dd></div>
@@ -971,7 +1003,12 @@ body.shot .hero__cue em { animation: none; }
     <span class="lm"><span class="l" data-i18n="lineup.t1">Five cylinders,</span></span>
     <span class="lm"><span class="l" data-i18n="lineup.t2">one engine.</span></span>
   </h2>
+  <div class="more" data-more>
+    <div class="more__body" id="more-lineup"><div class="more__in">
   <p class="lineup__lede" data-rev data-i18n="lineup.lede">Four selectors and one voice. Every Certified shift runs the same drivetrain — the DJs build the pressure, the MC decides when the room spends it.</p>
+    </div></div>
+    <button class="more__btn" type="button" aria-expanded="false" aria-controls="more-lineup"><span>Read more</span><em aria-hidden="true">↓</em></button>
+  </div>
 
   <div class="lineup__grid">
     <ul class="lineup__list">
@@ -1060,7 +1097,12 @@ body.shot .hero__cue em { animation: none; }
     <span class="lm"><span class="l" data-i18n="rooms.t1">Rooms this</span></span>
     <span class="lm"><span class="l" data-i18n="rooms.t2">engine runs in.</span></span>
   </h2>
+  <div class="more" data-more>
+    <div class="more__body" id="more-rooms"><div class="more__in">
   <p class="rooms__lede" data-rev data-i18n="rooms.lede">Residencies, guest shifts and takeovers across the city's current front row — from the Sukhumvit 24 strip to the Ratchayothin end of town.</p>
+    </div></div>
+    <button class="more__btn" type="button" aria-expanded="false" aria-controls="more-rooms"><span>Read more</span><em aria-hidden="true">↓</em></button>
+  </div>
 
   <ul class="rooms__list">
     <li class="room" data-rev>
@@ -1148,7 +1190,12 @@ body.shot .hero__cue em { animation: none; }
     <span class="lm"><span class="l">WICKED</span></span>
     <span class="lm"><span class="l"><em class="shows__vol">SESSIONS</em></span></span>
   </h2>
+  <div class="more" data-more>
+    <div class="more__body" id="more-shows"><div class="more__in">
   <p class="shows__lede" data-rev data-i18n="shows.lede">Halloween in the Wicked Woods — White Claw's Wicked Sessions takes over Sphere Hall, with Amanda Sze on decks and live sax and the full unit on the bill. Get lost. Get wicked.</p>
+    </div></div>
+    <button class="more__btn" type="button" aria-expanded="false" aria-controls="more-shows"><span>Read more</span><em aria-hidden="true">↓</em></button>
+  </div>
 
   <div class="shows__grid">
     <div class="shows__main">
@@ -1194,7 +1241,12 @@ body.shot .hero__cue em { animation: none; }
       <span class="lm"><span class="l" data-i18n="book.t1">Commission</span></span>
       <span class="lm"><span class="l" data-i18n="book.t2">the unit.</span></span>
     </h2>
+    <div class="more" data-more>
+      <div class="more__body" id="more-book"><div class="more__in">
     <p class="book__lede" data-rev data-i18n="book.lede">Club shifts, festival stages, brand launches, private floors — if it has a sound system, it can be certified. Dates and formats via DM.</p>
+      </div></div>
+      <button class="more__btn" type="button" aria-expanded="false" aria-controls="more-book"><span>Read more</span><em aria-hidden="true">↓</em></button>
+    </div>
     <div class="book__cta" data-rev>
       <a class="btn btn--fill btn--big" href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener"><span data-i18n="book.ig">DM on Instagram</span><em aria-hidden="true">↗︎</em></a>
       <a class="btn btn--ghost btn--big" href="https://www.tiktok.com/@certified_v10" target="_blank" rel="noopener"><span data-i18n="book.tt">TikTok — @certified_v10</span><em aria-hidden="true">↗︎</em></a>
@@ -1221,7 +1273,12 @@ body.shot .hero__cue em { animation: none; }
     <span class="lm"><span class="l" data-i18n="jobs.t1">Join the</span></span>
     <span class="lm"><span class="l" data-i18n="jobs.t2">pit crew.</span></span>
   </h2>
+  <div class="more" data-more>
+    <div class="more__body" id="more-jobs"><div class="more__in">
   <p class="jobs__lede" data-rev data-i18n="jobs.lede">Certified is calling for interns: a November 2026 – January 2027 intake, with real work on real events, on and behind the scenes.</p>
+    </div></div>
+    <button class="more__btn" type="button" aria-expanded="false" aria-controls="more-jobs"><span>Read more</span><em aria-hidden="true">↓</em></button>
+  </div>
   <p class="jobs__status meta" id="jobs-status" data-rev>Applications open — closing 15 Oct 2026</p>
 
   <ul class="jobs__list">
@@ -1327,7 +1384,7 @@ body.shot .hero__cue em { animation: none; }
   <div class="footer__fine meta">
     <p data-i18n="footer.d1">© 2026 Certified_V10 concept. Independent design study — not the collective's official site.</p>
     <p data-i18n="footer.d2">Photography is original generated artwork, art-directed for this concept. Venue names appear as public performance credits.</p>
-    <p id="build-tag">Build R21 · 14 Oct 2026</p>
+    <p id="build-tag">Build R22 · 14 Oct 2026</p>
   </div>
   <!-- the studio credit: the last line of every site O2 builds -->
   <p class="o2row">
@@ -1427,6 +1484,8 @@ window.CV_TH = {
   "rooms.more": "ดูเพิ่มเติม",
   "rooms.less": "ย่อรายการ",
   "rooms.moreCount": "อีก 6 ร้าน",
+  "more.more": "อ่านเพิ่มเติม",
+  "more.less": "ย่อข้อความ",
 
   "lineup.label": "ไลน์อัพ",
   "lineup.t1": "ห้าสูบ",
@@ -1587,6 +1646,7 @@ window.CV_TH = {
     tickCountdown();
     extras();
     syncRooms();
+    syncMores();
   }
 
   /* ---------- clock (BKK) ---------- */
@@ -1852,47 +1912,47 @@ window.CV_TH = {
   });
 
   /* ---------- lineup spotlight (mobile scroll) ----------
-     the row whose header sits nearest mid-viewport expands its drop,
-     as if hovered. Drops share one height, so a spotlight handoff is
-     collapse-above + expand-below and the scroll position stays stable. */
+     A row opens when its header, scrolling down, reaches the middle of the
+     screen, and closes when it drops back below the middle on the way up.
+     Rows already passed stay open above, so nothing above the reading line
+     ever changes height: iOS Safari has no scroll anchoring, and a collapse
+     above would throw the next DJ up the screen. */
   var mqSpot = window.matchMedia("(max-width: 900px)");
   var ops = Array.prototype.slice.call(doc.querySelectorAll(".op"));
-  var spotCur = -1;
-  var SPOT_HOLD = 800; /* ms a spotlight is held before a driver may hand off */
-  var lastSwitch = 0;
-  function setSpot(i, force) {
-    if (i === spotCur) return;
-    /* handoffs between rows respect the hold; first pick and clears are instant */
-    if (!force && i !== -1 && spotCur !== -1 && performance.now() - lastSwitch < SPOT_HOLD) return;
-    spotCur = i;
-    lastSwitch = performance.now();
-    ops.forEach(function (r, k) { r.classList.toggle("is-spot", k === i); });
+  var heads = ops.map(function (r) { return r.querySelector(".op__head"); });
+  var spotSide = ops.map(function () { return 0; }); /* 1 = header above the middle, -1 = below, 0 = not measured yet */
+  var SPOT_BACK = 48;   /* px a header must sink below the middle before its row closes (no flicker at the line) */
+  var spotFreeze = 0;   /* an in-page jump glides over the rows without opening them */
+  function setOpen(k, on) { ops[k].classList.toggle("is-spot", on); }
+  function setSpot(i) { ops.forEach(function (r, k) { setOpen(k, k === i); }); } /* QA: exactly row i open, -1 none */
+  window.__cvSpot = setSpot;
+  function spotSideOf(k, c, mid) {
+    if (spotSide[k] === 1) return c > mid + SPOT_BACK ? -1 : 1;
+    return c <= mid ? 1 : -1;
   }
-  window.__cvSpot = function (i) { setSpot(i, true); };
+  function spotMark(k, side) {
+    if (side === spotSide[k]) return;
+    if (spotSide[k] !== 0 && performance.now() >= spotFreeze) setOpen(k, side === 1);
+    spotSide[k] = side;
+  }
+  doc.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) spotFreeze = performance.now() + 1600;
+  });
   var lastGeom = 0;
   function spotFrame() {
     if (!ops.length) return;
-    if (!mqSpot.matches) { if (spotCur !== -1) setSpot(-1); return; }
+    if (!mqSpot.matches) {
+      ops.forEach(function (r, k) { if (r.classList.contains("is-spot")) setOpen(k, false); spotSide[k] = 0; });
+      return;
+    }
     if (vh > 2200) return; /* grow-to-content iframe (host scrolls the parent): the IO driver owns the spotlight */
     lastGeom = performance.now();
-    var mid = vh / 2, best = -1, bestD = 1e9;
+    var mid = vh / 2;
     for (var k = 0; k < ops.length; k++) {
-      var hd = ops[k].querySelector(".op__head").getBoundingClientRect();
-      var c = hd.top + hd.height / 2;
-      if (c < -vh * 0.2 || c > vh * 1.2) continue;
-      var d = Math.abs(c - mid);
-      if (d < bestD) { bestD = d; best = k; }
+      var hd = heads[k].getBoundingClientRect();
+      spotMark(k, spotSideOf(k, hd.top + hd.height / 2, mid));
     }
-    if (best < 0) { setSpot(-1); return; }
-    var bh = ops[best].querySelector(".op__head").getBoundingClientRect();
-    var bc = bh.top + bh.height / 2;
-    if (bc < vh * 0.1 || bc > vh * 0.9) { setSpot(-1); return; }
-    if (best !== spotCur && spotCur >= 0) {
-      var ch = ops[spotCur].querySelector(".op__head").getBoundingClientRect();
-      var cd = Math.abs(ch.top + ch.height / 2 - mid);
-      if (bestD > cd - 120) return; /* wide dead zone: stick with the current one */
-    }
-    setSpot(best);
   }
   /* belt and braces: some mobile webviews throttle rAF inside iframes —
      drive the spotlight from scroll events too */
@@ -1901,27 +1961,22 @@ window.CV_TH = {
     window.addEventListener("touchmove", spotFrame, { passive: true });
     setTimeout(spotFrame, 400);
   }
-  /* last-resort driver: an IntersectionObserver band works even when the page
-     is embedded in a grow-to-content iframe whose PARENT does the scrolling
-     (geometry + scroll events are blind there). It only takes over when the
-     geometric driver is inert or stale. */
+  /* last-resort driver: an IntersectionObserver line at mid-screen works even
+     when the page sits in a grow-to-content iframe whose PARENT scrolls. It
+     only takes over when the geometric driver is inert or stale. */
   if (!SHOT && "IntersectionObserver" in window) {
     var spotIO = new IntersectionObserver(function (entries) {
       if (!mqSpot.matches) return;
       if (vh <= 2200 && performance.now() - lastGeom < 800) return; /* geometric driver is alive — defer */
-      var cand = -1;
       entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          var row = en.target.closest(".op");
-          if (row) cand = ops.indexOf(row);
-        }
+        var k = heads.indexOf(en.target);
+        if (k < 0) return;
+        var r = en.boundingClientRect, rb = en.rootBounds;
+        if (rb) spotMark(k, spotSideOf(k, r.top + r.height / 2, rb.top + rb.height / 2));
+        else if (en.isIntersecting) spotMark(k, 1);
       });
-      if (cand >= 0) setSpot(cand);
-    }, { rootMargin: "-40% 0px -40% 0px", threshold: 0 });
-    ops.forEach(function (r) {
-      var hd = r.querySelector(".op__head");
-      if (hd) spotIO.observe(hd);
-    });
+    }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+    heads.forEach(function (hd) { if (hd) spotIO.observe(hd); });
   }
 
   /* ---------- HUD ---------- */
@@ -1972,6 +2027,20 @@ window.CV_TH = {
     requestAnimationFrame(frame);
   }
 
+  /* ---------- read more (phones) ---------- */
+  var mores = Array.prototype.slice.call(doc.querySelectorAll("[data-more]"));
+  function syncMore(m) {
+    var open = m.classList.contains("is-open"), b = m.querySelector(".more__btn");
+    if (!b) return;
+    b.setAttribute("aria-expanded", open ? "true" : "false");
+    b.querySelector("span").textContent = open ? t("more.less", "Read less") : t("more.more", "Read more");
+  }
+  function syncMores() { if (mores) mores.forEach(syncMore); }
+  mores.forEach(function (m) {
+    var b = m.querySelector(".more__btn");
+    if (b) b.addEventListener("click", function () { m.classList.toggle("is-open"); syncMore(m); setTimeout(buildTicks, 600); });
+  });
+
   /* ---------- rooms: show more ---------- */
   var roomsMore = doc.getElementById("rooms-more");
   var roomsBtn = doc.getElementById("rooms-toggle");
@@ -2013,7 +2082,7 @@ window.CV_TH = {
     var target = params.get("shot");
     var off = +(params.get("off") || 0);
 
-    if (params.has("spot")) setSpot(Math.max(0, Math.min(4, +params.get("spot"))), true);
+    if (params.has("spot")) setSpot(Math.max(0, Math.min(4, +params.get("spot"))));
 
     var pinFull = function () {
       /* finite page: freeze vh-based zones to a nominal 900px viewport so one tall capture rasters everything */
@@ -2061,6 +2130,7 @@ window.CV_TH = {
 
     if (params.get("open") === "sheet") openSheet();
     if (params.get("open") === "rooms") setRooms(true);
+    if (params.get("open") === "more") mores.forEach(function (m) { m.classList.add("is-open"); syncMore(m); });
     if (params.has("peek")) { var peekRow = doc.querySelector('.op[data-artist="' + params.get("peek") + '"]'); if (peekRow) peekRow.dispatchEvent(new Event("mouseenter")); }
 
     /* run NOW, then keep re-applying while fonts/images settle — the capture
