@@ -846,6 +846,19 @@ body.shot .hero__cue em { animation: none; }
 .rooms__toggle:hover, .rooms__toggle:focus-visible { background: var(--panel); color: var(--red); }
 @media (max-width: 900px) { .rooms__toggle { grid-template-columns: 44px auto minmax(0, 1fr); } }
 
+/* ============================================================
+   R21 — phone hero: logo, buttons and the next-shift countdown
+   ============================================================ */
+@media (max-width: 640px) {
+  .hero { padding-bottom: calc(var(--hud-h) + 44px); }
+  .hero__kicker, .hero__sub { display: none; }
+  .hero__specs li:not(.hero__specs-next) { display: none; }
+  .hero__row { margin-top: 26px; }
+  .hero__specs { margin-top: 22px; }
+  .hero__specs-next { padding-block: 14px 0; }
+  .hero__specs-next .hero__next-time { font-size: 15px; color: var(--bone); }
+}
+
 </style>
 <noscript><style>.l{transform:none}[data-rev]{opacity:1;transform:none}.rooms__more{grid-template-rows:1fr;visibility:visible}.rooms__toggle{display:none}</style></noscript>
 <script type="application/ld+json">
@@ -900,7 +913,7 @@ body.shot .hero__cue em { animation: none; }
       <p class="hero__sub" data-rev data-i18n="hero.sub">A Bangkok DJ &amp; MC unit with one job — take a club night and push it to redline. House. Hip-hop. Anthems the whole floor knows by heart.</p>
       <div class="hero__cta" data-rev style="--d:.12s">
         <a class="btn btn--fill" href="#book"><span data-i18n="hero.book">Book the unit</span><em aria-hidden="true">→</em></a>
-        <a class="btn btn--ghost" href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener"><span>@certified_v10</span><em aria-hidden="true">↗</em></a>
+        <a class="btn btn--ghost" href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener"><span>@certified_v10</span><em aria-hidden="true">↗︎</em></a>
       </div>
     </div>
   </div>
@@ -1160,7 +1173,7 @@ body.shot .hero__cue em { animation: none; }
         <div class="shows__row"><dt class="meta" data-i18n="shows.k6">On the night</dt><dd data-i18n="shows.v6">Free White Claw with every ticket · Tarot reading · Darts challenge · Lucky draw · Photo spots</dd></div>
       </dl>
       <div class="shows__cta" data-rev>
-        <a class="btn btn--fill" href="https://nightify.co/venues/white-claw/events/wicked-sessions-by-white-claw-2026-10-31" target="_blank" rel="noopener"><span data-i18n="shows.cta">Tickets on Nightify</span><em aria-hidden="true">↗</em></a>
+        <a class="btn btn--fill" href="https://nightify.co/venues/white-claw/events/wicked-sessions-by-white-claw-2026-10-31" target="_blank" rel="noopener"><span data-i18n="shows.cta">Tickets on Nightify</span><em aria-hidden="true">↗︎</em></a>
       </div>
     </div>
     <figure class="shows__poster" data-rev>
@@ -1183,8 +1196,8 @@ body.shot .hero__cue em { animation: none; }
     </h2>
     <p class="book__lede" data-rev data-i18n="book.lede">Club shifts, festival stages, brand launches, private floors — if it has a sound system, it can be certified. Dates and formats via DM.</p>
     <div class="book__cta" data-rev>
-      <a class="btn btn--fill btn--big" href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener"><span data-i18n="book.ig">DM on Instagram</span><em aria-hidden="true">↗</em></a>
-      <a class="btn btn--ghost btn--big" href="https://www.tiktok.com/@certified_v10" target="_blank" rel="noopener"><span data-i18n="book.tt">TikTok — @certified_v10</span><em aria-hidden="true">↗</em></a>
+      <a class="btn btn--fill btn--big" href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener"><span data-i18n="book.ig">DM on Instagram</span><em aria-hidden="true">↗︎</em></a>
+      <a class="btn btn--ghost btn--big" href="https://www.tiktok.com/@certified_v10" target="_blank" rel="noopener"><span data-i18n="book.tt">TikTok — @certified_v10</span><em aria-hidden="true">↗︎</em></a>
     </div>
     <ul class="book__list meta" data-rev>
       <li><em data-i18n="book.c1k">Arrives</em><span data-i18n="book.c1v">Selectors + MCs + hosts</span></li>
@@ -1265,8 +1278,8 @@ body.shot .hero__cue em { animation: none; }
         <div class="jobs__row"><dt class="meta" data-i18n="jobs.k5">Deadline</dt><dd data-i18n="jobs.v5">15 Oct 2026</dd></div>
       </dl>
       <div class="jobs__cta">
-        <a class="btn btn--fill" id="jobs-apply" href="mailto:joincertifiedteam@gmail.com?subject=Name_Position"><span data-i18n="jobs.cta">Email your application</span><em aria-hidden="true">↗</em></a>
-        <a class="btn btn--ghost" href="https://www.instagram.com/certified_v10/p/DeHQs2JFI2h/" target="_blank" rel="noopener"><span data-i18n="jobs.post">See the hiring post</span><em aria-hidden="true">↗</em></a>
+        <a class="btn btn--fill" id="jobs-apply" href="mailto:joincertifiedteam@gmail.com?subject=Name_Position"><span data-i18n="jobs.cta">Email your application</span><em aria-hidden="true">↗︎</em></a>
+        <a class="btn btn--ghost" href="https://www.instagram.com/certified_v10/p/DeHQs2JFI2h/" target="_blank" rel="noopener"><span data-i18n="jobs.post">See the hiring post</span><em aria-hidden="true">↗︎</em></a>
       </div>
       <p class="jobs__note meta" data-i18n="jobs.note">Every intern receives a certificate on passing the internship. Questions? DM @certified_v10.</p>
     </div>
@@ -1289,9 +1302,9 @@ body.shot .hero__cue em { animation: none; }
     </div>
     <nav class="footer__col" aria-label="Follow">
       <p class="meta footer__h" data-i18n="footer.follow">Follow</p>
-      <a href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener">Instagram ↗</a>
-      <a href="https://www.tiktok.com/@certified_v10" target="_blank" rel="noopener">TikTok ↗</a>
-      <a href="https://www.youtube.com/@certified_v10" target="_blank" rel="noopener">YouTube ↗</a>
+      <a href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener">Instagram ↗︎</a>
+      <a href="https://www.tiktok.com/@certified_v10" target="_blank" rel="noopener">TikTok ↗︎</a>
+      <a href="https://www.youtube.com/@certified_v10" target="_blank" rel="noopener">YouTube ↗︎</a>
     </nav>
     <nav class="footer__col" aria-label="Page">
       <p class="meta footer__h" data-i18n="footer.page">Document</p>
@@ -1314,7 +1327,7 @@ body.shot .hero__cue em { animation: none; }
   <div class="footer__fine meta">
     <p data-i18n="footer.d1">© 2026 Certified_V10 concept. Independent design study — not the collective's official site.</p>
     <p data-i18n="footer.d2">Photography is original generated artwork, art-directed for this concept. Venue names appear as public performance credits.</p>
-    <p id="build-tag">Build R20 · 14 Oct 2026</p>
+    <p id="build-tag">Build R21 · 14 Oct 2026</p>
   </div>
   <!-- the studio credit: the last line of every site O2 builds -->
   <p class="o2row">
@@ -1327,9 +1340,9 @@ body.shot .hero__cue em { animation: none; }
 <!-- ============ BOTTOM BAR ============ -->
 <nav class="hud" id="hud" aria-label="Follow Certified_V10">
   <p class="hud__links meta">
-    <a href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener">Instagram ↗</a>
-    <a href="https://www.tiktok.com/@certified_v10" target="_blank" rel="noopener">TikTok ↗</a>
-    <a href="https://www.youtube.com/@certified_v10" target="_blank" rel="noopener">YouTube ↗</a>
+    <a href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener">Instagram ↗︎</a>
+    <a href="https://www.tiktok.com/@certified_v10" target="_blank" rel="noopener">TikTok ↗︎</a>
+    <a href="https://www.youtube.com/@certified_v10" target="_blank" rel="noopener">YouTube ↗︎</a>
   </p>
   <div class="hud__track" id="hud-track" aria-hidden="true"><span class="hud__head" id="hud-head"></span></div>
 </nav>
