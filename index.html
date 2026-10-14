@@ -821,8 +821,33 @@ body.shot .hero__cue em { animation: none; }
 .o2-credit__lockup { white-space: nowrap; }
 .o2-credit__mark { display: inline-block; width: 1.95em; height: 1.6em; margin-right: 0.5em; vertical-align: -0.366em; }
 
+/* ============================================================
+   R19 — Rooms: "Show more" drop-down
+   ============================================================ */
+/* rows carry their own top rule; the toggle closes the list */
+.rooms .rooms__list { border-bottom: 0; }
+.rooms__more {
+  display: grid; grid-template-rows: 0fr; visibility: hidden;
+  transition: grid-template-rows .6s var(--ease), visibility 0s linear .6s;
+}
+.rooms__more.is-open { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .6s var(--ease), visibility 0s; }
+.rooms__morein { overflow: hidden; min-height: 0; }
+.rooms__toggle {
+  display: grid; grid-template-columns: 56px auto minmax(0, 1fr); gap: 20px; align-items: center;
+  width: 100%; padding-block: 22px; text-align: left;
+  border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+  font-family: var(--font-meta); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--bone); transition: background .3s ease, color .25s ease;
+}
+.rooms__toggle-arrow { justify-self: start; color: var(--red); font-size: 15px; line-height: 1; transition: transform .4s var(--ease); }
+.rooms__toggle-count { color: var(--muted); font-weight: 500; text-align: right; }
+.rooms__toggle.is-open .rooms__toggle-arrow { transform: rotate(180deg); }
+.rooms__toggle.is-open .rooms__toggle-count { visibility: hidden; }
+.rooms__toggle:hover, .rooms__toggle:focus-visible { background: var(--panel); color: var(--red); }
+@media (max-width: 900px) { .rooms__toggle { grid-template-columns: 44px auto minmax(0, 1fr); } }
+
 </style>
-<noscript><style>.l{transform:none}[data-rev]{opacity:1;transform:none}</style></noscript>
+<noscript><style>.l{transform:none}[data-rev]{opacity:1;transform:none}.rooms__more{grid-template-rows:1fr;visibility:visible}.rooms__toggle{display:none}</style></noscript>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MusicGroup","name":"Certified_V10","alternateName":"CERTIFIED","genre":["House","Hip hop","Thai pop"],"foundingLocation":{"@type":"City","name":"Bangkok"},"sameAs":["https://www.instagram.com/certified_v10/","https://www.tiktok.com/@certified_v10","https://www.youtube.com/@certified_v10"]}
 </script>
@@ -1039,29 +1064,70 @@ body.shot .hero__cue em { animation: none; }
     </li>
     <li class="room" data-rev>
       <span class="room__no meta">03</span>
-      <span class="room__name">RATCH HOUR</span>
-      <span class="room__meta meta"><em data-i18n="rooms.v3a">Ratchayothin</em><i data-i18n="rooms.v3t">Thai-pop hour</i></span>
-      <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
-    </li>
-    <li class="room" data-rev>
-      <span class="room__no meta">04</span>
       <span class="room__name">ECHO</span>
       <span class="room__meta meta"><em data-i18n="rooms.v4a">Sukhumvit 49</em><i data-i18n="rooms.v4t">New room</i></span>
       <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
     </li>
     <li class="room" data-rev>
-      <span class="room__no meta">05</span>
+      <span class="room__no meta">04</span>
       <span class="room__name">TOD</span>
       <span class="room__meta meta"><em data-i18n="rooms.v5a">Bangkok</em><i data-i18n="rooms.v5t">Club night</i></span>
       <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
     </li>
-    <li class="room" data-rev>
-      <span class="room__no meta">06</span>
-      <span class="room__name">SALONE</span>
-      <span class="room__meta meta"><em data-i18n="rooms.v6a">Thonglor</em><i data-i18n="rooms.v6t">Club floor</i></span>
-      <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
-    </li>
   </ul>
+  <div class="rooms__more" id="rooms-more">
+    <div class="rooms__morein">
+      <ul class="rooms__list rooms__list--more">
+        <li class="room" data-rev>
+          <span class="room__no meta">05</span>
+          <span class="room__name">CHUPA</span>
+          <span class="room__meta meta"><em data-i18n="rooms.v7a">T-One · Sukhumvit 40</em><i data-i18n="rooms.v7t">Sky club</i></span>
+          <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
+        </li>
+        <li class="room" data-rev>
+          <span class="room__no meta">06</span>
+          <span class="room__name">WHAT’S HAPPENED?</span>
+          <span class="room__meta meta"><em data-i18n="rooms.v8a">EmSphere · 5F</em><i data-i18n="rooms.v8t">Hidden hip-hop club</i></span>
+          <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
+        </li>
+        <li class="room" data-rev>
+          <span class="room__no meta">07</span>
+          <span class="room__name">CHU$CLUB EVERYWHERE</span>
+          <span class="room__meta meta"><em data-i18n="rooms.v9a">Saigon · on tour</em><i data-i18n="rooms.v9t">Touring takeover</i></span>
+          <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
+        </li>
+        <li class="room" data-rev>
+          <span class="room__no meta">08</span>
+          <span class="room__name">BACCARAT BANGKOK</span>
+          <span class="room__meta meta"><em data-i18n="rooms.v10a">Sukhumvit 24</em><i data-i18n="rooms.v10t">R&amp;B floor</i></span>
+          <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
+        </li>
+        <li class="room" data-rev>
+          <span class="room__no meta">09</span>
+          <span class="room__name">MIL SOCIAL CLUB</span>
+          <span class="room__meta meta"><em data-i18n="rooms.v11a">J Avenue · Thonglor</em><i data-i18n="rooms.v11t">Hip-hop &amp; trap</i></span>
+          <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
+        </li>
+        <li class="room" data-rev>
+          <span class="room__no meta">10</span>
+          <span class="room__name">RATCH HOUR</span>
+          <span class="room__meta meta"><em data-i18n="rooms.v3a">Ratchayothin</em><i data-i18n="rooms.v3t">Thai-pop hour</i></span>
+          <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
+        </li>
+        <li class="room" data-rev>
+          <span class="room__no meta">11</span>
+          <span class="room__name">SALONE</span>
+          <span class="room__meta meta"><em data-i18n="rooms.v6a">Thonglor</em><i data-i18n="rooms.v6t">Club floor</i></span>
+          <span class="room__stamp stamp" aria-hidden="true">CERTIFIED ✓</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button class="rooms__toggle" id="rooms-toggle" type="button" aria-expanded="false" aria-controls="rooms-more">
+    <span class="rooms__toggle-arrow" aria-hidden="true">↓</span>
+    <span class="rooms__toggle-label">Show more</span>
+    <span class="rooms__toggle-count" data-i18n="rooms.moreCount">7 more rooms</span>
+  </button>
   <p class="rooms__note meta" data-rev data-i18n="rooms.note">+ takeover formats for rooms not yet on this list.</p>
 </section>
 
@@ -1254,7 +1320,7 @@ body.shot .hero__cue em { animation: none; }
   <div class="footer__fine meta">
     <p data-i18n="footer.d1">© 2026 Certified_V10 concept. Independent design study — not the collective's official site.</p>
     <p data-i18n="footer.d2">Photography is original generated artwork, art-directed for this concept. Venue names appear as public performance credits.</p>
-    <p id="build-tag">Build R18 · 14 Oct 2026</p>
+    <p id="build-tag">Build R19 · 14 Oct 2026</p>
   </div>
   <!-- the studio credit: the last line of every site O2 builds -->
   <p class="o2row">
@@ -1343,6 +1409,19 @@ window.CV_TH = {
   "rooms.v6a": "ทองหล่อ",
   "rooms.v6t": "ฟลอร์เต้น",
   "rooms.note": "+ ฟอร์แมตเทคโอเวอร์สำหรับร้านที่ยังไม่อยู่ในลิสต์",
+  "rooms.v7a": "T-One · สุขุมวิท 40",
+  "rooms.v7t": "สกายคลับ",
+  "rooms.v8a": "EmSphere ชั้น 5",
+  "rooms.v8t": "คลับฮิปฮอปลับ",
+  "rooms.v9a": "ไซ่ง่อน · ออนทัวร์",
+  "rooms.v9t": "เทคโอเวอร์ข้ามประเทศ",
+  "rooms.v10a": "สุขุมวิท 24",
+  "rooms.v10t": "ฟลอร์ R&B",
+  "rooms.v11a": "J Avenue · ทองหล่อ",
+  "rooms.v11t": "ฮิปฮอป & แทร็ป",
+  "rooms.more": "ดูเพิ่มเติม",
+  "rooms.less": "ย่อรายการ",
+  "rooms.moreCount": "อีก 7 ร้าน",
 
   "lineup.label": "ไลน์อัพ",
   "lineup.t1": "ห้าสูบ",
@@ -1502,6 +1581,7 @@ window.CV_TH = {
     if (persist) { try { localStorage.setItem("cv-lang", lang); } catch (e) {} }
     tickCountdown();
     extras();
+    syncRooms();
   }
 
   /* ---------- clock (BKK) ---------- */
@@ -1887,6 +1967,25 @@ window.CV_TH = {
     requestAnimationFrame(frame);
   }
 
+  /* ---------- rooms: show more ---------- */
+  var roomsMore = doc.getElementById("rooms-more");
+  var roomsBtn = doc.getElementById("rooms-toggle");
+  var roomsOpen = false;
+  function syncRooms() {
+    if (!roomsBtn) return;
+    roomsBtn.setAttribute("aria-expanded", roomsOpen ? "true" : "false");
+    roomsBtn.classList.toggle("is-open", roomsOpen);
+    roomsBtn.querySelector(".rooms__toggle-label").textContent = roomsOpen ? t("rooms.less", "Show less") : t("rooms.more", "Show more");
+  }
+  function setRooms(open) {
+    if (!roomsMore) return;
+    roomsOpen = open;
+    roomsMore.classList.toggle("is-open", open);
+    syncRooms();
+    setTimeout(buildTicks, 700); /* the page got taller or shorter: re-place the section ticks once the drop settles */
+  }
+  if (roomsBtn) roomsBtn.addEventListener("click", function () { setRooms(!roomsOpen); });
+
   /* ---------- boot ---------- */
   if (!body.getAttribute("data-lang")) body.setAttribute("data-lang", "en"); /* artifact wrapper has a bare <body> */
   var savedLang = null;
@@ -1956,6 +2055,7 @@ window.CV_TH = {
     };
 
     if (params.get("open") === "sheet") openSheet();
+    if (params.get("open") === "rooms") setRooms(true);
     if (params.has("peek")) { var peekRow = doc.querySelector('.op[data-artist="' + params.get("peek") + '"]'); if (peekRow) peekRow.dispatchEvent(new Event("mouseenter")); }
 
     /* run NOW, then keep re-applying while fonts/images settle — the capture
