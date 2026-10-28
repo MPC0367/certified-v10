@@ -1,0 +1,8 @@
+{
+  "_note": "Internship intake switch. Set status to \"open\" or \"closed\" and commit; the homepage Jobs section and the internships page read this file when they load. Anything other than \"open\" counts as closed.",
+  "status": "closed",
+  "cycle": "Nov 2026 – Jan 2027",
+  "deadline": "15 Oct 2026",
+  "apply": "mailto:joincertifiedteam@gmail.com?subject=Name_Position",
+  "updated": "2026-10-28"
+}

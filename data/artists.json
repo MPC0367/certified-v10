@@ -1,0 +1,71 @@
+{
+  "_note": "The four DJs with profile pages, in lineup order. Bios quote Certified's own YouTube channel description. Only verified links go in 'links'.",
+  "artists": [
+    {
+      "id": "mawon",
+      "no": "01",
+      "name": "MAWON",
+      "role": { "en": "DJ — Selector", "th": "ดีเจ — ซีเลกเตอร์" },
+      "logo": { "src": "assets/img/name-mawon.png", "w": 685, "h": 140 },
+      "photo": "assets/img/photo-mawon.jpg",
+      "bio": {
+        "en": "MAWON brings the festival energy that makes any venue feel like a mainstage.",
+        "th": "MAWON มาพร้อมพลังแบบเฟสติวัล ที่ทำให้ทุกร้านรู้สึกเหมือนเวทีเมนสเตจ"
+      },
+      "styles": ["Open format", "Mainstream", "Jersey", "EDM"],
+      "set": "-wxnD5LY9UI",
+      "links": []
+    },
+    {
+      "id": "ossy",
+      "no": "02",
+      "name": "OSSY",
+      "role": { "en": "DJ — Selector", "th": "ดีเจ — ซีเลกเตอร์" },
+      "logo": { "src": "assets/img/name-ossy.png", "w": 1040, "h": 140 },
+      "photo": "assets/img/photo-ossy.jpg",
+      "bio": {
+        "en": "OSSY keeps it raw with hip-hop and mixing skills you never saw coming.",
+        "th": "OSSY เล่นแบบดิบ ๆ ด้วยฮิปฮอป และฝีมือมิกซ์ที่คุณคาดไม่ถึง"
+      },
+      "styles": ["Open format", "Hip-hop", "Pop", "R&B"],
+      "set": "HG6gP2sCCiQ",
+      "links": [{ "label": "YouTube — DJ OSSY", "url": "https://www.youtube.com/@oscarchanadol" }]
+    },
+    {
+      "id": "tew",
+      "no": "03",
+      "name": "TEW",
+      "role": { "en": "DJ — Selector", "th": "ดีเจ — ซีเลกเตอร์" },
+      "logo": { "src": "assets/img/name-tew.png", "w": 827, "h": 140 },
+      "photo": "assets/img/photo-tew.jpg",
+      "bio": {
+        "en": "TEW blends all your favourite music into a better version.",
+        "th": "TEW เบลนด์เพลงโปรดของคุณทั้งหมด ให้กลายเป็นเวอร์ชันที่ดีกว่าเดิม"
+      },
+      "styles": ["Hip-hop", "R&B", "Global sounds"],
+      "set": "3q8sxyGi02Q",
+      "links": []
+    },
+    {
+      "id": "wichaya",
+      "no": "04",
+      "name": "WICHAYA",
+      "role": { "en": "DJ — Selector", "th": "ดีเจ — ซีเลกเตอร์" },
+      "logo": { "src": "assets/img/name-wichaya.png", "w": 594, "h": 140 },
+      "photo": "assets/img/photo-wichaya.jpg",
+      "bio": {
+        "en": "WICHAYA fills the floor with sing-along tracks that everyone sings and dances to.",
+        "th": "WICHAYA ทำให้ฟลอร์เต็มด้วยเพลงที่ทุกคนร้องตามและเต้นไปด้วยกัน"
+      },
+      "styles": ["Open format", "International", "Thai"],
+      "set": "TOiUBDjO9Yk",
+      "links": [{ "label": "YouTube — Wichaya", "url": "https://www.youtube.com/@wichayamusic" }]
+    }
+  ],
+  "mc": { "id": "maxlerr", "name": "MAXLERR", "role": { "en": "MC — Throttle", "th": "MC — คุมคันเร่ง" } },
+  "group": {
+    "en": "Certified V10 is a Bangkok DJ collective that's been throwing unforgettable parties since 2023. Four DJs combined make your night a whole new experience.",
+    "th": "Certified V10 คือกลุ่มดีเจจากกรุงเทพฯ ที่จัดปาร์ตี้สุดจำมาตั้งแต่ปี 2023 ดีเจสี่คนรวมกัน ทำให้คืนของคุณกลายเป็นประสบการณ์ใหม่ทั้งหมด"
+  },
+  "source": "https://www.youtube.com/@certified_v10"
+}

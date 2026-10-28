@@ -1,0 +1,73 @@
+{
+  "_note": "Full DJ sets on the official channel (youtube.com/@certified_v10). All six allow embedding (checked 28 Oct 2026). 'artists' uses profile ids; [] means the collective or a guest.",
+  "sets": [
+    {
+      "id": "-wxnD5LY9UI",
+      "title": { "en": "MAWON — Peak time club energy", "th": "MAWON — พลังคลับช่วงพีค" },
+      "youtubeTitle": "DJ MAWON Peak Time Club Energy DJ Set @ After Sun Studio | Open Format, Mainstream, Jersey, EDM",
+      "artists": ["mawon"],
+      "event": "after-sun-studio-day-party-2026",
+      "genres": "Open format · Mainstream · Jersey · EDM",
+      "recorded": "2026-07-08",
+      "uploaded": "2026-10-04T07:39:49-07:00",
+      "seconds": 2104
+    },
+    {
+      "id": "TOiUBDjO9Yk",
+      "title": { "en": "WICHAYA — Unexpected remixes & hits", "th": "WICHAYA — รีมิกซ์และเพลงฮิตที่คาดไม่ถึง" },
+      "youtubeTitle": "DJ WICHAYA Unexpected DJ Remixes & Hits @ After Sun Studio | Open Format Inter & Thai DJ Set",
+      "artists": ["wichaya"],
+      "event": "after-sun-studio-day-party-2026",
+      "genres": "Open format · International & Thai",
+      "recorded": "2026-07-08",
+      "uploaded": "2026-09-25T03:50:40-07:00",
+      "seconds": 3062
+    },
+    {
+      "id": "HG6gP2sCCiQ",
+      "title": { "en": "OSSY — Unexpected transitions & hip-hop", "th": "OSSY — ทรานซิชันที่คาดไม่ถึงกับฮิปฮอป" },
+      "youtubeTitle": "DJ OSSY Unexpected DJ Transition & Hip-Hop Set @ After Sun Studio | Open Format, Hip-Hop, Pop, RnB",
+      "artists": ["ossy"],
+      "event": "after-sun-studio-day-party-2026",
+      "genres": "Open format · Hip-hop · Pop · R&B",
+      "recorded": "2026-07-08",
+      "uploaded": "2026-09-15T04:05:47-07:00",
+      "seconds": 2417
+    },
+    {
+      "id": "3q8sxyGi02Q",
+      "title": { "en": "TEW — Hip-hop day party", "th": "TEW — เดย์ปาร์ตี้ฮิปฮอป" },
+      "youtubeTitle": "CERTIFIED Presents: DJ TEW's Hip-Hop Day Party @ After Sun Studio BKK | Hip-Hop, RnB, Global Sounds",
+      "artists": ["tew"],
+      "event": "after-sun-studio-day-party-2026",
+      "genres": "Hip-hop · R&B · Global sounds",
+      "recorded": "2026-07-08",
+      "uploaded": "2026-09-06T06:36:47-07:00",
+      "seconds": 2979
+    },
+    {
+      "id": "0ILM_7NYRcE",
+      "title": { "en": "Certified — Wingstop Rave BKK", "th": "Certified — Wingstop Rave BKK" },
+      "youtubeTitle": "CERTIFIED DJ Presents: WINGSTOP RAVE BKK | HIP-HOP, MAINSTREAM & EDITS",
+      "artists": [],
+      "by": { "en": "The collective", "th": "ทั้งยูนิต" },
+      "event": "wingstop-rave-mbk-2026",
+      "genres": "Hip-hop · Mainstream · Edits",
+      "recorded": "2026-02-18",
+      "uploaded": "2026-07-27T05:24:20-07:00",
+      "seconds": 3276
+    },
+    {
+      "id": "t_EOGmvzqsU",
+      "title": { "en": "Certified Selects — DJ TIITO", "th": "Certified Selects — DJ TIITO" },
+      "youtubeTitle": "CERTIFIED Selects: DJ TIITO @ WINGSTOP BANGKOK | HIP-HOP, EDITS, MAINSTREAM, JERSEY, TECHNO",
+      "artists": [],
+      "by": { "en": "Guest set", "th": "ดีเจรับเชิญ" },
+      "event": "wingstop-rave-mbk-2026",
+      "genres": "Hip-hop · Edits · Mainstream · Jersey · Techno",
+      "recorded": "2026-02-18",
+      "uploaded": "2026-07-29T12:00:21-07:00",
+      "seconds": 3636
+    }
+  ]
+}
