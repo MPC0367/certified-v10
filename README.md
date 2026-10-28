@@ -19,6 +19,7 @@ node tools/build.mjs
 - `data/artists.json`: DJ bios (English and Thai), styles, photos, featured set.
 - `data/sets.json`: YouTube sets. A new set needs its thumbnail saved as `assets/img/sets/<video id>.jpg`.
 - `data/events.json`: shows. Upcoming shows appear on the events page, the DJ pages and the schedule posters; past shows move to "Past" by themselves.
+- `data/merch.json`: the merch page. It currently holds placeholders (drawn artwork, no prices) and stays out of search results. Fill in real names, prices (THB), options and drop details, add photos as `assets/img/merch/<file>.jpg` via each item's `"image"`, then set `"status"` to `"live"`.
 - `data/intake.json`: internship intake. Set `"status"` to `"open"` or `"closed"`. The homepage and the internships page read this file directly, so no rebuild is needed.
 
 Club dates on DJ schedules are sample data, labelled Demo, until a real booking calendar is connected. Booking enquiries are composed on the page and sent by the visitor through LINE or Instagram; the site itself stores nothing.

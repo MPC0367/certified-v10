@@ -8,7 +8,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const BASE = "/certified-v10/";
 const ORIGIN = "https://mpc0367.github.io";
-const BUILD = process.env.BUILD_TAG || "Build R27 · 29 Oct 2026";
+const BUILD = process.env.BUILD_TAG || "Build R28 · 29 Oct 2026";
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 const write = (p, s) => { const f = path.join(ROOT, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
 const json = (p) => JSON.parse(read(p));
@@ -16,6 +16,7 @@ const json = (p) => JSON.parse(read(p));
 const { artists, mc, group } = json("data/artists.json");
 const { sets } = json("data/sets.json");
 const { events } = json("data/events.json");
+const merch = json("data/merch.json");
 const intake = json("data/intake.json");
 const home = read("index.html");
 
@@ -85,6 +86,14 @@ const TH = {
   "bk.alt": "อยากคุยก่อน? แอด LINE ของ Certified หรือ DM @certified_v10 บน Instagram",
   "in.label": "ฝึกงาน", "in.roles": "ตำแหน่ง", "in.closedNote": "เมื่อเปิดรับรอบถัดไป รายละเอียดการสมัครจะแสดงที่นี่",
   "in.follow": "ติดตามบน Instagram", "in.apply": "สมัครรอบนี้",
+  "pg.merch": "เมิร์ช",
+  "mc.label": "เมิร์ช", "mc.t1": "เมิร์ช", "mc.t2": "จากยูนิต",
+  "mc.lede": "เมิร์ชทางการของ Certified V10 กำลังจะมา สินค้าด้านล่างเป็นตัวอย่างชั่วคราว ดีไซน์ รูป ไซซ์ และราคาจริงจะประกาศก่อนวันวางขาย",
+  "mc.soon": "เร็ว ๆ นี้", "mc.soonD": "ยังไม่เปิดขาย — กดรับแจ้งเตือนทาง LINE หรือติดตาม @certified_v10 เพื่อไม่พลาดวันวางขาย",
+  "mc.notifyAll": "รับแจ้งเตือนทาง LINE", "mc.follow": "ติดตามบน Instagram",
+  "mc.items": "สินค้า", "mc.ph": "ตัวอย่าง", "mc.tbc": "รอประกาศราคา", "mc.notify": "แจ้งเตือนฉัน",
+  "mc.drop": "รายละเอียดการวางขาย", "mc.k.date": "วันวางขาย", "mc.k.order": "วิธีสั่งซื้อ", "mc.k.ship": "การจัดส่ง", "mc.k.pickup": "รับที่งาน",
+  "mc.tba": "รอประกาศ", "mc.dropNote": "ข้อมูลทั้งหมดในหน้านี้เป็นตัวอย่างจนกว่า Certified จะประกาศรายละเอียดจริง",
   "bk.type": "ประเภทการจอง", "ev.bkk": "กรุงเทพฯ", "ev.credit": "อาร์ตเวิร์กทางการ — จาก @certified_v10",
   "lost.t1": "หลง", "lost.t2": "ทางแล้ว", "lost.d": "ไม่พบหน้านี้ ลองเริ่มจากหน้าแรก หรือดูไลน์อัพ",
 };
@@ -124,6 +133,7 @@ const NAV = [
   { href: BASE + "#lineup", key: "nav.lineup", en: "Lineup" },
   { href: BASE + "sets/", key: "nav.sets", en: "Sets", id: "sets" },
   { href: BASE + "events/", key: "nav.events", en: "Events", id: "events" },
+  { href: BASE + "merch/", key: "nav.merch", en: "Merch", id: "merch" },
   { href: BASE + "internships/", key: "nav.jobsP", en: "Jobs", id: "interns" },
 ];
 function header(current) {
@@ -147,7 +157,8 @@ ${NAV.map((n) => `    <a href="${n.href}" data-i18n="${n.key}"${n.id === current
     <a href="${BASE}sets/"${current === "sets" ? ' aria-current="page"' : ""}><em>03</em><span data-i18n="pg.sets">DJ sets</span></a>
     <a href="${BASE}events/"${current === "events" ? ' aria-current="page"' : ""}><em>04</em><span data-i18n="pg.events">Events</span></a>
     <a href="${BASE}booking/"${current === "booking" ? ' aria-current="page"' : ""}><em>05</em><span data-i18n="pg.booking">Booking</span></a>
-    <a href="${BASE}internships/"${current === "interns" ? ' aria-current="page"' : ""}><em>06</em><span data-i18n="pg.interns">Internships</span></a>
+    <a href="${BASE}merch/"${current === "merch" ? ' aria-current="page"' : ""}><em>06</em><span data-i18n="pg.merch">Merch</span></a>
+    <a href="${BASE}internships/"${current === "interns" ? ' aria-current="page"' : ""}><em>07</em><span data-i18n="pg.interns">Internships</span></a>
   </nav>
 </div>`;
 }
@@ -176,6 +187,7 @@ function footer() {
       <a href="${BASE}sets/" data-i18n="pg.sets">DJ sets</a>
       <a href="${BASE}events/" data-i18n="pg.events">Events</a>
       <a href="${BASE}booking/" data-i18n="pg.booking">Booking</a>
+      <a href="${BASE}merch/" data-i18n="pg.merch">Merch</a>
       <a href="${BASE}internships/" data-i18n="pg.interns">Internships</a>
     </nav>
     <nav class="footer__col" aria-label="DJs">
@@ -663,6 +675,97 @@ ${jobsBlock}
 </section>`,
 }));
 
+/* ---------- merch ----------
+   Until the real drop is in, every product is a drawn placeholder, tagged as one, with no price and no checkout:
+   "Notify me" opens LINE with a short message to Certified. Set data/merch.json "status" to "live" for real products. */
+const MERCH_PH = merch.status !== "live";
+const lineMsg = (text) => "https://line.me/R/oaMessage/%40316ghxsa/?" + encodeURIComponent(text);
+function merchArt(m) {
+  const G = "#1b1b1f", S = "#3a3a41", gid = "mg-" + m.id;
+  const logo = (x, y, w) => `<image href="${BASE}assets/img/logo.png" x="${x}" y="${y}" width="${w}" height="${(w * 96 / 933).toFixed(1)}"/>`;
+  const art = {
+    tee: `<path d="M138 132 L174 116 Q200 142 226 116 L262 132 L328 170 L304 228 L268 212 L268 432 L132 432 L132 212 L96 228 L72 170 Z" fill="${G}" stroke="${S}" stroke-width="2" stroke-linejoin="round"/>
+<path d="M174 116 Q200 142 226 116" fill="none" stroke="${S}" stroke-width="6"/>${logo(146, 176, 108)}<rect x="246" y="410" width="10" height="14" fill="#FF3117"/>`,
+    hoodie: `<path d="M134 136 Q200 112 266 136 L322 184 L346 316 L316 322 L292 230 L280 230 L280 436 L120 436 L120 230 L108 230 L84 322 L54 316 L78 184 Z" fill="${G}" stroke="${S}" stroke-width="2" stroke-linejoin="round"/>
+<path d="M150 144 Q146 78 200 72 Q254 78 250 144 Q226 128 200 128 Q174 128 150 144 Z" fill="${G}" stroke="${S}" stroke-width="2"/>
+<path d="M168 138 Q172 98 200 94 Q228 98 232 138 Q216 130 200 130 Q184 130 168 138 Z" fill="#0f0f11"/>
+<path d="M186 142 L184 192 M214 142 L216 192" stroke="#8E8B84" stroke-width="3" stroke-linecap="round"/>
+<path d="M148 346 L252 346 L266 408 L134 408 Z" fill="none" stroke="${S}" stroke-width="2"/>${logo(146, 214, 108)}<path d="M120 420 L280 420" stroke="${S}" stroke-width="2"/>`,
+    cap: `<path d="M96 306 Q96 178 210 170 Q318 176 324 306 Z" fill="${G}" stroke="${S}" stroke-width="2"/>
+<path d="M210 172 Q196 236 190 306 M210 172 Q226 236 232 306" fill="none" stroke="${S}" stroke-width="2"/>
+<path d="M70 310 Q210 278 350 310 Q356 340 330 346 Q210 322 90 346 Q64 340 70 310 Z" fill="${G}" stroke="${S}" stroke-width="2"/>
+<circle cx="210" cy="172" r="7" fill="${G}" stroke="${S}" stroke-width="2"/>${logo(150, 246, 120)}`,
+    tote: `<path d="M154 206 L154 160 Q154 108 200 108 Q246 108 246 160 L246 206" fill="none" stroke="${S}" stroke-width="12" stroke-linecap="round"/>
+<path d="M104 198 L296 198 L308 434 L92 434 Z" fill="${G}" stroke="${S}" stroke-width="2" stroke-linejoin="round"/>${logo(140, 300, 120)}
+<text x="200" y="344" text-anchor="middle" fill="#8E8B84" font-family="Chakra Petch, sans-serif" font-size="11" font-weight="600" letter-spacing="2.5">BANGKOK — AFTER MIDNIGHT</text>`,
+    poster: `<rect x="118" y="112" width="180" height="255" fill="#000" opacity=".5"/>
+<rect x="110" y="104" width="180" height="255" fill="#141416" stroke="${S}" stroke-width="2"/>
+<rect x="176" y="96" width="48" height="16" fill="#8E8B84" opacity=".35" transform="rotate(-4 200 104)"/>${logo(126, 126, 148)}
+<rect x="126" y="152" width="40" height="4" fill="#FF3117"/>
+<text x="200" y="262" text-anchor="middle" fill="none" stroke="#EDEAE3" stroke-opacity=".55" stroke-width="1.5" font-family="Anton, sans-serif" font-size="92">V10</text>
+<path d="M126 290 H246 M126 304 H226 M126 318 H256 M126 332 H210" stroke="#3a3a41" stroke-width="5"/>
+<text x="274" y="350" text-anchor="end" fill="#8E8B84" font-family="Chakra Petch, sans-serif" font-size="8" letter-spacing="1.5">BKK 2026</text>`,
+    stickers: `<circle cx="170" cy="236" r="80" fill="#EDEAE3"/>
+<text x="152" y="232" text-anchor="middle" fill="#0B0B0C" font-family="Anton, sans-serif" font-size="58">I</text>
+<path d="M0 -6 C-6 -14 -18 -8 -12 2 L0 12 L12 2 C18 -8 6 -14 0 -6 Z" fill="#FF3117" transform="translate(196 214) scale(1.9)"/>
+<text x="170" y="270" text-anchor="middle" fill="#0B0B0C" font-family="Anton, sans-serif" font-size="27" letter-spacing="1">CERTIFIED</text>
+<circle cx="286" cy="168" r="42" fill="${G}" stroke="${S}" stroke-width="2"/>
+<text x="286" y="176" text-anchor="middle" fill="#EDEAE3" font-family="Chakra Petch, sans-serif" font-size="20" font-weight="700" letter-spacing="3">BKK</text>
+<g transform="rotate(-10 262 336)"><rect x="186" y="304" width="152" height="64" rx="10" fill="#FF3117"/><text x="262" y="349" text-anchor="middle" fill="#0B0B0C" font-family="Anton, sans-serif" font-size="36">V10</text></g>`,
+  }[m.art] || "";
+  return `<svg viewBox="0 0 400 500" aria-hidden="true" focusable="false"><defs><radialGradient id="${gid}" cx="82%" cy="8%" r="80%"><stop offset="0" stop-color="#FF3117" stop-opacity=".2"/><stop offset="1" stop-color="#FF3117" stop-opacity="0"/></radialGradient></defs><rect width="400" height="500" fill="#0f0f11"/><rect width="400" height="500" fill="url(#${gid})"/><path d="M20 34 V20 H34 M366 20 H380 V34 M380 466 V480 H366 M34 480 H20 V466" fill="none" stroke="#2c2c31" stroke-width="2"/>${art}</svg>`;
+}
+merch.items.forEach((m) => { TH[`mc.n.${m.id}`] = m.name.th; TH[`mc.k.${m.id}`] = m.kind.th; TH[`mc.o.${m.id}`] = m.options.th; });
+const merchCard = (m) => `<article class="mcard" data-rev>
+      <div class="mcard__media">
+        ${m.image ? `<img src="${BASE}${h(m.image)}" alt="${h(m.name.en)}" loading="lazy">` : merchArt(m)}
+        ${MERCH_PH ? '<span class="mcard__stamp tag tag--muted" data-i18n="mc.ph">Placeholder</span>' : ""}
+      </div>
+      <div class="mcard__body">
+        <p class="mcard__kind meta" data-i18n="mc.k.${m.id}">${h(m.kind.en)}</p>
+        <h2 class="mcard__title" data-i18n="mc.n.${m.id}">${h(m.name.en)}</h2>
+        <p class="mcard__price">${m.price ? `<span class="mcard__amt">THB ${Number(m.price).toLocaleString("en-US")}</span>` : '<span class="mcard__amt" aria-hidden="true">THB —</span><span class="mcard__tbc meta" data-i18n="mc.tbc">Price to be announced</span>'}</p>
+        <p class="mcard__opts meta" data-i18n="mc.o.${m.id}">${h(m.options.en)}</p>
+        <a class="btn mcard__cta" href="${h(lineMsg(`Hi Certified — please let me know when the ${m.name.en} is available. (Sent from the Certified V10 website)`))}" target="_blank" rel="noopener"><span data-i18n="mc.notify">Notify me</span><em aria-hidden="true">↗︎</em></a>
+      </div>
+    </article>`;
+const dropRow = (k, en, v) => `<div class="shows__row"><dt class="meta" data-i18n="${k}">${en}</dt><dd>${v ? h(v) : '<span data-i18n="mc.tba">To be announced</span>'}</dd></div>`;
+write("merch/index.html", page({
+  kind: "merch", current: "merch",
+  headOpts: { title: "Merch | CERTIFIED V10", desc: "Official Certified V10 merch from the Bangkok DJ collective — coming soon. Get notified on LINE when the drop opens.", pathRel: "merch/", noindex: MERCH_PH },
+  main: `
+<section class="phead">
+  ${secHead("—", "mc.label", "Merch", "p")}
+  ${title2("phead__title", "mc.t1", "Merch from", "mc.t2", "the unit.")}
+  <p class="phead__lede" data-rev data-i18n="mc.lede">Official Certified V10 merch is on the way. The pieces below are placeholders — final designs, photos, sizes and prices will be posted before the drop.</p>
+</section>
+<section class="block block--tight">
+  <div class="intake is-open">
+    <div><p class="intake__state" data-i18n="mc.soon">Coming soon</p><p class="intake__d" data-i18n="mc.soonD">Not on sale yet — get notified on LINE or follow @certified_v10 so you don't miss the drop.</p></div>
+    <div class="ctas">
+      <a class="btn btn--fill" href="${h(lineMsg("Hi Certified — please let me know when the merch drops. (Sent from the Certified V10 website)"))}" target="_blank" rel="noopener"><span data-i18n="mc.notifyAll">Get notified on LINE</span><em aria-hidden="true">↗︎</em></a>
+      <a class="btn" href="https://www.instagram.com/certified_v10/" target="_blank" rel="noopener"><span data-i18n="mc.follow">Follow on Instagram</span><em aria-hidden="true">↗︎</em></a>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="items-h">
+  ${secHead("01", "mc.items", "The goods").replace("<header", '<header id="items-h"')}
+  <div class="mgrid">
+    ${merch.items.map(merchCard).join("\n    ")}
+  </div>
+</section>
+<section class="block" aria-labelledby="drop-h">
+  ${secHead("02", "mc.drop", "Drop details").replace("<header", '<header id="drop-h"')}
+  <dl class="shows__table">
+    ${dropRow("mc.k.date", "Release date", merch.drop.date)}
+    ${dropRow("mc.k.order", "Ordering", merch.drop.ordering)}
+    ${dropRow("mc.k.ship", "Shipping", merch.drop.shipping)}
+    ${dropRow("mc.k.pickup", "Pickup at shows", merch.drop.pickup)}
+  </dl>
+  ${MERCH_PH ? '<p class="jobs__note meta" data-i18n="mc.dropNote">Everything on this page is a placeholder until Certified announces the real drop.</p>' : ""}
+</section>`,
+}));
+
 /* ---------- 404 ---------- */
 write("404.html", page({
   kind: "lost", current: "",
@@ -681,7 +784,7 @@ write("assets/site.css", "/* Generated by tools/build.mjs from index.html + tool
 write("assets/site.js", "/* Generated by tools/build.mjs — edit tools/site-src.js and the Thai strings in tools/build.mjs. */\n" + homeTH + "\nObject.assign(window.CV_TH, " + JSON.stringify(TH) + ");\n" + read("tools/site-src.js"));
 
 /* ---------- sitemap ---------- */
-const paths = ["", "sets/", "events/", "booking/", "internships/", ...artists.map((a) => `artists/${a.id}/`), ...events.map((e) => `events/${e.slug}/`)];
+const paths = ["", "sets/", "events/", "booking/", "internships/", ...(MERCH_PH ? [] : ["merch/"]), ...artists.map((a) => `artists/${a.id}/`), ...events.map((e) => `events/${e.slug}/`)];
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${paths.map((p) => `  <url><loc>${url(p)}</loc></url>`).join("\n")}
