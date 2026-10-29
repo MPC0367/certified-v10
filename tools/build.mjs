@@ -8,7 +8,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const BASE = "/certified-v10/";
 const ORIGIN = "https://mpc0367.github.io";
-const BUILD = process.env.BUILD_TAG || "Build R30 · 29 Oct 2026";
+const BUILD = process.env.BUILD_TAG || "Build R31 · 29 Oct 2026";
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 const write = (p, s) => { const f = path.join(ROOT, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
 const json = (p) => JSON.parse(read(p));
@@ -100,7 +100,7 @@ const TH = {
   "mc.buyNote": "เปิดสั่งซื้อเมื่อประกาศวันวางขาย ตอนนี้ยังซื้อหรือชำระเงินบนเว็บไซต์นี้ไม่ได้",
   "mc.k.material": "วัสดุและทรง", "mc.k.guide": "ตารางไซซ์", "mc.k.delivery": "การจัดส่ง", "mc.k.returns": "การคืนสินค้าและติดต่อ",
   "mc.more2": "เมิร์ชอื่น ๆ", "mc.empty": "ยังไม่มีสินค้าจำหน่าย", "mc.dropNote": "ข้อมูลทั้งหมดในหน้านี้เป็นตัวอย่างจนกว่า Certified จะประกาศรายละเอียดจริง",
-  "st.latest": "เซ็ตล่าสุด", "st.muted": "กำลังเล่นแบบปิดเสียง — เปิดเสียงได้ที่ตัวเล่น",
+  "st.latest": "เซ็ตล่าสุด", "st.muted": "ตัวอย่างแบบปิดเสียงในคุณภาพสูงสุด — กด “เล่นพร้อมเสียง” เพื่อฟัง", "st.sound": "เล่นพร้อมเสียง", "st.now": "กำลังเล่น",
   "bk.type": "ประเภทการจอง", "ev.bkk": "กรุงเทพฯ", "ev.thai": "ประเทศไทย", "ev.tz": "เวลากรุงเทพฯ GMT+7",
   "ar.confirmed": "ยืนยันแล้ว", "ev.credit": "อาร์ตเวิร์กทางการ — จาก @certified_v10",
   "lost.t1": "หลง", "lost.t2": "ทางแล้ว", "lost.d": "ไม่พบหน้านี้ ลองเริ่มจากหน้าแรก หรือดูไลน์อัพ",
@@ -224,6 +224,7 @@ ${artists.map((a) => `      <a href="${BASE}artists/${a.id}/">${a.name}</a>`).jo
 function page({ kind, current, headOpts, main, data, extra = "" }) {
   return `${head(headOpts)}
 <body class="page page--${kind}" data-lang="en" data-base="${BASE}">
+<div class="bgfx" aria-hidden="true"><i></i><i></i><i></i></div>
 ${header(current)}
 <main id="main">
 ${main}
@@ -443,7 +444,7 @@ ${setLead(latestSet)}
 </section>
 <section class="block" aria-label="Sets">
   <div class="vgrid">
-    ${sets.filter((v) => v !== latestSet).map((v) => videoCard(v)).join("\n    ")}
+    ${sets.map((v) => videoCard(v).replace('<article class="vcard"', `<article class="vcard" data-set="${h(v.id)}"${v === latestSet ? " hidden" : ""}`)).join("\n    ")}
   </div>
 </section>
 <section class="block">
@@ -455,30 +456,40 @@ ${setLead(latestSet)}
 }));
 
 /* the newest upload leads the sets page as a large player that starts by itself, muted */
-function setLead(v) {
+function setLeadInfo(v, on) {
   setKeys(v);
   const ev = evBySlug(v.event);
-  return `<section class="setlead" aria-labelledby="lead-t">
+  return `<div class="setlead__set" data-set="${h(v.id)}"${on ? "" : " hidden"}>
+      <div>
+        <p class="vcard__by meta">${setBy(v)}</p>
+        <p class="setlead__title" id="lead-t-${h(v.id)}" data-i18n="st.t.${v.id}">${h(v.title.en)}</p>
+      </div>
+      <div>
+        <p class="vcard__meta meta">${ev ? `<a href="${BASE}events/${ev.slug}/">${h(ev.title)}</a> · ` : ""}<span data-i18n="st.rec.${v.id}">Recorded ${h(longDate(v.recorded))}</span> · ${mmss(v.seconds)}</p>
+        <p class="vcard__genres meta">${h(v.genres)}</p>
+        <a class="vcard__yt meta" href="https://www.youtube.com/watch?v=${h(v.id)}" target="_blank" rel="noopener"><span data-i18n="st.yt">Watch on YouTube ↗︎</span></a>
+      </div>
+    </div>`;
+}
+function setLead(v) {
+  setKeys(v);
+  return `<section class="setlead" aria-labelledby="lead-t-${h(v.id)}" data-latest="${h(v.id)}">
   <div class="setlead__wrap">
-    <p class="setlead__kicker meta"><span class="setlead__dot" aria-hidden="true"></span><span data-i18n="st.latest">Latest set</span></p>
     <div class="vcard__media setlead__media">
       <button class="vcard__play" type="button" data-yt="${h(v.id)}" data-title="${h(v.title.en)}" data-autoplay aria-label="${h("Play: " + v.title.en + " (" + mmss(v.seconds) + ")")}">
         <img src="${BASE}assets/img/sets/${h(v.id)}.jpg" alt="" width="960" height="540" fetchpriority="high">
         <span class="vcard__badge"><span class="vcard__icon" aria-hidden="true"></span><span class="meta" data-i18n="st.play">Play set</span></span>
         <span class="vcard__len meta" aria-hidden="true">${mmss(v.seconds)}</span>
       </button>
+      <div class="setlead__ctrl" id="lead-ctrl" hidden>
+        <button class="setlead__btn setlead__btn--sound" type="button" id="lead-sound"><span data-i18n="st.sound">Play with sound</span></button>
+        <button class="setlead__btn" type="button" id="lead-pause" aria-pressed="false">Pause</button>
+      </div>
     </div>
+    <p class="setlead__kicker meta"><span class="setlead__dot" aria-hidden="true"></span><span id="lead-k-latest" data-i18n="st.latest">Latest set</span><span id="lead-k-now" data-i18n="st.now" hidden>Now playing</span></p>
     <div class="setlead__info">
-      <div>
-        <p class="vcard__by meta">${setBy(v)}</p>
-        <p class="setlead__title" id="lead-t" data-i18n="st.t.${v.id}">${h(v.title.en)}</p>
-      </div>
-      <div>
-        <p class="vcard__meta meta">${ev ? `<a href="${BASE}events/${ev.slug}/">${h(ev.title)}</a> · ` : ""}<span data-i18n="st.rec.${v.id}">Recorded ${h(longDate(v.recorded))}</span> · ${mmss(v.seconds)}</p>
-        <p class="vcard__genres meta">${h(v.genres)}</p>
-        <p class="setlead__muted meta" id="lead-muted" hidden data-i18n="st.muted">Playing muted — turn the sound up in the player.</p>
-        <a class="vcard__yt meta" href="https://www.youtube.com/watch?v=${h(v.id)}" target="_blank" rel="noopener"><span data-i18n="st.yt">Watch on YouTube ↗︎</span></a>
-      </div>
+    ${sets.map((o) => setLeadInfo(o, o === v)).join("\n    ")}
+      <p class="setlead__muted meta" id="lead-muted" hidden data-i18n="st.muted">Muted preview in top quality — press Play with sound to listen.</p>
     </div>
   </div>
 </section>`;
@@ -884,7 +895,10 @@ write("404.html", page({
 
 /* ---------- shared assets ---------- */
 write("assets/site.css", "/* Generated by tools/build.mjs from index.html + tools/pages.css — edit those, not this. */\n" + homeCSS + "\n\n" + read("tools/pages.css"));
-write("assets/site.js", "/* Generated by tools/build.mjs — edit tools/site-src.js and the Thai strings in tools/build.mjs. */\n" + homeTH + "\nObject.assign(window.CV_TH, " + JSON.stringify(TH) + ");\n" + read("tools/site-src.js"));
+/* which sets have a loudness map (tools/levels.mjs), so the page only asks for files that exist */
+const levelsDir = path.join(ROOT, "data/levels");
+const levelIds = fs.existsSync(levelsDir) ? fs.readdirSync(levelsDir).filter((n) => n.endsWith(".json")).map((n) => n.slice(0, -5)) : [];
+write("assets/site.js", "/* Generated by tools/build.mjs — edit tools/site-src.js and the Thai strings in tools/build.mjs. */\n" + homeTH + "\nObject.assign(window.CV_TH, " + JSON.stringify(TH) + ");\nwindow.CV_LEVELS = " + JSON.stringify(levelIds) + ";\n" + read("tools/site-src.js"));
 
 /* ---------- sitemap ---------- */
 const paths = ["", "sets/", "events/", "booking/", "internships/", ...(MERCH_PH ? [] : ["merch/"]), ...artists.map((a) => `artists/${a.id}/`), ...events.map((e) => `events/${e.slug}/`)];

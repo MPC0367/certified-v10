@@ -212,7 +212,8 @@ window.CV_TH = {
 
 };
 
-Object.assign(window.CV_TH, {"pg.home":"หน้าแรก","pg.sets":"ดีเจเซ็ต","pg.events":"อีเวนต์","pg.booking":"จองดีเจ","pg.interns":"ฝึกงาน","nav.sets":"เซ็ต","nav.events":"อีเวนต์","nav.jobsP":"ฝึกงาน","nav.bookP":"จองเลย","pg.back":"← ไลน์อัพ","pg.backEvents":"← อีเวนต์ทั้งหมด","pg.backHome":"← หน้าแรก","ft.pages":"หน้าต่าง ๆ","ft.djs":"ดีเจ","ft.line":"LINE ↗︎","ar.bioSrc":"— จากคำอธิบายของ Certified V10 บน YouTube","ar.book":"จอง {a}","ar.intl":"จองจากต่างประเทศ","ar.watch":"ดูเซ็ตเต็ม ↓","ar.next":"งานถัดไปที่ยืนยันแล้ว","ar.nextNone":"ยังไม่มีงานที่ประกาศ — ติดตาม @certified_v10 เพื่อรอวันถัดไป","ar.sched":"ตารางงาน","ar.schedLede":"งานที่มีป้าย ยืนยันแล้ว คืองานจริงที่ประกาศแล้ว ส่วนวันในคลับที่มีป้าย ตัวอย่าง เป็นข้อมูลตัวอย่าง จนกว่าจะเชื่อมกับปฏิทินการจองของ Certified","ar.posterOpen":"ดูโปสเตอร์ขนาดเต็ม","ar.posterHint":"ดูขนาดเต็ม","ar.close":"ปิด","ar.posterCap":"โปสเตอร์นี้สร้างจากตารางข้างต้น และจะอัปเดตตามข้อมูลเสมอ","ar.set":"เซ็ตเต็ม","ar.setLede":"บันทึกสดจากช่อง YouTube ทางการของ Certified","ar.others":"สมาชิกคนอื่นในยูนิต","ar.allSets":"ดูเซ็ตทั้งหมด →","ar.bandT":"จอง {a}","ar.go":"โปรไฟล์และเซ็ต →","st.label":"ดีเจเซ็ต","st.t1":"ฟังเสียง","st.t2":"ของยูนิต","st.lede":"เซ็ตเต็มจากช่องทางการของ Certified V10 — บันทึกสดที่ After Sun Studio และ Wingstop Rave กดเล่นเพื่อดูที่นี่ หรือเปิดบน YouTube","st.yt":"ดูบน YouTube ↗︎","st.play":"เล่นเซ็ต","st.recorded":"บันทึกเมื่อ","st.bandT1":"ชอบสิ่งที่ได้ยินไหม?","st.bandT2":"จองยูนิตนี้","ev.label":"อีเวนต์","ev.t1":"งานถัดไป","ev.t2":"และงานที่ผ่านมา","ev.lede":"ทุกงานที่ Certified ขึ้นเล่น — วันที่ สถานที่ และลิงก์บัตรจากผู้จัดโดยตรง งานที่ผ่านมาเก็บไว้พร้อมเซ็ตที่บันทึกไว้","ev.up":"เร็ว ๆ นี้","ev.past":"งานที่ผ่านมา","ev.none":"ยังไม่มีงานที่ประกาศ — ติดตาม @certified_v10","ev.k.date":"วันที่","ev.k.time":"เวลา","ev.k.venue":"สถานที่","ev.k.by":"ผู้จัด","ev.k.head":"เฮดไลเนอร์","ev.k.lineup":"ไลน์อัพ","ev.k.unit":"จากยูนิต","ev.k.tickets":"บัตร","ev.tickets":"ซื้อบัตรที่ {p}","ev.book":"จองยูนิตสำหรับงานของคุณ","ev.sets":"เซ็ตที่บันทึกจากงานนี้","ev.setTimes":"ยังไม่ประกาศเวลาเซ็ตของแต่ละคน","bk.label":"จองดีเจ","bk.t1":"เล่าเรื่องงาน","bk.t2":"ของคุณให้เราฟัง","bk.lede":"เลือกดีเจหรือทั้งยูนิต แล้วบอกวันและสถานที่ ทีมงานจะยืนยันคิวว่างและขั้นตอนถัดไป","bk.modeV":"งานในไทย","bk.modeVd":"คลับ เฟสติวัล งานแบรนด์ หรือปาร์ตี้ส่วนตัวในประเทศไทย","bk.modeI":"จองจากต่างประเทศ","bk.modeId":"จัดงานนอกประเทศไทย? ใส่ปลายทางและวันที่เสนอ รายละเอียดการเดินทางและโปรดักชันคุยกับทีมได้","bk.s1":"ใคร","bk.s2":"งาน","bk.s3":"ติดต่อ","bk.who":"อยากจองใคร?","bk.unit":"ทั้งยูนิต","bk.help":"ช่วยเลือกให้หน่อย","bk.format":"ประเภทงาน","bk.f.club":"คลับไนต์","bk.f.fest":"เฟสติวัล","bk.f.show":"คอนเสิร์ตหรือโชว์","bk.f.brand":"งานแบรนด์หรืองานเปิดตัว","bk.f.private":"ปาร์ตี้ส่วนตัว","bk.f.wedding":"งานแต่งงาน","bk.f.other":"อื่น ๆ","bk.choose":"เลือก…","bk.date":"วันจัดงาน","bk.tbc":"ยังไม่ระบุวัน","bk.time":"เวลาเริ่ม (เวลาท้องถิ่น)","bk.setlen":"ความยาวเซ็ต","bk.len.1":"1 ชั่วโมง","bk.len.2":"2 ชั่วโมง","bk.len.3":"3 ชั่วโมง","bk.len.x":"นานกว่านั้น / คุยกันได้","bk.venue":"ชื่อสถานที่","bk.city":"เมือง","bk.country":"ประเทศ","bk.audience":"จำนวนผู้ชมโดยประมาณ","bk.budget":"งบประมาณ","bk.budgetHint":"ช่วงงบหรือพิมพ์ “คุยกัน” — ไม่บังคับ","bk.currency":"สกุลเงิน","bk.tz":"เขตเวลาของงาน","bk.travel":"ตั๋วเครื่องบิน","bk.hotel":"ที่พัก","bk.ground":"การเดินทางในพื้นที่","bk.cover":"ผู้จัดรับผิดชอบ","bk.discuss":"คุยกัน","bk.details":"เล่าเรื่องงานให้ฟัง","bk.detailsHint":"คอนเซ็ปต์ ไลน์อัพ แนวเพลง หรืออะไรก็ได้ที่ช่วยให้ทีมเข้าใจงาน","bk.name":"ชื่อของคุณ","bk.email":"อีเมล","bk.org":"องค์กรหรือสถานที่","bk.orgHint":"สถานที่ โปรโมเตอร์ แบรนด์ หรือ “บุคคล”","bk.phone":"โทรศัพท์ (พร้อมรหัสประเทศ)","bk.web":"เว็บไซต์หรือโซเชียล","bk.contact":"ช่องทางที่สะดวก","bk.opt":"ไม่บังคับ","bk.submit":"เตรียมข้อความจอง","bk.privacy":"หน้านี้ไม่ได้ส่งหรือเก็บข้อมูลใด ๆ ข้อความจะถึง Certified เมื่อคุณกดส่งใน LINE หรือ Instagram เท่านั้น","bk.readyT":"ข้อความจองพร้อมแล้ว","bk.readyD":"ส่งถึง Certified ทาง LINE หรือ Instagram ยังไม่มีอะไรถูกส่ง และการสอบถามยังไม่ใช่การยืนยันการจอง","bk.sendLine":"ส่งทาง LINE","bk.sendIg":"คัดลอกแล้วเปิด Instagram DM","bk.copy":"คัดลอกข้อความ","bk.alt":"อยากคุยก่อน? แอด LINE ของ Certified หรือ DM @certified_v10 บน Instagram","in.label":"ฝึกงาน","in.roles":"ตำแหน่ง","in.closedNote":"เมื่อเปิดรับรอบถัดไป รายละเอียดการสมัครจะแสดงที่นี่","in.follow":"ติดตามบน Instagram","in.apply":"สมัครรอบนี้","pg.merch":"เมิร์ช","mc.label":"เมิร์ช","mc.t1":"เมิร์ช","mc.t2":"จากยูนิต","mc.lede":"เมิร์ชทางการของ Certified V10 กำลังจะมา สินค้าด้านล่างเป็นตัวอย่างชั่วคราว ดีไซน์ รูป ไซซ์ และราคาจริงจะประกาศก่อนวันวางขาย","mc.soon":"เร็ว ๆ นี้","mc.soonD":"ยังไม่เปิดขาย — กดรับแจ้งเตือนทาง LINE หรือติดตาม @certified_v10 เพื่อไม่พลาดวันวางขาย","mc.notifyAll":"รับแจ้งเตือนทาง LINE","mc.follow":"ติดตามบน Instagram","mc.items":"สินค้า","mc.ph":"ตัวอย่าง","mc.tbc":"รอประกาศราคา","mc.notify":"แจ้งเตือนฉัน","mc.drop":"รายละเอียดการวางขาย","mc.k.date":"วันวางขาย","mc.k.order":"วิธีสั่งซื้อ","mc.k.ship":"การจัดส่ง","mc.k.pickup":"รับที่งาน","mc.tba":"รอประกาศ","mc.back":"← เมิร์ชทั้งหมด","mc.stock":"ยังไม่มีจำหน่าย","mc.size":"ไซซ์","mc.qty":"จำนวน","mc.less":"ลดจำนวน","mc.more":"เพิ่มจำนวน","mc.order":"สั่งซื้อ — ยังไม่เปิดขาย","mc.notifyLine":"แจ้งเตือนฉันทาง LINE","mc.buyNote":"เปิดสั่งซื้อเมื่อประกาศวันวางขาย ตอนนี้ยังซื้อหรือชำระเงินบนเว็บไซต์นี้ไม่ได้","mc.k.material":"วัสดุและทรง","mc.k.guide":"ตารางไซซ์","mc.k.delivery":"การจัดส่ง","mc.k.returns":"การคืนสินค้าและติดต่อ","mc.more2":"เมิร์ชอื่น ๆ","mc.empty":"ยังไม่มีสินค้าจำหน่าย","mc.dropNote":"ข้อมูลทั้งหมดในหน้านี้เป็นตัวอย่างจนกว่า Certified จะประกาศรายละเอียดจริง","st.latest":"เซ็ตล่าสุด","st.muted":"กำลังเล่นแบบปิดเสียง — เปิดเสียงได้ที่ตัวเล่น","bk.type":"ประเภทการจอง","ev.bkk":"กรุงเทพฯ","ev.thai":"ประเทศไทย","ev.tz":"เวลากรุงเทพฯ GMT+7","ar.confirmed":"ยืนยันแล้ว","ev.credit":"อาร์ตเวิร์กทางการ — จาก @certified_v10","lost.t1":"หลง","lost.t2":"ทางแล้ว","lost.d":"ไม่พบหน้านี้ ลองเริ่มจากหน้าแรก หรือดูไลน์อัพ","ev.date.wicked-sessions-2026":"เสาร์ 31 ต.ค. 2026","ev.mon.wicked-sessions-2026":"ต.ค. 2026","ev.time.wicked-sessions-2026":"ประตูเปิด 20:00 — จนดึก","ev.date.certified-x-wingstop-vol-2":"เสาร์ 29 + อาทิตย์ 30 ส.ค. 2026","ev.mon.certified-x-wingstop-vol-2":"ส.ค. 2026","ev.date.after-sun-studio-day-party-2026":"พุธ 8 ก.ค. 2026","ev.mon.after-sun-studio-day-party-2026":"ก.ค. 2026","ev.date.wingstop-rave-mbk-2026":"พุธ 18 ก.พ. 2026","ev.mon.wingstop-rave-mbk-2026":"ก.พ. 2026","ar.upd":"อัปเดตตารางเมื่อ 29 ตุลาคม 2026.","ar.book.mawon":"จอง MAWON","ar.band.mawon":"จอง MAWON","ar.bio.mawon":"MAWON มาพร้อมพลังแบบเฟสติวัล ที่ทำให้ทุกร้านรู้สึกเหมือนเวทีเมนสเตจ","ar.role.mawon":"ดีเจ — ซีเลกเตอร์","st.rec.-wxnD5LY9UI":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.-wxnD5LY9UI":"MAWON — พลังคลับช่วงพีค","ar.book.ossy":"จอง OSSY","ar.band.ossy":"จอง OSSY","ar.bio.ossy":"OSSY เล่นแบบดิบ ๆ ด้วยฮิปฮอป และฝีมือมิกซ์ที่คุณคาดไม่ถึง","ar.role.ossy":"ดีเจ — ซีเลกเตอร์","st.rec.HG6gP2sCCiQ":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.HG6gP2sCCiQ":"OSSY — ทรานซิชันที่คาดไม่ถึงกับฮิปฮอป","ar.book.tew":"จอง TEW","ar.band.tew":"จอง TEW","ar.bio.tew":"TEW เบลนด์เพลงโปรดของคุณทั้งหมด ให้กลายเป็นเวอร์ชันที่ดีกว่าเดิม","ar.role.tew":"ดีเจ — ซีเลกเตอร์","st.rec.3q8sxyGi02Q":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.3q8sxyGi02Q":"TEW — เดย์ปาร์ตี้ฮิปฮอป","ar.book.wichaya":"จอง WICHAYA","ar.band.wichaya":"จอง WICHAYA","ar.bio.wichaya":"WICHAYA ทำให้ฟลอร์เต็มด้วยเพลงที่ทุกคนร้องตามและเต้นไปด้วยกัน","ar.role.wichaya":"ดีเจ — ซีเลกเตอร์","st.rec.TOiUBDjO9Yk":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.TOiUBDjO9Yk":"WICHAYA — รีมิกซ์และเพลงฮิตที่คาดไม่ถึง","ar.doorsIn":"ประตูเปิดอีก","ar.event":"รายละเอียดงาน →","st.rec.0ILM_7NYRcE":"บันทึกเมื่อ 18 กุมภาพันธ์ 2026","st.by.0ILM_7NYRcE":"ทั้งยูนิต","st.t.0ILM_7NYRcE":"Certified — Wingstop Rave BKK","st.rec.t_EOGmvzqsU":"บันทึกเมื่อ 18 กุมภาพันธ์ 2026","st.by.t_EOGmvzqsU":"ดีเจรับเชิญ","st.t.t_EOGmvzqsU":"Certified Selects — DJ TIITO","ev.sub.wicked-sessions-2026":"White Claw presents — ฮาโลวีนในป่า Wicked Woods","ev.about.wicked-sessions-2026":"ฮาโลวีนในป่า Wicked Woods — Wicked Sessions โดย White Claw ยึด Sphere Hall พร้อม Amanda Sze ทั้งเปิดเพลงและเป่าแซกโซโฟนสด และยูนิตเต็มทีมขึ้นบิล White Claw ฟรีทุกบัตร ดูไพ่ทาโรต์ ปาเป้า ลัคกี้ดรอว์ และมุมถ่ายรูป","ev.tk.wicked-sessions-2026":"Regular ฿1,499 · หน้างาน ฿1,899","ev.tkBtn.wicked-sessions-2026":"ซื้อบัตรที่ Nightify","ev.sub.certified-x-wingstop-vol-2":"สองคืนกับ Wingstop","ev.about.certified-x-wingstop-vol-2":"สองคืนกับ Wingstop ที่สามย่านมิตรทาวน์ YOUNGOHM ขึ้นเป็นเฮดไลเนอร์ และยูนิตเต็มทีมคุมเครื่องเล่น","ev.sub.after-sun-studio-day-party-2026":"เดย์ปาร์ตี้เฉพาะแขกรับเชิญที่ After Sun Studio","ev.about.after-sun-studio-day-party-2026":"Certified พาพลังที่เป็นเอกลักษณ์มาสู่เดย์ปาร์ตี้ เฉพาะแขกรับเชิญ ที่ After Sun Studio สตูดิโอแสงธรรมชาติพร้อมสวนในร่มและกลางแจ้งใจกลางเมือง ดีเจทั้งสี่คนขึ้นเล่น และทุกเซ็ตถูกถ่ายไว้","ev.sub.wingstop-rave-mbk-2026":"Certified จัดปาร์ตี้ดีเจที่ Wingstop, MBK Center","ev.about.wingstop-rave-mbk-2026":"Certified จัดปาร์ตี้ดีเจที่ Wingstop อาหารอร่อยกับบีตดี ๆ โดยมีทีม Certified คุมเครื่องเล่น และ DJ TIITO เป็นแขกรับเชิญในซีรีส์ Certified Selects","mc.n.logo-tee":"เสื้อยืดโลโก้","mc.k.logo-tee":"เสื้อยืด","mc.o.logo-tee":"ไซซ์ S – XL","mc.n.night-shift-hoodie":"ฮู้ดดี้ไนต์ชิฟต์","mc.k.night-shift-hoodie":"ฮู้ดดี้","mc.o.night-shift-hoodie":"ไซซ์ S – XL","mc.n.v10-cap":"หมวก V10","mc.k.v10-cap":"หมวกแก๊ป","mc.o.v10-cap":"ฟรีไซซ์","mc.n.certified-tote":"กระเป๋าผ้า Certified","mc.k.certified-tote":"กระเป๋าผ้า","mc.o.certified-tote":"ขนาดเดียว","mc.n.lineup-poster":"โปสเตอร์ไลน์อัพ","mc.k.lineup-poster":"ภาพพิมพ์ A2","mc.o.lineup-poster":"A2 · 420 × 594 มม.","mc.n.sticker-pack":"ชุดสติกเกอร์","mc.k.sticker-pack":"สติกเกอร์","mc.o.sticker-pack":"แพ็ก 3 ชิ้น"});
+Object.assign(window.CV_TH, {"pg.home":"หน้าแรก","pg.sets":"ดีเจเซ็ต","pg.events":"อีเวนต์","pg.booking":"จองดีเจ","pg.interns":"ฝึกงาน","nav.sets":"เซ็ต","nav.events":"อีเวนต์","nav.jobsP":"ฝึกงาน","nav.bookP":"จองเลย","pg.back":"← ไลน์อัพ","pg.backEvents":"← อีเวนต์ทั้งหมด","pg.backHome":"← หน้าแรก","ft.pages":"หน้าต่าง ๆ","ft.djs":"ดีเจ","ft.line":"LINE ↗︎","ar.bioSrc":"— จากคำอธิบายของ Certified V10 บน YouTube","ar.book":"จอง {a}","ar.intl":"จองจากต่างประเทศ","ar.watch":"ดูเซ็ตเต็ม ↓","ar.next":"งานถัดไปที่ยืนยันแล้ว","ar.nextNone":"ยังไม่มีงานที่ประกาศ — ติดตาม @certified_v10 เพื่อรอวันถัดไป","ar.sched":"ตารางงาน","ar.schedLede":"งานที่มีป้าย ยืนยันแล้ว คืองานจริงที่ประกาศแล้ว ส่วนวันในคลับที่มีป้าย ตัวอย่าง เป็นข้อมูลตัวอย่าง จนกว่าจะเชื่อมกับปฏิทินการจองของ Certified","ar.posterOpen":"ดูโปสเตอร์ขนาดเต็ม","ar.posterHint":"ดูขนาดเต็ม","ar.close":"ปิด","ar.posterCap":"โปสเตอร์นี้สร้างจากตารางข้างต้น และจะอัปเดตตามข้อมูลเสมอ","ar.set":"เซ็ตเต็ม","ar.setLede":"บันทึกสดจากช่อง YouTube ทางการของ Certified","ar.others":"สมาชิกคนอื่นในยูนิต","ar.allSets":"ดูเซ็ตทั้งหมด →","ar.bandT":"จอง {a}","ar.go":"โปรไฟล์และเซ็ต →","st.label":"ดีเจเซ็ต","st.t1":"ฟังเสียง","st.t2":"ของยูนิต","st.lede":"เซ็ตเต็มจากช่องทางการของ Certified V10 — บันทึกสดที่ After Sun Studio และ Wingstop Rave กดเล่นเพื่อดูที่นี่ หรือเปิดบน YouTube","st.yt":"ดูบน YouTube ↗︎","st.play":"เล่นเซ็ต","st.recorded":"บันทึกเมื่อ","st.bandT1":"ชอบสิ่งที่ได้ยินไหม?","st.bandT2":"จองยูนิตนี้","ev.label":"อีเวนต์","ev.t1":"งานถัดไป","ev.t2":"และงานที่ผ่านมา","ev.lede":"ทุกงานที่ Certified ขึ้นเล่น — วันที่ สถานที่ และลิงก์บัตรจากผู้จัดโดยตรง งานที่ผ่านมาเก็บไว้พร้อมเซ็ตที่บันทึกไว้","ev.up":"เร็ว ๆ นี้","ev.past":"งานที่ผ่านมา","ev.none":"ยังไม่มีงานที่ประกาศ — ติดตาม @certified_v10","ev.k.date":"วันที่","ev.k.time":"เวลา","ev.k.venue":"สถานที่","ev.k.by":"ผู้จัด","ev.k.head":"เฮดไลเนอร์","ev.k.lineup":"ไลน์อัพ","ev.k.unit":"จากยูนิต","ev.k.tickets":"บัตร","ev.tickets":"ซื้อบัตรที่ {p}","ev.book":"จองยูนิตสำหรับงานของคุณ","ev.sets":"เซ็ตที่บันทึกจากงานนี้","ev.setTimes":"ยังไม่ประกาศเวลาเซ็ตของแต่ละคน","bk.label":"จองดีเจ","bk.t1":"เล่าเรื่องงาน","bk.t2":"ของคุณให้เราฟัง","bk.lede":"เลือกดีเจหรือทั้งยูนิต แล้วบอกวันและสถานที่ ทีมงานจะยืนยันคิวว่างและขั้นตอนถัดไป","bk.modeV":"งานในไทย","bk.modeVd":"คลับ เฟสติวัล งานแบรนด์ หรือปาร์ตี้ส่วนตัวในประเทศไทย","bk.modeI":"จองจากต่างประเทศ","bk.modeId":"จัดงานนอกประเทศไทย? ใส่ปลายทางและวันที่เสนอ รายละเอียดการเดินทางและโปรดักชันคุยกับทีมได้","bk.s1":"ใคร","bk.s2":"งาน","bk.s3":"ติดต่อ","bk.who":"อยากจองใคร?","bk.unit":"ทั้งยูนิต","bk.help":"ช่วยเลือกให้หน่อย","bk.format":"ประเภทงาน","bk.f.club":"คลับไนต์","bk.f.fest":"เฟสติวัล","bk.f.show":"คอนเสิร์ตหรือโชว์","bk.f.brand":"งานแบรนด์หรืองานเปิดตัว","bk.f.private":"ปาร์ตี้ส่วนตัว","bk.f.wedding":"งานแต่งงาน","bk.f.other":"อื่น ๆ","bk.choose":"เลือก…","bk.date":"วันจัดงาน","bk.tbc":"ยังไม่ระบุวัน","bk.time":"เวลาเริ่ม (เวลาท้องถิ่น)","bk.setlen":"ความยาวเซ็ต","bk.len.1":"1 ชั่วโมง","bk.len.2":"2 ชั่วโมง","bk.len.3":"3 ชั่วโมง","bk.len.x":"นานกว่านั้น / คุยกันได้","bk.venue":"ชื่อสถานที่","bk.city":"เมือง","bk.country":"ประเทศ","bk.audience":"จำนวนผู้ชมโดยประมาณ","bk.budget":"งบประมาณ","bk.budgetHint":"ช่วงงบหรือพิมพ์ “คุยกัน” — ไม่บังคับ","bk.currency":"สกุลเงิน","bk.tz":"เขตเวลาของงาน","bk.travel":"ตั๋วเครื่องบิน","bk.hotel":"ที่พัก","bk.ground":"การเดินทางในพื้นที่","bk.cover":"ผู้จัดรับผิดชอบ","bk.discuss":"คุยกัน","bk.details":"เล่าเรื่องงานให้ฟัง","bk.detailsHint":"คอนเซ็ปต์ ไลน์อัพ แนวเพลง หรืออะไรก็ได้ที่ช่วยให้ทีมเข้าใจงาน","bk.name":"ชื่อของคุณ","bk.email":"อีเมล","bk.org":"องค์กรหรือสถานที่","bk.orgHint":"สถานที่ โปรโมเตอร์ แบรนด์ หรือ “บุคคล”","bk.phone":"โทรศัพท์ (พร้อมรหัสประเทศ)","bk.web":"เว็บไซต์หรือโซเชียล","bk.contact":"ช่องทางที่สะดวก","bk.opt":"ไม่บังคับ","bk.submit":"เตรียมข้อความจอง","bk.privacy":"หน้านี้ไม่ได้ส่งหรือเก็บข้อมูลใด ๆ ข้อความจะถึง Certified เมื่อคุณกดส่งใน LINE หรือ Instagram เท่านั้น","bk.readyT":"ข้อความจองพร้อมแล้ว","bk.readyD":"ส่งถึง Certified ทาง LINE หรือ Instagram ยังไม่มีอะไรถูกส่ง และการสอบถามยังไม่ใช่การยืนยันการจอง","bk.sendLine":"ส่งทาง LINE","bk.sendIg":"คัดลอกแล้วเปิด Instagram DM","bk.copy":"คัดลอกข้อความ","bk.alt":"อยากคุยก่อน? แอด LINE ของ Certified หรือ DM @certified_v10 บน Instagram","in.label":"ฝึกงาน","in.roles":"ตำแหน่ง","in.closedNote":"เมื่อเปิดรับรอบถัดไป รายละเอียดการสมัครจะแสดงที่นี่","in.follow":"ติดตามบน Instagram","in.apply":"สมัครรอบนี้","pg.merch":"เมิร์ช","mc.label":"เมิร์ช","mc.t1":"เมิร์ช","mc.t2":"จากยูนิต","mc.lede":"เมิร์ชทางการของ Certified V10 กำลังจะมา สินค้าด้านล่างเป็นตัวอย่างชั่วคราว ดีไซน์ รูป ไซซ์ และราคาจริงจะประกาศก่อนวันวางขาย","mc.soon":"เร็ว ๆ นี้","mc.soonD":"ยังไม่เปิดขาย — กดรับแจ้งเตือนทาง LINE หรือติดตาม @certified_v10 เพื่อไม่พลาดวันวางขาย","mc.notifyAll":"รับแจ้งเตือนทาง LINE","mc.follow":"ติดตามบน Instagram","mc.items":"สินค้า","mc.ph":"ตัวอย่าง","mc.tbc":"รอประกาศราคา","mc.notify":"แจ้งเตือนฉัน","mc.drop":"รายละเอียดการวางขาย","mc.k.date":"วันวางขาย","mc.k.order":"วิธีสั่งซื้อ","mc.k.ship":"การจัดส่ง","mc.k.pickup":"รับที่งาน","mc.tba":"รอประกาศ","mc.back":"← เมิร์ชทั้งหมด","mc.stock":"ยังไม่มีจำหน่าย","mc.size":"ไซซ์","mc.qty":"จำนวน","mc.less":"ลดจำนวน","mc.more":"เพิ่มจำนวน","mc.order":"สั่งซื้อ — ยังไม่เปิดขาย","mc.notifyLine":"แจ้งเตือนฉันทาง LINE","mc.buyNote":"เปิดสั่งซื้อเมื่อประกาศวันวางขาย ตอนนี้ยังซื้อหรือชำระเงินบนเว็บไซต์นี้ไม่ได้","mc.k.material":"วัสดุและทรง","mc.k.guide":"ตารางไซซ์","mc.k.delivery":"การจัดส่ง","mc.k.returns":"การคืนสินค้าและติดต่อ","mc.more2":"เมิร์ชอื่น ๆ","mc.empty":"ยังไม่มีสินค้าจำหน่าย","mc.dropNote":"ข้อมูลทั้งหมดในหน้านี้เป็นตัวอย่างจนกว่า Certified จะประกาศรายละเอียดจริง","st.latest":"เซ็ตล่าสุด","st.muted":"ตัวอย่างแบบปิดเสียงในคุณภาพสูงสุด — กด “เล่นพร้อมเสียง” เพื่อฟัง","st.sound":"เล่นพร้อมเสียง","st.now":"กำลังเล่น","bk.type":"ประเภทการจอง","ev.bkk":"กรุงเทพฯ","ev.thai":"ประเทศไทย","ev.tz":"เวลากรุงเทพฯ GMT+7","ar.confirmed":"ยืนยันแล้ว","ev.credit":"อาร์ตเวิร์กทางการ — จาก @certified_v10","lost.t1":"หลง","lost.t2":"ทางแล้ว","lost.d":"ไม่พบหน้านี้ ลองเริ่มจากหน้าแรก หรือดูไลน์อัพ","ev.date.wicked-sessions-2026":"เสาร์ 31 ต.ค. 2026","ev.mon.wicked-sessions-2026":"ต.ค. 2026","ev.time.wicked-sessions-2026":"ประตูเปิด 20:00 — จนดึก","ev.date.certified-x-wingstop-vol-2":"เสาร์ 29 + อาทิตย์ 30 ส.ค. 2026","ev.mon.certified-x-wingstop-vol-2":"ส.ค. 2026","ev.date.after-sun-studio-day-party-2026":"พุธ 8 ก.ค. 2026","ev.mon.after-sun-studio-day-party-2026":"ก.ค. 2026","ev.date.wingstop-rave-mbk-2026":"พุธ 18 ก.พ. 2026","ev.mon.wingstop-rave-mbk-2026":"ก.พ. 2026","ar.upd":"อัปเดตตารางเมื่อ 29 ตุลาคม 2026.","ar.book.mawon":"จอง MAWON","ar.band.mawon":"จอง MAWON","ar.bio.mawon":"MAWON มาพร้อมพลังแบบเฟสติวัล ที่ทำให้ทุกร้านรู้สึกเหมือนเวทีเมนสเตจ","ar.role.mawon":"ดีเจ — ซีเลกเตอร์","st.rec.-wxnD5LY9UI":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.-wxnD5LY9UI":"MAWON — พลังคลับช่วงพีค","ar.book.ossy":"จอง OSSY","ar.band.ossy":"จอง OSSY","ar.bio.ossy":"OSSY เล่นแบบดิบ ๆ ด้วยฮิปฮอป และฝีมือมิกซ์ที่คุณคาดไม่ถึง","ar.role.ossy":"ดีเจ — ซีเลกเตอร์","st.rec.HG6gP2sCCiQ":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.HG6gP2sCCiQ":"OSSY — ทรานซิชันที่คาดไม่ถึงกับฮิปฮอป","ar.book.tew":"จอง TEW","ar.band.tew":"จอง TEW","ar.bio.tew":"TEW เบลนด์เพลงโปรดของคุณทั้งหมด ให้กลายเป็นเวอร์ชันที่ดีกว่าเดิม","ar.role.tew":"ดีเจ — ซีเลกเตอร์","st.rec.3q8sxyGi02Q":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.3q8sxyGi02Q":"TEW — เดย์ปาร์ตี้ฮิปฮอป","ar.book.wichaya":"จอง WICHAYA","ar.band.wichaya":"จอง WICHAYA","ar.bio.wichaya":"WICHAYA ทำให้ฟลอร์เต็มด้วยเพลงที่ทุกคนร้องตามและเต้นไปด้วยกัน","ar.role.wichaya":"ดีเจ — ซีเลกเตอร์","st.rec.TOiUBDjO9Yk":"บันทึกเมื่อ 8 กรกฎาคม 2026","st.t.TOiUBDjO9Yk":"WICHAYA — รีมิกซ์และเพลงฮิตที่คาดไม่ถึง","ar.doorsIn":"ประตูเปิดอีก","ar.event":"รายละเอียดงาน →","st.rec.0ILM_7NYRcE":"บันทึกเมื่อ 18 กุมภาพันธ์ 2026","st.by.0ILM_7NYRcE":"ทั้งยูนิต","st.t.0ILM_7NYRcE":"Certified — Wingstop Rave BKK","st.rec.t_EOGmvzqsU":"บันทึกเมื่อ 18 กุมภาพันธ์ 2026","st.by.t_EOGmvzqsU":"ดีเจรับเชิญ","st.t.t_EOGmvzqsU":"Certified Selects — DJ TIITO","ev.sub.wicked-sessions-2026":"White Claw presents — ฮาโลวีนในป่า Wicked Woods","ev.about.wicked-sessions-2026":"ฮาโลวีนในป่า Wicked Woods — Wicked Sessions โดย White Claw ยึด Sphere Hall พร้อม Amanda Sze ทั้งเปิดเพลงและเป่าแซกโซโฟนสด และยูนิตเต็มทีมขึ้นบิล White Claw ฟรีทุกบัตร ดูไพ่ทาโรต์ ปาเป้า ลัคกี้ดรอว์ และมุมถ่ายรูป","ev.tk.wicked-sessions-2026":"Regular ฿1,499 · หน้างาน ฿1,899","ev.tkBtn.wicked-sessions-2026":"ซื้อบัตรที่ Nightify","ev.sub.certified-x-wingstop-vol-2":"สองคืนกับ Wingstop","ev.about.certified-x-wingstop-vol-2":"สองคืนกับ Wingstop ที่สามย่านมิตรทาวน์ YOUNGOHM ขึ้นเป็นเฮดไลเนอร์ และยูนิตเต็มทีมคุมเครื่องเล่น","ev.sub.after-sun-studio-day-party-2026":"เดย์ปาร์ตี้เฉพาะแขกรับเชิญที่ After Sun Studio","ev.about.after-sun-studio-day-party-2026":"Certified พาพลังที่เป็นเอกลักษณ์มาสู่เดย์ปาร์ตี้ เฉพาะแขกรับเชิญ ที่ After Sun Studio สตูดิโอแสงธรรมชาติพร้อมสวนในร่มและกลางแจ้งใจกลางเมือง ดีเจทั้งสี่คนขึ้นเล่น และทุกเซ็ตถูกถ่ายไว้","ev.sub.wingstop-rave-mbk-2026":"Certified จัดปาร์ตี้ดีเจที่ Wingstop, MBK Center","ev.about.wingstop-rave-mbk-2026":"Certified จัดปาร์ตี้ดีเจที่ Wingstop อาหารอร่อยกับบีตดี ๆ โดยมีทีม Certified คุมเครื่องเล่น และ DJ TIITO เป็นแขกรับเชิญในซีรีส์ Certified Selects","mc.n.logo-tee":"เสื้อยืดโลโก้","mc.k.logo-tee":"เสื้อยืด","mc.o.logo-tee":"ไซซ์ S – XL","mc.n.night-shift-hoodie":"ฮู้ดดี้ไนต์ชิฟต์","mc.k.night-shift-hoodie":"ฮู้ดดี้","mc.o.night-shift-hoodie":"ไซซ์ S – XL","mc.n.v10-cap":"หมวก V10","mc.k.v10-cap":"หมวกแก๊ป","mc.o.v10-cap":"ฟรีไซซ์","mc.n.certified-tote":"กระเป๋าผ้า Certified","mc.k.certified-tote":"กระเป๋าผ้า","mc.o.certified-tote":"ขนาดเดียว","mc.n.lineup-poster":"โปสเตอร์ไลน์อัพ","mc.k.lineup-poster":"ภาพพิมพ์ A2","mc.o.lineup-poster":"A2 · 420 × 594 มม.","mc.n.sticker-pack":"ชุดสติกเกอร์","mc.k.sticker-pack":"สติกเกอร์","mc.o.sticker-pack":"แพ็ก 3 ชิ้น"});
+window.CV_LEVELS = [];
 /* ============================================================
    CERTIFIED_V10 — sub-page runtime (artist, sets, events, booking,
    internships). Vanilla JS, no dependencies. The Thai dictionary
@@ -244,7 +245,7 @@ Object.assign(window.CV_TH, {"pg.home":"หน้าแรก","pg.sets":"ดี
     posterFoot: ["Drawn from the schedule data", "สร้างจากข้อมูลตารางงาน"],
     posterAlt: ["{a} schedule poster, {p}. The same dates are listed beside it.", "โปสเตอร์ตารางงานของ {a} ช่วง {p} รายการเดียวกันอยู่ข้าง ๆ"],
     noDates: ["No dates announced yet.", "ยังไม่มีการประกาศวันเล่น"],
-    play: ["Play set", "เล่นเซ็ต"], playing: ["Playing — {t}", "กำลังเล่น — {t}"],
+    play: ["Play set", "เล่นเซ็ต"], playing: ["Playing — {t}", "กำลังเล่น — {t}"], pause: ["Pause", "หยุดชั่วคราว"], resume: ["Resume", "เล่นต่อ"],
     copied: ["Message copied. Paste it into the chat that just opened.", "คัดลอกข้อความแล้ว วางในแชตที่เพิ่งเปิดได้เลย"],
     copiedOnly: ["Message copied.", "คัดลอกข้อความแล้ว"],
     copyFail: ["Copy didn't work here — select the message above and copy it.", "คัดลอกไม่สำเร็จ — เลือกข้อความด้านบนแล้วคัดลอกเอง"],
@@ -477,31 +478,182 @@ Object.assign(window.CV_TH, {"pg.home":"หน้าแรก","pg.sets":"ดี
   }
 
   /* ---------- YouTube sets: one player at a time, started by the visitor ---------- */
+  /* ---------- background: three soft glows drift as the page scrolls; while a set plays they come alive.
+     The page can't hear a YouTube player (it is another site's frame), so a set's loudness is measured
+     once ahead of time (tools/levels.mjs -> data/levels/<id>.json) and lined up with the player's position:
+     brightness follows the loudness, the pulse follows the bass. A set without a loudness file falls back to
+     a steady pulse while it plays. ---------- */
+  var bg = (function () {
+    var els = Array.prototype.slice.call(doc.querySelectorAll(".bgfx i"));
+    var still = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    var PATH = [[0.30, 0.44, 1.3, 0.9, 0.6, 0.2], [-0.32, 0.52, 0.8, 1.1, 1.9, 2.4], [0.22, -0.40, 1.7, 1.4, 4.0, 1.0]];
+    var p0 = -1, e = 0, want = 0, raf = 0, source = null, lvL = 0, lvB = 0, live = false;
+    function paint() {
+      raf = 0;
+      var max = Math.max(1, root.scrollHeight - window.innerHeight);
+      var p = Math.min(1, Math.max(0, (window.scrollY || root.scrollTop) / max));
+      p0 = p0 < 0 || still ? p : p0 + (p - p0) * 0.08;
+      e = still ? 0 : e + (want - e) * 0.04;
+      if (e < 0.002 && want === 0) e = 0;
+      var W = window.innerWidth, H = window.innerHeight, T = Math.PI * 2, t = performance.now() / 1000;
+      /* real levels: quick to rise, slower to fall, like a meter */
+      var r = source && e > 0 ? source() : null;
+      live = !!r;
+      lvL += ((r ? r.loud : 0) - lvL) * (r && r.loud > lvL ? 0.5 : 0.12);
+      lvB += ((r ? r.bass : 0) - lvB) * (r && r.bass > lvB ? 0.6 : 0.16);
+      els.forEach(function (el, i) {
+        var c = PATH[i];
+        var beat = live ? lvB : Math.pow(0.5 + 0.5 * Math.sin(t * T * 1.9 + i * 1.7), 3);
+        var x = c[0] * W * Math.cos(T * p0 * c[2] + c[4]) + e * 0.07 * W * Math.sin(t * 0.47 + i * 2.1);
+        var y = c[1] * H * Math.sin(T * p0 * c[3] + c[5]) + e * 0.06 * H * Math.cos(t * 0.39 + i * 1.3);
+        var k = 1 + 0.18 * Math.sin(T * p0 * (c[2] + c[3]) / 2 + c[4]) + e * (live ? 0.24 * beat * (1 - i * 0.25) + 0.06 * lvL : 0.1 * beat + 0.05 * Math.sin(t * 0.8 + i));
+        el.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) scale(" + k.toFixed(3) + ")";
+        el.style.opacity = (live ? 0.45 + e * 0.55 * lvL : 0.6 + e * (0.25 + 0.15 * beat)).toFixed(3);
+      });
+      if (!still && (Math.abs(p - p0) > 0.0004 || e > 0)) raf = requestAnimationFrame(paint);
+    }
+    function kick() { if (!raf && els.length) raf = requestAnimationFrame(paint); }
+    if (els.length) { window.addEventListener("scroll", kick, { passive: true }); window.addEventListener("resize", kick); paint(); }
+    return {
+      energy: function (v) { want = v; kick(); },
+      source: function (fn) { source = fn; },
+      level: function () { return e; },
+      reading: function () { return live ? { loud: lvL, bass: lvB } : null; }
+    };
+  })();
+  window.__cvBg = bg;
+
+  /* YouTube picks the stream from the size its player is laid out at — it ignores screen density, and its old
+     quality settings (vq, setPlaybackQuality) no longer do anything. So each player is laid out at a standard large
+     size and scaled down into its box: at least 1080p, more on dense or large screens, up to 4K. While YouTube's own
+     controls show, the scale stays at 0.6 or more so they remain usable; the muted preview has none, so it goes all the way. */
+  var STEPS = [1280, 1920, 2560, 3840];
+  function fit(f, media, controls) {
+    var w = media.clientWidth, h = media.clientHeight;
+    if (!w || !h) return;
+    var need = Math.max(1920, w * (window.devicePixelRatio || 1));
+    var L = STEPS.filter(function (x) { return x >= need; })[0] || 3840;
+    if (controls) while (L > w && w / L < 0.6) { var i = STEPS.indexOf(L); L = i > 0 ? STEPS[i - 1] : w; }
+    if (L <= w) { f.style.width = f.style.height = f.style.transform = ""; return; }
+    f.style.width = L + "px";
+    f.style.height = Math.round(L * h / w) + "px";
+    f.style.transformOrigin = "0 0";
+    f.style.transform = "scale(" + (w / L) + ")";
+  }
   function players() {
-    var active = null, mutedNote = doc.getElementById("lead-muted");
-    function start(btn, muted) {
+    var active = null, preview = null, mutedNote = doc.getElementById("lead-muted");
+    var ctrl = doc.getElementById("lead-ctrl"), soundBtn = doc.getElementById("lead-sound"), pauseBtn = doc.getElementById("lead-pause");
+    var lead = doc.querySelector("[data-yt][data-autoplay]");
+    function post(f, o) { try { f.contentWindow.postMessage(JSON.stringify(o), "https://www.youtube-nocookie.com"); } catch (x) {} }
+    function paintPause() {
+      if (!pauseBtn || !preview) return;
+      pauseBtn.textContent = s(preview.paused ? "resume" : "pause");
+      pauseBtn.setAttribute("aria-pressed", preview.paused ? "true" : "false");
+    }
+    function start(btn, muted, at) {
       var id = btn.getAttribute("data-yt"), media = btn.parentNode, title = btn.getAttribute("data-title") || "";
-      if (active && active.media !== media) {
-        active.frame.remove(); active.btn.hidden = false;
-      }
+      if (active) { active.frame.remove(); active.btn.hidden = false; bg.energy(0); }
+      preview = null;
+      if (ctrl) ctrl.hidden = true;
+      /* enablejsapi: the player reports play/pause (and the preview's position) back to the page */
+      var q = "autoplay=1&playsinline=1&rel=0&enablejsapi=1&origin=" + encodeURIComponent(location.origin);
+      /* browsers only let a video start by itself with the sound off; the preview runs without YouTube's controls
+         (it is scaled too far for them) and the page's own Play with sound / Pause buttons stand in */
+      if (muted) q += "&mute=1&controls=0";
+      if (at > 1) q += "&start=" + Math.floor(at);
       var f = doc.createElement("iframe");
-      /* browsers only let a video start by itself with the sound off */
-      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&playsinline=1&rel=0" + (muted ? "&mute=1" : "");
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?" + q;
       f.title = s("playing").replace("{t}", title);
       f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
       f.allowFullscreen = true;
       f.referrerPolicy = "strict-origin-when-cross-origin";
       btn.hidden = true;
       media.appendChild(f);
-      if (!muted) f.focus();
-      if (mutedNote) mutedNote.hidden = !(muted && btn.hasAttribute("data-autoplay"));
-      active = { media: media, frame: f, btn: btn };
+      f.addEventListener("load", function () { post(f, { event: "listening", id: 1, channel: "widget" }); });
+      fit(f, media, !muted);
+      if (!muted) { try { f.focus({ preventScroll: true }); } catch (x) { f.focus(); } }
+      if (mutedNote) mutedNote.hidden = !muted;
+      active = { media: media, frame: f, btn: btn, controls: !muted, id: id, t: at > 1 ? Math.floor(at) : 0, at: performance.now(), rate: 1, playing: false };
+      if (muted) {
+        preview = { frame: f, time: at || 0, paused: false };
+        if (ctrl) ctrl.hidden = false;
+        paintPause();
+      }
     }
+    /* on the sets page, every set opens in the big player at the top; the one it replaces returns to the grid */
+    var leadSec = lead ? lead.closest(".setlead") : null, latestId = leadSec ? leadSec.getAttribute("data-latest") : "";
+    function showInLead(id) {
+      var card = doc.querySelector('.vgrid .vcard[data-set="' + id + '"]');
+      if (!card || !leadSec) return false;
+      var cb = card.querySelector("[data-yt]"), img = lead.querySelector("img"), len = lead.querySelector(".vcard__len");
+      lead.setAttribute("data-yt", id);
+      lead.setAttribute("data-title", cb.getAttribute("data-title") || "");
+      lead.setAttribute("aria-label", cb.getAttribute("aria-label") || "");
+      if (img) img.src = card.querySelector("img").getAttribute("src");
+      if (len) len.textContent = card.querySelector(".vcard__len").textContent;
+      leadSec.querySelectorAll(".setlead__set").forEach(function (b) { b.hidden = b.getAttribute("data-set") !== id; });
+      leadSec.setAttribute("aria-labelledby", "lead-t-" + id);
+      var kl = doc.getElementById("lead-k-latest"), kn = doc.getElementById("lead-k-now");
+      if (kl) kl.hidden = id !== latestId;
+      if (kn) kn.hidden = id === latestId;
+      doc.querySelectorAll(".vgrid .vcard[data-set]").forEach(function (c) { c.hidden = c.getAttribute("data-set") === id; });
+      return true;
+    }
+    var still = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
     doc.querySelectorAll("[data-yt]").forEach(function (btn) {
-      btn.addEventListener("click", function () { start(btn, false); });
+      btn.addEventListener("click", function () {
+        if (lead && btn !== lead && btn.closest(".vgrid") && showInLead(btn.getAttribute("data-yt"))) {
+          start(lead, false);
+          window.scrollTo({ top: 0, behavior: still ? "instant" : "smooth" });
+          return;
+        }
+        start(btn, false);
+      });
     });
+    /* players report play/pause (the background follows it) and the preview's position,
+       so Play with sound carries on from the same moment */
+    /* loudness maps, fetched once per set; null when a set has none */
+    var LV = {};
+    function loadLevels(id) {
+      if (id in LV || !window.fetch) return;
+      LV[id] = null;
+      if ((window.CV_LEVELS || []).indexOf(id) < 0) return;
+      fetch(BASE + "data/levels/" + encodeURIComponent(id) + ".json").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+        if (!j || !j.loud) return;
+        function bytes(b64) { var raw = atob(b64), out = new Uint8Array(raw.length); for (var i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i); return out; }
+        LV[id] = { hop: j.hop || 0.05, loud: bytes(j.loud), bass: bytes(j.bass || j.loud) };
+      }, function () {});
+    }
+    bg.source(function () {
+      var lv = active && active.playing && LV[active.id];
+      if (!lv) return null;
+      var t = active.t + (performance.now() - active.at) / 1000 * active.rate;
+      var x = t / lv.hop, i = Math.floor(x), fr = x - i;
+      if (i < 0 || i + 1 >= lv.loud.length) return null;
+      return { loud: (lv.loud[i] * (1 - fr) + lv.loud[i + 1] * fr) / 255, bass: (lv.bass[i] * (1 - fr) + lv.bass[i + 1] * fr) / 255 };
+    });
+    window.addEventListener("message", function (e) {
+      if (!active || e.source !== active.frame.contentWindow) return;
+      var d; try { d = JSON.parse(e.data); } catch (x) { return; }
+      if (!d || !d.info) return;
+      if (preview && typeof d.info.currentTime === "number") preview.time = d.info.currentTime;
+      if (typeof d.info.currentTime === "number") { active.t = d.info.currentTime; active.at = performance.now(); }
+      if (typeof d.info.playbackRate === "number") active.rate = d.info.playbackRate;
+      var st = d.info.playerState;
+      if (st === 1) { active.playing = true; loadLevels(active.id); bg.energy(1); }
+      else if (st === 0 || st === 2) { active.playing = false; bg.energy(0); }
+      if (preview && (st === 1 || st === 2)) { preview.paused = st === 2; paintPause(); }
+    });
+    if (soundBtn) soundBtn.addEventListener("click", function () { if (lead) start(lead, false, preview ? preview.time : 0); });
+    if (pauseBtn) pauseBtn.addEventListener("click", function () {
+      if (!preview) return;
+      preview.paused = !preview.paused;
+      post(preview.frame, { event: "command", func: preview.paused ? "pauseVideo" : "playVideo", args: [] });
+      paintPause();
+    });
+    langHooks.push(paintPause);
+    window.addEventListener("resize", function () { if (active) fit(active.frame, active.media, active.controls); });
     /* the newest set on the sets page starts on arrival — not for reduced motion or data saver, where it waits for a tap */
-    var lead = doc.querySelector("[data-yt][data-autoplay]");
     var calm = (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) || (navigator.connection && navigator.connection.saveData);
     if (lead && !calm) start(lead, true);
   }
