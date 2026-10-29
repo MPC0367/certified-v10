@@ -7,6 +7,7 @@
 :root {
   --carbon: #0B0B0C;
   --panel: #121214;
+  --panel-see: rgba(18, 18, 20, .45); /* the panel grey, see-through: row highlights let the background show */
   --bone: #EDEAE3;
   --bone-70: rgba(237, 234, 227, .72);
   --bone-45: rgba(237, 234, 227, .5);
@@ -367,7 +368,7 @@ body[data-lang="th"] .sheet__links a { font-family: var(--font-th-disp); font-we
   background: var(--carbon);
 }
 @media (hover: hover) {
-  .room:hover { background: var(--panel); }
+  .room:hover { background: var(--panel-see); }
   .room:hover .room__name { color: var(--red); transform: translateX(10px); }
   .room:hover .room__stamp { opacity: 1; scale: 1; }
 }
@@ -553,7 +554,7 @@ body[data-lang="th"] .sheet__links a { font-family: var(--font-th-disp); font-we
 .op__role--mc { color: var(--red); }
 .op__drop { display: none; }
 @media (hover: hover) {
-  .op:hover { background: rgba(18, 18, 20, .45); } /* the panel grey, see-through so the background glow shows */
+  .op:hover { background: var(--panel-see); }
   .op:hover .op__name img { transform: translateX(10px); }
 }
 .lineup__peek { position: sticky; top: calc(var(--nav-h) + 4vh); }
@@ -611,7 +612,7 @@ body[data-lang="th"] .sheet__links a { font-family: var(--font-th-disp); font-we
   .op__dropin { overflow: hidden; min-height: 0; }
   .op__photo { width: 100%; aspect-ratio: 4 / 5; max-height: 56vh; object-fit: cover; object-position: 50% 14%; }
   .op__fig { color: var(--muted); padding: 12px 2px 20px; }
-  .op.is-spot { background: rgba(18, 18, 20, .45); }
+  .op.is-spot { background: var(--panel-see); }
   .op.is-spot .op__name img { transform: translateX(10px); }
   .op.is-spot .op__drop { grid-template-rows: 1fr; }
   .shows__grid { grid-template-columns: 1fr; }
@@ -756,7 +757,7 @@ body.shot .hero__cue em { animation: none; }
 .job__meta em { color: var(--bone-70); }
 .job__meta i { color: var(--red); }
 @media (hover: hover) {
-  .job:hover { background: var(--panel); }
+  .job:hover { background: var(--panel-see); }
   .job:hover .job__name { color: var(--red); transform: translateX(10px); }
 }
 .jobs__grid {
@@ -822,7 +823,7 @@ body.shot .hero__cue em { animation: none; }
 .rooms__toggle-count { color: var(--muted); font-weight: 500; text-align: right; }
 .rooms__toggle.is-open .rooms__toggle-arrow { transform: rotate(180deg); }
 .rooms__toggle.is-open .rooms__toggle-count { visibility: hidden; }
-.rooms__toggle:hover, .rooms__toggle:focus-visible { background: var(--panel); color: var(--red); }
+.rooms__toggle:hover, .rooms__toggle:focus-visible { background: var(--panel-see); color: var(--red); }
 @media (max-width: 900px) { .rooms__toggle { grid-template-columns: 44px auto minmax(0, 1fr); } }
 
 /* ============================================================
@@ -1152,10 +1153,10 @@ body[data-lang="th"] .vcard__title { font-family: var(--font-th-disp); font-weig
 .ecard__side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .ecard__thumb { width: 64px; height: 80px; object-fit: cover; border: 1px solid var(--hair); }
 @media (hover: hover) {
-  .ecard:hover { background: var(--panel); }
+  .ecard:hover { background: var(--panel-see); }
   .ecard:hover .ecard__title { color: var(--red); }
 }
-.ecard:focus-within { background: var(--panel); }
+.ecard:focus-within { background: var(--panel-see); }
 
 /* event detail */
 .event { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 88px); align-items: start; }
@@ -1251,7 +1252,7 @@ body[data-lang="th"] .intake__state { font-family: var(--font-th-disp); font-wei
 /* also in the unit */
 .others { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .others a { display: grid; gap: 14px; border: 1px solid var(--hair); padding: 18px; min-height: 44px; transition: border-color .14s ease, background .3s ease; }
-.others a:hover, .others a:focus-visible { border-color: var(--red); background: var(--panel); }
+.others a:hover, .others a:focus-visible { border-color: var(--red); background: var(--panel-see); }
 .others img { height: 40px; width: auto; max-width: 100%; }
 
 /* booking band */

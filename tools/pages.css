@@ -161,10 +161,10 @@ body[data-lang="th"] .vcard__title { font-family: var(--font-th-disp); font-weig
 .ecard__side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .ecard__thumb { width: 64px; height: 80px; object-fit: cover; border: 1px solid var(--hair); }
 @media (hover: hover) {
-  .ecard:hover { background: var(--panel); }
+  .ecard:hover { background: var(--panel-see); }
   .ecard:hover .ecard__title { color: var(--red); }
 }
-.ecard:focus-within { background: var(--panel); }
+.ecard:focus-within { background: var(--panel-see); }
 
 /* event detail */
 .event { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 88px); align-items: start; }
@@ -260,7 +260,7 @@ body[data-lang="th"] .intake__state { font-family: var(--font-th-disp); font-wei
 /* also in the unit */
 .others { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .others a { display: grid; gap: 14px; border: 1px solid var(--hair); padding: 18px; min-height: 44px; transition: border-color .14s ease, background .3s ease; }
-.others a:hover, .others a:focus-visible { border-color: var(--red); background: var(--panel); }
+.others a:hover, .others a:focus-visible { border-color: var(--red); background: var(--panel-see); }
 .others img { height: 40px; width: auto; max-width: 100%; }
 
 /* booking band */

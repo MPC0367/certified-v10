@@ -28,6 +28,7 @@
 :root {
   --carbon: #0B0B0C;
   --panel: #121214;
+  --panel-see: rgba(18, 18, 20, .45); /* the panel grey, see-through: row highlights let the background show */
   --bone: #EDEAE3;
   --bone-70: rgba(237, 234, 227, .72);
   --bone-45: rgba(237, 234, 227, .5);
@@ -388,7 +389,7 @@ body[data-lang="th"] .sheet__links a { font-family: var(--font-th-disp); font-we
   background: var(--carbon);
 }
 @media (hover: hover) {
-  .room:hover { background: var(--panel); }
+  .room:hover { background: var(--panel-see); }
   .room:hover .room__name { color: var(--red); transform: translateX(10px); }
   .room:hover .room__stamp { opacity: 1; scale: 1; }
 }
@@ -574,7 +575,7 @@ body[data-lang="th"] .sheet__links a { font-family: var(--font-th-disp); font-we
 .op__role--mc { color: var(--red); }
 .op__drop { display: none; }
 @media (hover: hover) {
-  .op:hover { background: rgba(18, 18, 20, .45); } /* the panel grey, see-through so the background glow shows */
+  .op:hover { background: var(--panel-see); }
   .op:hover .op__name img { transform: translateX(10px); }
 }
 .lineup__peek { position: sticky; top: calc(var(--nav-h) + 4vh); }
@@ -632,7 +633,7 @@ body[data-lang="th"] .sheet__links a { font-family: var(--font-th-disp); font-we
   .op__dropin { overflow: hidden; min-height: 0; }
   .op__photo { width: 100%; aspect-ratio: 4 / 5; max-height: 56vh; object-fit: cover; object-position: 50% 14%; }
   .op__fig { color: var(--muted); padding: 12px 2px 20px; }
-  .op.is-spot { background: rgba(18, 18, 20, .45); }
+  .op.is-spot { background: var(--panel-see); }
   .op.is-spot .op__name img { transform: translateX(10px); }
   .op.is-spot .op__drop { grid-template-rows: 1fr; }
   .shows__grid { grid-template-columns: 1fr; }
@@ -777,7 +778,7 @@ body.shot .hero__cue em { animation: none; }
 .job__meta em { color: var(--bone-70); }
 .job__meta i { color: var(--red); }
 @media (hover: hover) {
-  .job:hover { background: var(--panel); }
+  .job:hover { background: var(--panel-see); }
   .job:hover .job__name { color: var(--red); transform: translateX(10px); }
 }
 .jobs__grid {
@@ -843,7 +844,7 @@ body.shot .hero__cue em { animation: none; }
 .rooms__toggle-count { color: var(--muted); font-weight: 500; text-align: right; }
 .rooms__toggle.is-open .rooms__toggle-arrow { transform: rotate(180deg); }
 .rooms__toggle.is-open .rooms__toggle-count { visibility: hidden; }
-.rooms__toggle:hover, .rooms__toggle:focus-visible { background: var(--panel); color: var(--red); }
+.rooms__toggle:hover, .rooms__toggle:focus-visible { background: var(--panel-see); color: var(--red); }
 @media (max-width: 900px) { .rooms__toggle { grid-template-columns: 44px auto minmax(0, 1fr); } }
 
 /* ============================================================
@@ -1541,7 +1542,7 @@ a.op__name:focus-visible { outline-offset: 6px; }
   <div class="footer__fine meta">
     <p data-i18n="footer.d1">© 2026 Certified_V10 concept. Independent design study — not the collective's official site.</p>
     <p data-i18n="footer.d2">Photography is original generated artwork, art-directed for this concept. Venue names appear as public performance credits.</p>
-    <p id="build-tag">Build R32 · 29 Oct 2026</p>
+    <p id="build-tag">Build R33 · 29 Oct 2026</p>
   </div>
   <!-- the studio credit: the last line of every site O2 builds -->
   <p class="o2row">
