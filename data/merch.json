@@ -1,6 +1,6 @@
 {
   "status": "placeholder",
-  "note": "Placeholder line-up. Replace names, prices (THB), sizes, options and the drop details with the real ones; set an item's \"image\" to a photo in assets/img/merch/ to replace its drawn placeholder. Set \"status\" to \"live\" only when the products are real; ordering still needs a shop provider (such as hosted checkout) wired in.",
+  "note": "Line-up: the I ♥ Certified sticker is a real product (its picture is a photoreal render with a transparent background, generated with Codex from a photo of the real stickers); the rest are placeholders. Replace names, prices (THB), sizes, options and the drop details with the real ones; set an item's \"image\" to a photo in assets/img/merch/ to replace its drawn placeholder. Set \"status\" to \"live\" only when the products are real; ordering still needs a shop provider (such as hosted checkout) wired in.",
   "drop": {
     "date": null,
     "ordering": null,
@@ -8,6 +8,30 @@
     "pickup": null
   },
   "items": [
+    {
+      "id": "sticker-pack",
+      "art": "stickers",
+      "name": {
+        "en": "I ♥︎ Certified sticker",
+        "th": "สติกเกอร์ I ♥︎ Certified"
+      },
+      "kind": {
+        "en": "Sticker",
+        "th": "สติกเกอร์"
+      },
+      "options": {
+        "en": "Square sticker",
+        "th": "สติกเกอร์ทรงสี่เหลี่ยม"
+      },
+      "sizes": [],
+      "price": null,
+      "image": "assets/img/merch/i-love-certified-sticker.webp",
+      "placeholder": false,
+      "imageSize": [
+        1122,
+        1402
+      ]
+    },
     {
       "id": "logo-tee",
       "art": "tee",
@@ -108,25 +132,6 @@
       "options": {
         "en": "A2 · 420 × 594 mm",
         "th": "A2 · 420 × 594 มม."
-      },
-      "sizes": [],
-      "price": null,
-      "image": null
-    },
-    {
-      "id": "sticker-pack",
-      "art": "stickers",
-      "name": {
-        "en": "Sticker pack",
-        "th": "ชุดสติกเกอร์"
-      },
-      "kind": {
-        "en": "Stickers",
-        "th": "สติกเกอร์"
-      },
-      "options": {
-        "en": "Pack of 3",
-        "th": "แพ็ก 3 ชิ้น"
       },
       "sizes": [],
       "price": null,

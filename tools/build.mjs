@@ -8,7 +8,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const BASE = "/certified-v10/";
 const ORIGIN = "https://mpc0367.github.io";
-const BUILD = process.env.BUILD_TAG || "Build R34 · 29 Oct 2026";
+const BUILD = process.env.BUILD_TAG || "Build R35 · 29 Oct 2026";
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 const write = (p, s) => { const f = path.join(ROOT, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
 const json = (p) => JSON.parse(read(p));
@@ -90,7 +90,7 @@ const TH = {
   "in.follow": "ติดตามบน Instagram", "in.apply": "สมัครรอบนี้",
   "pg.merch": "เมิร์ช",
   "mc.label": "เมิร์ช", "mc.t1": "เมิร์ช", "mc.t2": "จากยูนิต",
-  "mc.lede": "เมิร์ชทางการของ Certified V10 กำลังจะมา สินค้าด้านล่างเป็นตัวอย่างชั่วคราว ดีไซน์ รูป ไซซ์ และราคาจริงจะประกาศก่อนวันวางขาย",
+  "mc.lede": "เมิร์ชทางการของ Certified V10 กำลังจะมา เริ่มจากสติกเกอร์ I ♥︎ Certified ชิ้นอื่นเป็นตัวอย่างชั่วคราว ดีไซน์ รูป ไซซ์ และราคาจริงจะประกาศก่อนวันวางขาย",
   "mc.soon": "เร็ว ๆ นี้", "mc.soonD": "ยังไม่เปิดขาย — กดรับแจ้งเตือนทาง LINE หรือติดตาม @certified_v10 เพื่อไม่พลาดวันวางขาย",
   "mc.notifyAll": "รับแจ้งเตือนทาง LINE", "mc.follow": "ติดตามบน Instagram",
   "mc.items": "สินค้า", "mc.ph": "ตัวอย่าง", "mc.tbc": "รอประกาศราคา", "mc.notify": "แจ้งเตือนฉัน",
@@ -775,9 +775,9 @@ function merchArt(m) {
 }
 merch.items.forEach((m) => { TH[`mc.n.${m.id}`] = m.name.th; TH[`mc.k.${m.id}`] = m.kind.th; TH[`mc.o.${m.id}`] = m.options.th; });
 const merchCard = (m) => `<article class="mcard" data-rev>
-      <a class="mcard__media" href="${BASE}merch/${m.id}/" tabindex="-1" aria-hidden="true">
-        ${m.image ? `<img src="${BASE}${h(m.image)}" alt="${h(m.name.en)}" loading="lazy">` : merchArt(m)}
-        ${MERCH_PH ? '<span class="mcard__stamp tag tag--muted" data-i18n="mc.ph">Placeholder</span>' : ""}
+      <a class="mcard__media${m.image ? " mcard__media--cutout" : ""}" href="${BASE}merch/${m.id}/" tabindex="-1" aria-hidden="true">
+        ${m.image ? `<img src="${BASE}${h(m.image)}" alt="${h(m.name.en)}" width="${(m.imageSize || [1200, 1500])[0]}" height="${(m.imageSize || [1200, 1500])[1]}" loading="lazy">` : merchArt(m)}
+        ${MERCH_PH && m.placeholder !== false ? '<span class="mcard__stamp tag tag--muted" data-i18n="mc.ph">Placeholder</span>' : ""}
       </a>
       <div class="mcard__body">
         <p class="mcard__kind meta" data-i18n="mc.k.${m.id}">${h(m.kind.en)}</p>
@@ -795,7 +795,7 @@ write("merch/index.html", page({
 <section class="phead">
   ${secHead("—", "mc.label", "Merch", "p")}
   ${title2("phead__title", "mc.t1", "Merch from", "mc.t2", "the unit.")}
-  <p class="phead__lede" data-rev data-i18n="mc.lede">Official Certified V10 merch is on the way. The pieces below are placeholders — final designs, photos, sizes and prices will be posted before the drop.</p>
+  <p class="phead__lede" data-rev data-i18n="mc.lede">Official Certified V10 merch is on the way, starting with the I ♥︎ Certified sticker. The other pieces are placeholders — final designs, photos, sizes and prices will be posted before the drop.</p>
 </section>
 <section class="block block--tight">
   <div class="intake is-open">
@@ -836,9 +836,9 @@ merch.items.forEach((m) => {
 <section class="block product" aria-labelledby="product-h">
   <a class="phead__back meta" href="${BASE}merch/" data-i18n="mc.back">← All merch</a>
   <div class="product__grid">
-    <figure class="product__media mcard__media">
-      ${m.image ? `<img src="${BASE}${h(m.image)}" alt="${h(m.name.en)}">` : merchArt(m)}
-      ${MERCH_PH ? '<span class="mcard__stamp tag tag--muted" data-i18n="mc.ph">Placeholder</span>' : ""}
+    <figure class="product__media mcard__media${m.image ? " mcard__media--cutout" : ""}">
+      ${m.image ? `<img src="${BASE}${h(m.image)}" alt="${h(m.name.en)}" width="${(m.imageSize || [1200, 1500])[0]}" height="${(m.imageSize || [1200, 1500])[1]}">` : merchArt(m)}
+      ${MERCH_PH && m.placeholder !== false ? '<span class="mcard__stamp tag tag--muted" data-i18n="mc.ph">Placeholder</span>' : ""}
     </figure>
     <div class="product__info">
       <p class="mcard__kind meta" data-i18n="mc.k.${m.id}">${h(m.kind.en)}</p>

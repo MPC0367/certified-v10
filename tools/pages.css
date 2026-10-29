@@ -319,6 +319,9 @@ body[data-lang="th"] .mcard__title { font-family: var(--font-th-disp); font-weig
 .mcard__cta { margin-top: auto; align-self: flex-start; }
 .mcard__opts { margin-bottom: 18px; }
 a.mcard__media { display: block; }
+/* a product photo cut out on a transparent background sits straight on the page's moving background */
+.mcard__media--cutout { background: transparent; }
+.mcard__media--cutout img { object-fit: contain; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .45)); }
 .mcard__title a { transition: color .14s ease; }
 .mcard__title a:hover, .mcard__title a:focus-visible { color: var(--red); }
 .product { padding-top: clamp(40px, 7vh, 96px); }
