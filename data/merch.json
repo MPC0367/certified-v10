@@ -1,6 +1,6 @@
 {
   "status": "placeholder",
-  "note": "Placeholder line-up. Replace names, prices and options with the real drop; set an item's \"image\" to a photo in assets/img/merch/ to replace its drawn placeholder. Set \"status\" to \"live\" once the products are real.",
+  "note": "Placeholder line-up. Replace names, prices (THB), sizes, options and the drop details with the real ones; set an item's \"image\" to a photo in assets/img/merch/ to replace its drawn placeholder. Set \"status\" to \"live\" only when the products are real; ordering still needs a shop provider (such as hosted checkout) wired in.",
   "drop": {
     "date": null,
     "ordering": null,
@@ -11,54 +11,124 @@
     {
       "id": "logo-tee",
       "art": "tee",
-      "name": { "en": "Logo tee", "th": "เสื้อยืดโลโก้" },
-      "kind": { "en": "T-shirt", "th": "เสื้อยืด" },
-      "options": { "en": "Sizes S – XL", "th": "ไซซ์ S – XL" },
+      "name": {
+        "en": "Logo tee",
+        "th": "เสื้อยืดโลโก้"
+      },
+      "kind": {
+        "en": "T-shirt",
+        "th": "เสื้อยืด"
+      },
+      "options": {
+        "en": "Sizes S – XL",
+        "th": "ไซซ์ S – XL"
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "price": null,
       "image": null
     },
     {
       "id": "night-shift-hoodie",
       "art": "hoodie",
-      "name": { "en": "Night shift hoodie", "th": "ฮู้ดดี้ไนต์ชิฟต์" },
-      "kind": { "en": "Hoodie", "th": "ฮู้ดดี้" },
-      "options": { "en": "Sizes S – XL", "th": "ไซซ์ S – XL" },
+      "name": {
+        "en": "Night shift hoodie",
+        "th": "ฮู้ดดี้ไนต์ชิฟต์"
+      },
+      "kind": {
+        "en": "Hoodie",
+        "th": "ฮู้ดดี้"
+      },
+      "options": {
+        "en": "Sizes S – XL",
+        "th": "ไซซ์ S – XL"
+      },
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "price": null,
       "image": null
     },
     {
       "id": "v10-cap",
       "art": "cap",
-      "name": { "en": "V10 cap", "th": "หมวก V10" },
-      "kind": { "en": "Cap", "th": "หมวกแก๊ป" },
-      "options": { "en": "One size", "th": "ฟรีไซซ์" },
+      "name": {
+        "en": "V10 cap",
+        "th": "หมวก V10"
+      },
+      "kind": {
+        "en": "Cap",
+        "th": "หมวกแก๊ป"
+      },
+      "options": {
+        "en": "One size",
+        "th": "ฟรีไซซ์"
+      },
+      "sizes": [],
       "price": null,
       "image": null
     },
     {
       "id": "certified-tote",
       "art": "tote",
-      "name": { "en": "Certified tote", "th": "กระเป๋าผ้า Certified" },
-      "kind": { "en": "Tote bag", "th": "กระเป๋าผ้า" },
-      "options": { "en": "One size", "th": "ขนาดเดียว" },
+      "name": {
+        "en": "Certified tote",
+        "th": "กระเป๋าผ้า Certified"
+      },
+      "kind": {
+        "en": "Tote bag",
+        "th": "กระเป๋าผ้า"
+      },
+      "options": {
+        "en": "One size",
+        "th": "ขนาดเดียว"
+      },
+      "sizes": [],
       "price": null,
       "image": null
     },
     {
       "id": "lineup-poster",
       "art": "poster",
-      "name": { "en": "Lineup poster", "th": "โปสเตอร์ไลน์อัพ" },
-      "kind": { "en": "A2 print", "th": "ภาพพิมพ์ A2" },
-      "options": { "en": "A2 · 420 × 594 mm", "th": "A2 · 420 × 594 มม." },
+      "name": {
+        "en": "Lineup poster",
+        "th": "โปสเตอร์ไลน์อัพ"
+      },
+      "kind": {
+        "en": "A2 print",
+        "th": "ภาพพิมพ์ A2"
+      },
+      "options": {
+        "en": "A2 · 420 × 594 mm",
+        "th": "A2 · 420 × 594 มม."
+      },
+      "sizes": [],
       "price": null,
       "image": null
     },
     {
       "id": "sticker-pack",
       "art": "stickers",
-      "name": { "en": "Sticker pack", "th": "ชุดสติกเกอร์" },
-      "kind": { "en": "Stickers", "th": "สติกเกอร์" },
-      "options": { "en": "Pack of 3", "th": "แพ็ก 3 ชิ้น" },
+      "name": {
+        "en": "Sticker pack",
+        "th": "ชุดสติกเกอร์"
+      },
+      "kind": {
+        "en": "Stickers",
+        "th": "สติกเกอร์"
+      },
+      "options": {
+        "en": "Pack of 3",
+        "th": "แพ็ก 3 ชิ้น"
+      },
+      "sizes": [],
       "price": null,
       "image": null
     }

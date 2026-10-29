@@ -8,14 +8,14 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const BASE = "/certified-v10/";
 const ORIGIN = "https://mpc0367.github.io";
-const BUILD = process.env.BUILD_TAG || "Build R28 · 29 Oct 2026";
+const BUILD = process.env.BUILD_TAG || "Build R29 · 29 Oct 2026";
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 const write = (p, s) => { const f = path.join(ROOT, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
 const json = (p) => JSON.parse(read(p));
 
 const { artists, mc, group } = json("data/artists.json");
 const { sets } = json("data/sets.json");
-const { events } = json("data/events.json");
+const { events, updated: scheduleUpdated } = json("data/events.json");
 const merch = json("data/merch.json");
 const intake = json("data/intake.json");
 const home = read("index.html");
@@ -39,6 +39,8 @@ const monYr = (iso) => new Date(iso).toLocaleDateString("en-GB", { month: "short
 const monYrTH = (iso) => new Date(iso).toLocaleDateString("th-TH-u-ca-gregory", { month: "short", year: "numeric", timeZone: "Asia/Bangkok" });
 const longDateTH = (iso) => new Date(iso + (iso.length === 10 ? "T12:00:00+07:00" : "")).toLocaleDateString("th-TH-u-ca-gregory", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Bangkok" });
 const cityHTML = (c) => c === "Bangkok" ? '<span data-i18n="ev.bkk">Bangkok</span>' : h(c);
+const placeHTML = (e) => `${cityHTML(e.city)}, ${(e.country || "Thailand") === "Thailand" ? '<span data-i18n="ev.thai">Thailand</span>' : h(e.country)}`;
+const tzHTML = '<span data-i18n="ev.tz">Bangkok time, GMT+7</span>';
 function evKeys(e) {
   TH[`ev.date.${e.slug}`] = e.dateText.th;
   TH[`ev.mon.${e.slug}`] = monYrTH(e.start);
@@ -93,11 +95,17 @@ const TH = {
   "mc.notifyAll": "รับแจ้งเตือนทาง LINE", "mc.follow": "ติดตามบน Instagram",
   "mc.items": "สินค้า", "mc.ph": "ตัวอย่าง", "mc.tbc": "รอประกาศราคา", "mc.notify": "แจ้งเตือนฉัน",
   "mc.drop": "รายละเอียดการวางขาย", "mc.k.date": "วันวางขาย", "mc.k.order": "วิธีสั่งซื้อ", "mc.k.ship": "การจัดส่ง", "mc.k.pickup": "รับที่งาน",
-  "mc.tba": "รอประกาศ", "mc.dropNote": "ข้อมูลทั้งหมดในหน้านี้เป็นตัวอย่างจนกว่า Certified จะประกาศรายละเอียดจริง",
-  "bk.type": "ประเภทการจอง", "ev.bkk": "กรุงเทพฯ", "ev.credit": "อาร์ตเวิร์กทางการ — จาก @certified_v10",
+  "mc.tba": "รอประกาศ", "mc.back": "← เมิร์ชทั้งหมด", "mc.stock": "ยังไม่มีจำหน่าย", "mc.size": "ไซซ์", "mc.qty": "จำนวน",
+  "mc.less": "ลดจำนวน", "mc.more": "เพิ่มจำนวน", "mc.order": "สั่งซื้อ — ยังไม่เปิดขาย", "mc.notifyLine": "แจ้งเตือนฉันทาง LINE",
+  "mc.buyNote": "เปิดสั่งซื้อเมื่อประกาศวันวางขาย ตอนนี้ยังซื้อหรือชำระเงินบนเว็บไซต์นี้ไม่ได้",
+  "mc.k.material": "วัสดุและทรง", "mc.k.guide": "ตารางไซซ์", "mc.k.delivery": "การจัดส่ง", "mc.k.returns": "การคืนสินค้าและติดต่อ",
+  "mc.more2": "เมิร์ชอื่น ๆ", "mc.empty": "ยังไม่มีสินค้าจำหน่าย", "mc.dropNote": "ข้อมูลทั้งหมดในหน้านี้เป็นตัวอย่างจนกว่า Certified จะประกาศรายละเอียดจริง",
+  "bk.type": "ประเภทการจอง", "ev.bkk": "กรุงเทพฯ", "ev.thai": "ประเทศไทย", "ev.tz": "เวลากรุงเทพฯ GMT+7",
+  "ar.confirmed": "ยืนยันแล้ว", "ev.credit": "อาร์ตเวิร์กทางการ — จาก @certified_v10",
   "lost.t1": "หลง", "lost.t2": "ทางแล้ว", "lost.d": "ไม่พบหน้านี้ ลองเริ่มจากหน้าแรก หรือดูไลน์อัพ",
 };
 events.forEach(evKeys);
+TH["ar.upd"] = "อัปเดตตารางเมื่อ " + longDateTH(scheduleUpdated) + ".";
 
 /* ---------- page frame ---------- */
 function head({ title, desc, pathRel, image, ld = [], noindex = false }) {
@@ -324,8 +332,9 @@ for (const a of artists) {
     <p class="next__date"><span class="next__day">${dayNum(nextEv.start)}</span><span class="next__mon meta" data-i18n="ev.mon.${nextEv.slug}">${monYr(nextEv.start)}</span></p>
     <div>
       <h3 class="next__title"><a href="${BASE}events/${nextEv.slug}/">${h(nextEv.title)}</a></h3>
-      <p class="next__meta meta"><span data-i18n="ev.date.${nextEv.slug}">${h(nextEv.dateText.en)}</span> · ${h(nextEv.venue)} · ${cityHTML(nextEv.city)}</p>
-      <p class="next__tba meta">${nextEv.allDay ? "" : `<span data-i18n="ev.time.${nextEv.slug}">${h(nextEv.timeText.en)}</span> · `}<span data-i18n="ev.setTimes">Individual set times not announced</span></p>
+      <p class="next__meta meta"><span data-i18n="ev.date.${nextEv.slug}">${h(nextEv.dateText.en)}</span> · ${h(nextEv.venue)} · ${placeHTML(nextEv)}</p>
+      <p class="next__tba meta">${nextEv.allDay ? "" : `<span data-i18n="ev.time.${nextEv.slug}">${h(nextEv.timeText.en)}</span> (${tzHTML}) · `}<span data-i18n="ev.setTimes">Individual set times not announced</span></p>
+      <p class="next__status"><span class="tag tag--red" data-i18n="ar.confirmed">Confirmed</span></p>
     </div>
     <div class="next__side">
       ${nextEv.allDay ? "" : `<p class="next__label meta" data-i18n="ar.doorsIn">Doors in</p><p class="next__count" data-count="${Date.parse(nextEv.start)}">—</p>`}
@@ -350,7 +359,7 @@ for (const a of artists) {
       <ul class="slist" id="slist">
 ${confirmed.map((e) => `        <li class="slist__row"><p class="slist__date" data-i18n="ev.date.${e.slug}">${h(e.dateText.en)}</p><div><p class="slist__venue"><a href="${BASE}events/${e.slug}/">${h(e.title)}</a></p><p class="slist__time meta">${h(e.venue)}</p></div><span class="tag tag--red">Confirmed</span></li>`).join("\n") || '        <li class="sched__empty">No dates announced yet.</li>'}
       </ul>
-      <p class="sched__note meta" data-i18n="ar.posterCap">The poster is drawn from this list, so the two always match.</p>
+      <p class="sched__note meta"><span data-i18n="ar.posterCap">The poster is drawn from this list, so the two always match.</span> <span data-i18n="ar.upd">Schedule updated ${h(longDate(scheduleUpdated))}.</span></p>
     </div>
   </div>
 </section>
@@ -398,7 +407,7 @@ ${others.map((o) => `    <li><a href="${BASE}artists/${o.id}/"><img src="${BASE}
     },
     main,
     data: {
-      artist: { id: a.id, name: a.name, logo: a.logo },
+      artist: { id: a.id, name: a.name, logo: a.logo }, updated: scheduleUpdated,
       events: upcoming.filter((e) => (e.unit || []).includes(a.id)).map((e) => ({ title: e.title, venue: e.venue, start: e.start, allDay: !!e.allDay, url: `${BASE}events/${e.slug}/` })),
     },
     extra: dialog,
@@ -483,8 +492,8 @@ for (const e of events) {
   if (e.tickets) { TH[`ev.tk.${e.slug}`] = e.tickets.text.th; TH[`ev.tkBtn.${e.slug}`] = TH["ev.tickets"].replace("{p}", e.tickets.label); }
   const rows = [
     ["ev.k.date", "Date", `<span data-i18n="ev.date.${e.slug}">${h(e.dateText.en)}</span>`],
-    e.timeText ? ["ev.k.time", "Time", `<span data-i18n="ev.time.${e.slug}">${h(e.timeText.en)}</span>`] : null,
-    ["ev.k.venue", "Venue", `${h(e.venue)} — ${cityHTML(e.city)}`],
+    e.timeText ? ["ev.k.time", "Time", `<span data-i18n="ev.time.${e.slug}">${h(e.timeText.en)}</span> (${tzHTML})`] : null,
+    ["ev.k.venue", "Venue", `${h(e.venue)} — ${placeHTML(e)}`],
     ["ev.k.by", "Presented by", h(e.organiser)],
     e.headliner ? ["ev.k.head", "Headliner", h(e.headliner)] : null,
     e.lineup ? ["ev.k.lineup", "Lineup", h(e.lineup)] : null,
@@ -717,13 +726,13 @@ function merchArt(m) {
 }
 merch.items.forEach((m) => { TH[`mc.n.${m.id}`] = m.name.th; TH[`mc.k.${m.id}`] = m.kind.th; TH[`mc.o.${m.id}`] = m.options.th; });
 const merchCard = (m) => `<article class="mcard" data-rev>
-      <div class="mcard__media">
+      <a class="mcard__media" href="${BASE}merch/${m.id}/" tabindex="-1" aria-hidden="true">
         ${m.image ? `<img src="${BASE}${h(m.image)}" alt="${h(m.name.en)}" loading="lazy">` : merchArt(m)}
         ${MERCH_PH ? '<span class="mcard__stamp tag tag--muted" data-i18n="mc.ph">Placeholder</span>' : ""}
-      </div>
+      </a>
       <div class="mcard__body">
         <p class="mcard__kind meta" data-i18n="mc.k.${m.id}">${h(m.kind.en)}</p>
-        <h2 class="mcard__title" data-i18n="mc.n.${m.id}">${h(m.name.en)}</h2>
+        <h2 class="mcard__title"><a href="${BASE}merch/${m.id}/" data-i18n="mc.n.${m.id}">${h(m.name.en)}</a></h2>
         <p class="mcard__price">${m.price ? `<span class="mcard__amt">THB ${Number(m.price).toLocaleString("en-US")}</span>` : '<span class="mcard__amt" aria-hidden="true">THB —</span><span class="mcard__tbc meta" data-i18n="mc.tbc">Price to be announced</span>'}</p>
         <p class="mcard__opts meta" data-i18n="mc.o.${m.id}">${h(m.options.en)}</p>
         <a class="btn mcard__cta" href="${h(lineMsg(`Hi Certified — please let me know when the ${m.name.en} is available. (Sent from the Certified V10 website)`))}" target="_blank" rel="noopener"><span data-i18n="mc.notify">Notify me</span><em aria-hidden="true">↗︎</em></a>
@@ -751,7 +760,7 @@ write("merch/index.html", page({
 <section class="block" aria-labelledby="items-h">
   ${secHead("01", "mc.items", "The goods").replace("<header", '<header id="items-h"')}
   <div class="mgrid">
-    ${merch.items.map(merchCard).join("\n    ")}
+    ${merch.items.length ? merch.items.map(merchCard).join("\n    ") : '<p class="block__lede" data-i18n="mc.empty">Merchandise is not available yet.</p>'}
   </div>
 </section>
 <section class="block" aria-labelledby="drop-h">
@@ -765,6 +774,62 @@ write("merch/index.html", page({
   ${MERCH_PH ? '<p class="jobs__note meta" data-i18n="mc.dropNote">Everything on this page is a placeholder until Certified announces the real drop.</p>' : ""}
 </section>`,
 }));
+
+
+/* one page per product: sizes, quantity, stock and delivery facts in place, ordering switched off until a shop provider is connected */
+const factRow = (k, en) => `<div class="shows__row"><dt class="meta" data-i18n="${k}">${en}</dt><dd><span data-i18n="mc.tba">To be announced</span></dd></div>`;
+merch.items.forEach((m) => {
+  const sizes = m.sizes && m.sizes.length ? m.sizes : null;
+  write(`merch/${m.id}/index.html`, page({
+    kind: "product", current: "merch",
+    headOpts: { title: `${m.name.en} | Merch | CERTIFIED V10`, desc: `${m.name.en} (${m.kind.en.toLowerCase()}) from the Certified V10 merch line — coming soon.`, pathRel: `merch/${m.id}/`, noindex: MERCH_PH },
+    main: `
+<section class="block product" aria-labelledby="product-h">
+  <a class="phead__back meta" href="${BASE}merch/" data-i18n="mc.back">← All merch</a>
+  <div class="product__grid">
+    <figure class="product__media mcard__media">
+      ${m.image ? `<img src="${BASE}${h(m.image)}" alt="${h(m.name.en)}">` : merchArt(m)}
+      ${MERCH_PH ? '<span class="mcard__stamp tag tag--muted" data-i18n="mc.ph">Placeholder</span>' : ""}
+    </figure>
+    <div class="product__info">
+      <p class="mcard__kind meta" data-i18n="mc.k.${m.id}">${h(m.kind.en)}</p>
+      <h1 class="product__title" id="product-h" data-i18n="mc.n.${m.id}">${h(m.name.en)}</h1>
+      <p class="mcard__price">${m.price ? `<span class="mcard__amt">THB ${Number(m.price).toLocaleString("en-US")}</span>` : '<span class="mcard__amt" aria-hidden="true">THB —</span><span class="mcard__tbc meta" data-i18n="mc.tbc">Price to be announced</span>'}</p>
+      <p class="product__stock"><span class="tag tag--muted" data-i18n="mc.stock">Not available yet</span></p>
+      <form class="product__form" id="pform" data-name="${h(m.name.en)}" novalidate>
+        ${sizes ? `<fieldset class="field">
+          <legend class="field__label" data-i18n="mc.size">Size</legend>
+          <div class="picks">
+            ${sizes.map((z, i) => `<label class="pick"><input type="radio" name="size" value="${h(z)}"${i === 1 ? " checked" : ""}><span>${h(z)}</span></label>`).join("\n            ")}
+          </div>
+        </fieldset>` : `<p class="mcard__opts meta" data-i18n="mc.o.${m.id}">${h(m.options.en)}</p>`}
+        <div class="field product__qty">
+          <label for="qty" data-i18n="mc.qty">Quantity</label>
+          <div class="qty"><button type="button" class="qty__btn" data-step="-1" aria-label="Fewer" data-i18n-aria="mc.less">−</button><input id="qty" name="qty" type="number" inputmode="numeric" min="1" max="5" value="1"><button type="button" class="qty__btn" data-step="1" aria-label="More" data-i18n-aria="mc.more">+</button></div>
+        </div>
+        <div class="product__buy">
+          <button class="btn btn--fill" type="button" disabled aria-describedby="buy-note"><span data-i18n="mc.order">Order — not available yet</span></button>
+          <a class="btn" id="notify" href="${h(lineMsg(`Hi Certified — please let me know when the ${m.name.en}${sizes ? ` (size ${sizes[1]})` : ""} is available. (Sent from the Certified V10 website)`))}" target="_blank" rel="noopener"><span data-i18n="mc.notifyLine">Notify me on LINE</span><em aria-hidden="true">↗︎</em></a>
+        </div>
+        <p class="jobs__note meta" id="buy-note" data-i18n="mc.buyNote">Ordering opens when the drop is announced. Nothing can be bought or paid for on this site yet.</p>
+      </form>
+      <dl class="shows__table product__facts">
+        ${factRow("mc.k.material", "Material & fit")}
+        ${sizes ? factRow("mc.k.guide", "Size guide") : ""}
+        ${factRow("mc.k.delivery", "Delivery & dispatch")}
+        ${factRow("mc.k.returns", "Returns & support")}
+      </dl>
+    </div>
+  </div>
+</section>
+<section class="block block--tight" aria-labelledby="more-h">
+  ${secHead("—", "mc.more2", "More merch").replace("<header", '<header id="more-h"')}
+  <ul class="product__more">
+    ${merch.items.filter((o) => o.id !== m.id).map((o) => `<li><a href="${BASE}merch/${o.id}/" data-i18n="mc.n.${o.id}">${h(o.name.en)}</a></li>`).join("\n    ")}
+  </ul>
+</section>`,
+  }));
+});
 
 /* ---------- 404 ---------- */
 write("404.html", page({

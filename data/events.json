@@ -1,21 +1,49 @@
 {
   "_note": "Public events only, with verified facts. Times are Bangkok local with offset. Leave unknown fields out (no guessed end or set times). Status is worked out from the dates.",
+  "updated": "2026-10-29",
   "events": [
     {
       "slug": "wicked-sessions-2026",
       "title": "Wicked Sessions",
-      "subtitle": { "en": "White Claw presents — Halloween in the Wicked Woods", "th": "White Claw presents — ฮาโลวีนในป่า Wicked Woods" },
+      "subtitle": {
+        "en": "White Claw presents — Halloween in the Wicked Woods",
+        "th": "White Claw presents — ฮาโลวีนในป่า Wicked Woods"
+      },
       "start": "2026-10-31T20:00:00+07:00",
-      "dateText": { "en": "Sat 31 Oct 2026", "th": "เสาร์ 31 ต.ค. 2026" },
-      "timeText": { "en": "Doors 20:00 — till very late", "th": "ประตูเปิด 20:00 — จนดึก" },
+      "dateText": {
+        "en": "Sat 31 Oct 2026",
+        "th": "เสาร์ 31 ต.ค. 2026"
+      },
+      "timeText": {
+        "en": "Doors 20:00 — till very late",
+        "th": "ประตูเปิด 20:00 — จนดึก"
+      },
       "venue": "Sphere Hall, 5F, EmSphere",
       "city": "Bangkok",
       "organiser": "White Claw",
       "headliner": "AMANDA SZE",
       "lineup": "NORITA · PAULIE SIRISANT · ELLIA B2B PLUMA · JAHJABOYZ · CERTIFIED",
-      "unit": ["ossy", "mawon", "tew", "wichaya", "maxlerr"],
-      "tickets": { "url": "https://nightify.co/venues/white-claw/events/wicked-sessions-by-white-claw-2026-10-31", "label": "Nightify", "text": { "en": "Regular ฿1,499 · At the door ฿1,899", "th": "Regular ฿1,499 · หน้างาน ฿1,899" } },
-      "poster": { "src": "assets/img/poster-wicked-sessions-2026.jpg", "w": 800, "h": 1000, "credit": "Official artwork — via @certified_v10" },
+      "unit": [
+        "ossy",
+        "mawon",
+        "tew",
+        "wichaya",
+        "maxlerr"
+      ],
+      "tickets": {
+        "url": "https://nightify.co/venues/white-claw/events/wicked-sessions-by-white-claw-2026-10-31",
+        "label": "Nightify",
+        "text": {
+          "en": "Regular ฿1,499 · At the door ฿1,899",
+          "th": "Regular ฿1,499 · หน้างาน ฿1,899"
+        }
+      },
+      "poster": {
+        "src": "assets/img/poster-wicked-sessions-2026.jpg",
+        "w": 800,
+        "h": 1000,
+        "credit": "Official artwork — via @certified_v10"
+      },
       "about": {
         "en": "Halloween in the Wicked Woods — White Claw's Wicked Sessions takes over Sphere Hall, with Amanda Sze on decks and live sax and the full unit on the bill. Free White Claw with every ticket, tarot reading, a darts challenge, a lucky draw and photo spots.",
         "th": "ฮาโลวีนในป่า Wicked Woods — Wicked Sessions โดย White Claw ยึด Sphere Hall พร้อม Amanda Sze ทั้งเปิดเพลงและเป่าแซกโซโฟนสด และยูนิตเต็มทีมขึ้นบิล White Claw ฟรีทุกบัตร ดูไพ่ทาโรต์ ปาเป้า ลัคกี้ดรอว์ และมุมถ่ายรูป"
@@ -26,18 +54,35 @@
     {
       "slug": "certified-x-wingstop-vol-2",
       "title": "Certified × Wingstop Vol. 2",
-      "subtitle": { "en": "Two nights with Wingstop", "th": "สองคืนกับ Wingstop" },
+      "subtitle": {
+        "en": "Two nights with Wingstop",
+        "th": "สองคืนกับ Wingstop"
+      },
       "start": "2026-08-29T00:00:00+07:00",
       "allDay": true,
       "endDate": "2026-08-30",
-      "dateText": { "en": "Sat 29 + Sun 30 Aug 2026", "th": "เสาร์ 29 + อาทิตย์ 30 ส.ค. 2026" },
+      "dateText": {
+        "en": "Sat 29 + Sun 30 Aug 2026",
+        "th": "เสาร์ 29 + อาทิตย์ 30 ส.ค. 2026"
+      },
       "venue": "Samyan Mitrtown",
       "city": "Bangkok",
       "organiser": "Certified × Wingstop",
       "headliner": "YOUNGOHM",
       "lineup": "OSSY · TEW · MAWON · WICHAYA · MAXLERR",
-      "unit": ["ossy", "tew", "mawon", "wichaya", "maxlerr"],
-      "poster": { "src": "assets/img/poster-wingstop-vol-2.jpg", "w": 640, "h": 800, "credit": "Official artwork — via @certified_v10" },
+      "unit": [
+        "ossy",
+        "tew",
+        "mawon",
+        "wichaya",
+        "maxlerr"
+      ],
+      "poster": {
+        "src": "assets/img/poster-wingstop-vol-2.jpg",
+        "w": 640,
+        "h": 800,
+        "credit": "Official artwork — via @certified_v10"
+      },
       "about": {
         "en": "Two nights with Wingstop at Samyan Mitrtown, with YOUNGOHM headlining and the full unit on the decks.",
         "th": "สองคืนกับ Wingstop ที่สามย่านมิตรทาวน์ YOUNGOHM ขึ้นเป็นเฮดไลเนอร์ และยูนิตเต็มทีมคุมเครื่องเล่น"
@@ -47,27 +92,49 @@
     {
       "slug": "after-sun-studio-day-party-2026",
       "title": "Certified Day Party",
-      "subtitle": { "en": "An invite-only day party at After Sun Studio", "th": "เดย์ปาร์ตี้เฉพาะแขกรับเชิญที่ After Sun Studio" },
+      "subtitle": {
+        "en": "An invite-only day party at After Sun Studio",
+        "th": "เดย์ปาร์ตี้เฉพาะแขกรับเชิญที่ After Sun Studio"
+      },
       "start": "2026-07-08T00:00:00+07:00",
       "allDay": true,
-      "dateText": { "en": "Wed 8 Jul 2026", "th": "พุธ 8 ก.ค. 2026" },
+      "dateText": {
+        "en": "Wed 8 Jul 2026",
+        "th": "พุธ 8 ก.ค. 2026"
+      },
       "venue": "After Sun Studio",
       "city": "Bangkok",
       "organiser": "Certified",
-      "unit": ["mawon", "ossy", "tew", "wichaya"],
+      "unit": [
+        "mawon",
+        "ossy",
+        "tew",
+        "wichaya"
+      ],
       "about": {
         "en": "Bringing that signature energy to a day party, Certified hosted an invite-only day party at After Sun Studio, a natural-light studio with an indoor-outdoor garden in the heart of the city. All four DJs played — and every set was filmed.",
         "th": "Certified พาพลังที่เป็นเอกลักษณ์มาสู่เดย์ปาร์ตี้ เฉพาะแขกรับเชิญ ที่ After Sun Studio สตูดิโอแสงธรรมชาติพร้อมสวนในร่มและกลางแจ้งใจกลางเมือง ดีเจทั้งสี่คนขึ้นเล่น และทุกเซ็ตถูกถ่ายไว้"
       },
-      "sets": ["-wxnD5LY9UI", "TOiUBDjO9Yk", "HG6gP2sCCiQ", "3q8sxyGi02Q"]
+      "sets": [
+        "-wxnD5LY9UI",
+        "TOiUBDjO9Yk",
+        "HG6gP2sCCiQ",
+        "3q8sxyGi02Q"
+      ]
     },
     {
       "slug": "wingstop-rave-mbk-2026",
       "title": "Wingstop Rave",
-      "subtitle": { "en": "Certified hosts a DJ party at Wingstop, MBK Center", "th": "Certified จัดปาร์ตี้ดีเจที่ Wingstop, MBK Center" },
+      "subtitle": {
+        "en": "Certified hosts a DJ party at Wingstop, MBK Center",
+        "th": "Certified จัดปาร์ตี้ดีเจที่ Wingstop, MBK Center"
+      },
       "start": "2026-02-18T00:00:00+07:00",
       "allDay": true,
-      "dateText": { "en": "Wed 18 Feb 2026", "th": "พุธ 18 ก.พ. 2026" },
+      "dateText": {
+        "en": "Wed 18 Feb 2026",
+        "th": "พุธ 18 ก.พ. 2026"
+      },
       "venue": "Wingstop, MBK Center",
       "city": "Bangkok",
       "organiser": "Certified × Wingstop",
@@ -76,7 +143,10 @@
         "en": "Certified hosted a DJ party at Wingstop — great food and great beats — with the collective on the decks and DJ TIITO as a Certified Selects guest.",
         "th": "Certified จัดปาร์ตี้ดีเจที่ Wingstop อาหารอร่อยกับบีตดี ๆ โดยมีทีม Certified คุมเครื่องเล่น และ DJ TIITO เป็นแขกรับเชิญในซีรีส์ Certified Selects"
       },
-      "sets": ["0ILM_7NYRcE", "t_EOGmvzqsU"]
+      "sets": [
+        "0ILM_7NYRcE",
+        "t_EOGmvzqsU"
+      ]
     }
   ]
 }

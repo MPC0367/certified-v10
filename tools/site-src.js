@@ -22,9 +22,11 @@
     tba: ["Set time to be announced", "รอประกาศเวลาเซ็ต"], doors: ["Doors {t}", "ประตูเปิด {t}"],
     d: ["d", "วัน"], h: ["h", "ชม."], m: ["m", "น."], s: ["s", "วิ"],
     tonight: ["Tonight", "คืนนี้"], upcoming: ["Upcoming", "เร็ว ๆ นี้"], past: ["Past", "จบแล้ว"],
-    doorsIn: ["Doors in", "ประตูเปิดอีก"], happening: ["Happening now", "กำลังจัดอยู่"], over: ["This event has ended", "งานนี้จบแล้ว"],
+    doorsIn: ["Doors in", "ประตูเปิดอีก"], doorsOpen: ["Doors open — set times not announced", "ประตูเปิดแล้ว — ยังไม่ประกาศเวลาเซ็ต"],
+    onToday: ["On today", "วันนี้มีงาน"], over: ["This date has passed", "วันงานผ่านไปแล้ว"],
+    updated: ["Updated {d}", "อัปเดต {d}"],
     posterPeriod: ["Schedule", "ตารางงาน"], posterDemo: ["Demo data", "ข้อมูลตัวอย่าง"], posterMore: ["+{n} more dates on the site", "+ อีก {n} วันบนเว็บไซต์"],
-    posterFoot: ["Made from the live schedule", "สร้างจากตารางล่าสุด"],
+    posterFoot: ["Drawn from the schedule data", "สร้างจากข้อมูลตารางงาน"],
     posterAlt: ["{a} schedule poster, {p}. The same dates are listed beside it.", "โปสเตอร์ตารางงานของ {a} ช่วง {p} รายการเดียวกันอยู่ข้าง ๆ"],
     noDates: ["No dates announced yet.", "ยังไม่มีการประกาศวันเล่น"],
     play: ["Play set", "เล่นเซ็ต"], playing: ["Playing — {t}", "กำลังเล่น — {t}"],
@@ -45,6 +47,12 @@
 
   /* ---------- language ---------- */
   var langHooks = [];
+  /* the address bar says which language is on screen, so a reload, back or a shared link reopens the same one */
+  function langURL() {
+    if (LANG === "th") params.set("lang", "th"); else params.delete("lang");
+    var q = params.toString();
+    try { history.replaceState(history.state, "", location.pathname + (q ? "?" + q : "") + location.hash); } catch (e) {}
+  }
   function setLang(lang, fromUser) {
     LANG = lang === "th" ? "th" : "en";
     body.setAttribute("data-lang", LANG);
@@ -71,12 +79,7 @@
     });
     if (fromUser) {
       try { localStorage.setItem("cv-lang", LANG); } catch (e) {}
-      /* a shared link must reopen the language on screen */
-      if (params.has("lang")) {
-        params.delete("lang");
-        var q = params.toString();
-        try { history.replaceState(null, "", location.pathname + (q ? "?" + q : "") + location.hash); } catch (e) {}
-      }
+      langURL();
     }
     langHooks.forEach(function (f) { try { f(); } catch (e) {} });
   }
@@ -189,7 +192,7 @@
     }
     o.push('<line x1="80" x2="1000" y1="1254" y2="1254" stroke="#2c2c31" stroke-width="2"/>');
     o.push('<text x="80" y="1300" fill="#5b5a56" font-family="Chakra Petch, Kanit, sans-serif" font-size="22" letter-spacing="3">' + esc(s("posterFoot").toUpperCase()) + "</text>");
-    o.push('<text x="1000" y="1300" text-anchor="end" fill="#5b5a56" font-family="Chakra Petch, Kanit, sans-serif" font-size="22" letter-spacing="3">BANGKOK · ' + esc(fmt(Date.now(), { day: "numeric", month: "short", year: "numeric" }).toUpperCase()) + "</text>");
+    o.push('<text x="1000" y="1300" text-anchor="end" fill="#5b5a56" font-family="Chakra Petch, Kanit, sans-serif" font-size="22" letter-spacing="3">' + esc(s("updated").replace("{d}", fmt(Date.parse(PAGE.updated || "") || Date.now(), { day: "numeric", month: "short", year: "numeric" })).toUpperCase()) + "</text>");
     o.push("</svg>");
     return o.join("");
   }
@@ -234,9 +237,10 @@
       if (!shown) return;
       var el = shown.querySelector("[data-count]");
       if (!el) return;
-      var start = +el.getAttribute("data-count"), now = Date.now();
+      var start = +el.getAttribute("data-count"), now = Date.now(), lab = shown.querySelector(".next__label");
+      if (lab) lab.hidden = now >= start;
       if (now < start) el.innerHTML = '<span class="sr">' + esc(s("doorsIn")) + " " + esc(countText(start - now)) + '</span><span aria-hidden="true">' + countHTML(start - now) + "</span>";
-      else el.textContent = s("happening");
+      else { el.textContent = s("doorsOpen"); el.classList.add("is-open"); }
     }
     render(); tickNext();
     langHooks.push(function () { lastKey = ""; render(); tickNext(); });
@@ -317,7 +321,7 @@
         if (now < start && !ev.allDay) { el.hidden = false; el.innerHTML = '<span class="meta next__label">' + esc(s("doorsIn")) + '</span><p class="next__count" aria-hidden="true">' + countHTML(start - now) + '</p><p class="sr">' + esc(s("doorsIn") + " " + countText(start - now)) + "</p>"; }
         else el.hidden = true;
       }
-      if (state) state.textContent = now >= end ? s("over") : now >= start ? s("happening") : "";
+      if (state) state.textContent = now >= end ? s("over") : now >= start ? s(ev.allDay ? "onToday" : "doorsOpen") : "";
       if (tickets && now >= end) tickets.hidden = true;
     }
     tick(); langHooks.push(tick); every(tick);
@@ -489,6 +493,24 @@
     });
   }
 
+  /* ---------- merch product: the size feeds the "Notify me" message; ordering stays off until a shop is connected ---------- */
+  function merchProduct() {
+    var form = doc.getElementById("pform"); if (!form) return;
+    var notify = doc.getElementById("notify"), qty = form.elements["qty"], name = form.getAttribute("data-name");
+    form.addEventListener("submit", function (e) { e.preventDefault(); });
+    function clamp() { qty.value = Math.min(5, Math.max(1, parseInt(qty.value, 10) || 1)); }
+    form.querySelectorAll(".qty__btn").forEach(function (b) {
+      b.addEventListener("click", function () { qty.value = (parseInt(qty.value, 10) || 1) + +b.getAttribute("data-step"); clamp(); });
+    });
+    qty.addEventListener("change", clamp);
+    function sync() {
+      var sz = form.querySelector('input[name="size"]:checked');
+      var text = "Hi Certified — please let me know when the " + name + (sz ? " (size " + sz.value + ")" : "") + " is available. (Sent from the Certified V10 website)";
+      if (notify) notify.href = "https://line.me/R/oaMessage/%40316ghxsa/?" + encodeURIComponent(text);
+    }
+    form.addEventListener("change", sync); sync();
+  }
+
   /* ---------- shared timer: one interval, paused while the tab is hidden ---------- */
   var tasks = [];
   function every(fn, ms) { tasks.push({ fn: fn, ms: ms || 1000, last: 0 }); }
@@ -557,8 +579,9 @@
   } else revEls.forEach(function (el) { el.classList.add("is-in"); });
 
   /* ---------- boot ---------- */
-  artistPage(); players(); eventsPage(); eventPage(); intake(); booking();
+  artistPage(); players(); eventsPage(); eventPage(); intake(); booking(); merchProduct();
   var saved = null; try { saved = localStorage.getItem("cv-lang"); } catch (e) {}
   var want = params.get("lang") === "th" || params.get("lang") === "en" ? params.get("lang") : saved === "th" ? "th" : "en";
   setLang(want, false);
+  if (want === "th" && params.get("lang") !== "th") langURL();
 })();
