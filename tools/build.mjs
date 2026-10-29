@@ -8,7 +8,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const BASE = "/certified-v10/";
 const ORIGIN = "https://mpc0367.github.io";
-const BUILD = process.env.BUILD_TAG || "Build R31 · 29 Oct 2026";
+const BUILD = process.env.BUILD_TAG || "Build R32 · 29 Oct 2026";
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 const write = (p, s) => { const f = path.join(ROOT, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
 const json = (p) => JSON.parse(read(p));
@@ -224,7 +224,7 @@ ${artists.map((a) => `      <a href="${BASE}artists/${a.id}/">${a.name}</a>`).jo
 function page({ kind, current, headOpts, main, data, extra = "" }) {
   return `${head(headOpts)}
 <body class="page page--${kind}" data-lang="en" data-base="${BASE}">
-<div class="bgfx" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bgfx" aria-hidden="true"><canvas></canvas></div>
 ${header(current)}
 <main id="main">
 ${main}

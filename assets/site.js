@@ -478,44 +478,103 @@ window.CV_LEVELS = [];
   }
 
   /* ---------- YouTube sets: one player at a time, started by the visitor ---------- */
-  /* ---------- background: three soft glows drift as the page scrolls; while a set plays they come alive.
+  /* ---------- background: the field drifts as the page scrolls; while a set plays it comes alive.
      The page can't hear a YouTube player (it is another site's frame), so a set's loudness is measured
      once ahead of time (tools/levels.mjs -> data/levels/<id>.json) and lined up with the player's position:
-     brightness follows the loudness, the pulse follows the bass. A set without a loudness file falls back to
+     brightness follows the loudness, the swell follows the bass. A set without a loudness file falls back to
      a steady pulse while it plays. ---------- */
+  /* A soft field of red light behind the page: five overlapping colour fields and two drifting pools of black,
+     each with a gaussian falloff, drawn on a small canvas and stretched to the window so it stays smooth and cheap.
+     Every field wanders on its own slow, uneven path (two out-of-step waves per axis, random start each visit).
+     draw(tau, t, e, loud, bass): tau is how far along the drift is; e (0–1) lights the field up while a set plays,
+     with loud and bass (0–1) driving brightness and swell. */
+  function bgField(cv) {
+    var ctx = cv && cv.getContext && cv.getContext("2d");
+    if (!ctx) return null;
+    /* r, g, b, strength, radius (share of the long side), home x, home y, swing x, swing y, speed x, speed y */
+    var F = [
+      [255, 49, 23, .10, .52, .80, .16, .30, .30, 1.3, .9],
+      [150, 16, 8, .19, .66, .16, .80, .32, .30, .8, 1.1],
+      [255, 118, 60, .04, .40, .58, .52, .26, .30, 1.7, 1.4],
+      [104, 8, 30, .15, .72, .30, .22, .28, .26, 1.1, .7],
+      [194, 31, 14, .08, .48, .86, .86, .22, .28, .6, 1.6],
+      [11, 11, 12, .70, .52, .55, .40, .30, .28, .9, 1.2],
+      [11, 11, 12, .62, .46, .30, .65, .26, .24, 1.4, .8],
+      [11, 11, 12, .55, .40, .75, .70, .24, .26, 1.2, 1.0]
+    ];
+    var PH = F.map(function () { return [Math.random() * 6.283, Math.random() * 6.283, Math.random() * 6.283, Math.random() * 6.283]; });
+    var G = new Float32Array(257);
+    for (var i = 0; i < 257; i++) G[i] = Math.exp(-i / 32 * 3);
+    var w = 0, h = 0, img = null;
+    function fit() {
+      var W = window.innerWidth, H = window.innerHeight, s = W > 900 ? 10 : 7;
+      w = Math.max(24, Math.ceil(W / s)); h = Math.max(24, Math.ceil(H / s));
+      cv.width = w; cv.height = h;
+      img = ctx.createImageData(w, h);
+    }
+    fit();
+    function draw(tau, t, e, loud, bass) {
+      var T = Math.PI * 2, m = Math.max(w, h), q = [], d = img.data, o = 0, x, y, k;
+      for (k = 0; k < F.length; k++) {
+        var f = F[k], ph = PH[k], ax = T * tau * f[9], ay = T * tau * f[10];
+        var cx = (f[5] + f[7] * (.62 * Math.sin(ax + ph[0]) + .38 * Math.sin(ax * 1.618 + ph[1])) + e * .07 * Math.sin(t * .47 + k * 2.1)) * w;
+        var cy = (f[6] + f[8] * (.62 * Math.sin(ay + ph[2]) + .38 * Math.sin(ay * 1.618 + ph[3])) + e * .06 * Math.cos(t * .39 + k * 1.3)) * h;
+        var r = f[4] * m * (1 + .12 * Math.sin((ax + ay) / 2 + ph[1]) + e * .2 * bass);
+        q.push(cx, cy, 32 / (r * r), f[0] < 20 ? f[3] * (1 - e * .3) : Math.min(.6, f[3] * (1 + e * (.35 + .7 * loud))), f[0], f[1], f[2]);
+      }
+      for (y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
+          var R = 11, Gc = 11, B = 12;
+          for (k = 0; k < q.length; k += 7) {
+            var dx = x - q[k], dy = y - q[k + 1], j = (dx * dx + dy * dy) * q[k + 2];
+            if (j >= 256) continue;
+            var a = q[k + 3] * G[j | 0];
+            R += (q[k + 4] - R) * a; Gc += (q[k + 5] - Gc) * a; B += (q[k + 6] - B) * a;
+          }
+          d[o++] = R; d[o++] = Gc; d[o++] = B; d[o++] = 255;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+    }
+    return { fit: fit, draw: draw };
+  }
+  /* The drift clock: a slow steady creep (a full wander every few minutes), nudged faster while the page scrolls.
+     Idle it redraws about 25 times a second; while scrolling or playing, every frame. */
+  var BG_IDLE = 1 / 200, BG_SCROLL = 0.06;
   var bg = (function () {
-    var els = Array.prototype.slice.call(doc.querySelectorAll(".bgfx i"));
+    var field = bgField(doc.querySelector(".bgfx canvas"));
     var still = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
-    var PATH = [[0.30, 0.44, 1.3, 0.9, 0.6, 0.2], [-0.32, 0.52, 0.8, 1.1, 1.9, 2.4], [0.22, -0.40, 1.7, 1.4, 4.0, 1.0]];
-    var p0 = -1, e = 0, want = 0, raf = 0, source = null, lvL = 0, lvB = 0, live = false;
-    function paint() {
-      raf = 0;
-      var max = Math.max(1, root.scrollHeight - window.innerHeight);
-      var p = Math.min(1, Math.max(0, (window.scrollY || root.scrollTop) / max));
-      p0 = p0 < 0 || still ? p : p0 + (p - p0) * 0.08;
-      e = still ? 0 : e + (want - e) * 0.04;
+    var tau = Math.random() * 20, boost = 0, lastY = window.scrollY || 0, lastT = 0, lastDraw = 0;
+    var e = 0, want = 0, source = null, lvL = 0, lvB = 0, live = false;
+    function frame(now) {
+      var dt = lastT ? Math.min(0.1, (now - lastT) / 1000) : 0;
+      lastT = now;
+      var y = window.scrollY || root.scrollTop, dy = Math.abs(y - lastY);
+      lastY = y;
+      boost += (dy / Math.max(1, window.innerHeight) * BG_SCROLL - boost) * 0.15;
+      tau += dt * BG_IDLE + boost;
+      e += (want - e) * 0.04;
       if (e < 0.002 && want === 0) e = 0;
-      var W = window.innerWidth, H = window.innerHeight, T = Math.PI * 2, t = performance.now() / 1000;
-      /* real levels: quick to rise, slower to fall, like a meter */
+      /* real levels: quick to rise, slower to fall, like a meter; otherwise a steady pulse */
       var r = source && e > 0 ? source() : null;
       live = !!r;
       lvL += ((r ? r.loud : 0) - lvL) * (r && r.loud > lvL ? 0.5 : 0.12);
       lvB += ((r ? r.bass : 0) - lvB) * (r && r.bass > lvB ? 0.6 : 0.16);
-      els.forEach(function (el, i) {
-        var c = PATH[i];
-        var beat = live ? lvB : Math.pow(0.5 + 0.5 * Math.sin(t * T * 1.9 + i * 1.7), 3);
-        var x = c[0] * W * Math.cos(T * p0 * c[2] + c[4]) + e * 0.07 * W * Math.sin(t * 0.47 + i * 2.1);
-        var y = c[1] * H * Math.sin(T * p0 * c[3] + c[5]) + e * 0.06 * H * Math.cos(t * 0.39 + i * 1.3);
-        var k = 1 + 0.18 * Math.sin(T * p0 * (c[2] + c[3]) / 2 + c[4]) + e * (live ? 0.24 * beat * (1 - i * 0.25) + 0.06 * lvL : 0.1 * beat + 0.05 * Math.sin(t * 0.8 + i));
-        el.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) scale(" + k.toFixed(3) + ")";
-        el.style.opacity = (live ? 0.45 + e * 0.55 * lvL : 0.6 + e * (0.25 + 0.15 * beat)).toFixed(3);
-      });
-      if (!still && (Math.abs(p - p0) > 0.0004 || e > 0)) raf = requestAnimationFrame(paint);
+      if (e > 0 || boost > 0.00005 || now - lastDraw > 38) {
+        var t = now / 1000, beat = Math.pow(0.5 + 0.5 * Math.sin(t * Math.PI * 2 * 1.9), 3);
+        field.draw(tau, t, e, live ? lvL : 0.35 + 0.4 * beat, live ? lvB : beat);
+        lastDraw = now;
+      }
+      requestAnimationFrame(frame);
     }
-    function kick() { if (!raf && els.length) raf = requestAnimationFrame(paint); }
-    if (els.length) { window.addEventListener("scroll", kick, { passive: true }); window.addEventListener("resize", kick); paint(); }
+    if (field) {
+      field.draw(tau, 0, 0, 0, 0);
+      /* reduced motion: the field holds still and doesn't react */
+      if (!still) requestAnimationFrame(frame);
+      window.addEventListener("resize", function () { field.fit(); field.draw(tau, 0, e, 0, 0); });
+    }
     return {
-      energy: function (v) { want = v; kick(); },
+      energy: function (v) { want = still ? 0 : v; },
       source: function (fn) { source = fn; },
       level: function () { return e; },
       reading: function () { return live ? { loud: lvL, bass: lvB } : null; }

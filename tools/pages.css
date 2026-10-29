@@ -167,9 +167,10 @@ body[data-lang="th"] .vcard__title { font-family: var(--font-th-disp); font-weig
 .ecard:focus-within { background: var(--panel); }
 
 /* event detail */
-.event { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: clamp(32px, 5vw, 88px); align-items: start; }
+.event { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 88px); align-items: start; }
 .event__count { margin-bottom: clamp(26px, 3vw, 40px); }
-.event__poster { position: sticky; top: calc(var(--nav-h) + 4vh); max-width: 440px; justify-self: end; width: 100%; }
+/* the poster scales with the window: as big as its height allows beside the details */
+.event__poster { position: sticky; top: calc(var(--nav-h) + 4vh); justify-self: end; width: clamp(300px, min(38vw, (100vh - var(--nav-h) - 14vh) * .8), 720px); width: clamp(300px, min(38vw, (100svh - var(--nav-h) - 14vh) * .8), 720px); }
 .event__poster img { width: 100%; border: 1px solid var(--hair); }
 .event__poster figcaption { color: var(--muted); margin-top: 10px; }
 .event__about { color: #C9C5BC; font-size: 16.5px; line-height: 1.75; max-width: 58ch; margin-top: clamp(26px, 3vw, 36px); }
@@ -354,7 +355,7 @@ body[data-lang="th"] .product__more a { font-family: var(--font-th-disp); font-w
   .sched { grid-template-columns: minmax(0, 1fr); }
   .sched .poster-wrap { max-width: 460px; }
   .event { grid-template-columns: minmax(0, 1fr); }
-  .event__poster { position: static; justify-self: start; max-width: 420px; order: 2; }
+  .event__poster { position: static; justify-self: start; width: 100%; max-width: min(100%, (100vh - var(--nav-h) - 10vh) * .8); max-width: min(100%, (100svh - var(--nav-h) - 10vh) * .8); order: 2; }
   .others { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
