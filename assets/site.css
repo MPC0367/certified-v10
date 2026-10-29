@@ -1253,6 +1253,17 @@ body[data-lang="th"] .intake__state { font-family: var(--font-th-disp); font-wei
 .sheet__more a:hover, .sheet__more a:focus-visible { color: var(--red); }
 .nav__links a[aria-current="page"] { color: var(--bone); background-size: 100% 1px; }
 
+/* ---------- sets: the newest set leads the page ---------- */
+.setlead { padding: clamp(24px, 4vh, 48px) var(--mx) clamp(8px, 2vh, 24px); }
+.setlead__wrap { max-width: max(560px, calc((100vh - 210px) * 16 / 9)); max-width: max(560px, calc((100svh - 210px) * 16 / 9)); }
+.setlead__kicker { display: flex; align-items: center; gap: 10px; color: var(--bone-70); margin-bottom: 14px; }
+.setlead__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.setlead__info { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px clamp(24px, 4vw, 64px); align-items: end; margin-top: 22px; }
+.setlead__title { font-family: var(--font-disp); font-size: clamp(34px, 4.6vw, 72px); line-height: .96; text-transform: uppercase; margin-top: 8px; }
+body[data-lang="th"] .setlead__title { font-family: var(--font-th-disp); font-weight: 800; line-height: 1.15; }
+.setlead__muted { color: var(--muted); margin-top: 10px; }
+.setlead .vcard__yt { display: inline-flex; margin-top: 12px; }
+
 /* ---------- merch (placeholders until the real drop) ---------- */
 .mgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(36px, 4vw, 56px) clamp(18px, 2.4vw, 36px); }
 .mcard { display: flex; flex-direction: column; }
@@ -1299,6 +1310,7 @@ body[data-lang="th"] .product__more a { font-family: var(--font-th-disp); font-w
 
 @media (max-width: 900px) {
   .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .setlead__info { grid-template-columns: minmax(0, 1fr); }
   .product__grid { grid-template-columns: minmax(0, 1fr); }
   .product__media { max-width: 520px; }
   .artist { grid-template-columns: minmax(0, 1fr); align-items: start; }
@@ -1311,6 +1323,8 @@ body[data-lang="th"] .product__more a { font-family: var(--font-th-disp); font-w
 }
 @media (max-width: 640px) {
   .mgrid { gap: 32px 14px; }
+  .setlead { padding-top: 16px; }
+  .setlead__media { width: calc(100% + 2 * var(--mx)); margin-inline: calc(-1 * var(--mx)); }
   .mcard__title { font-size: 21px; }
   .mcard__stamp { left: 8px; top: 8px; min-height: 22px; padding: 2px 7px; font-size: 9.5px; }
   .mcard__cta { align-self: stretch; }

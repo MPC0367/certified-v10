@@ -8,7 +8,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const BASE = "/certified-v10/";
 const ORIGIN = "https://mpc0367.github.io";
-const BUILD = process.env.BUILD_TAG || "Build R29 · 29 Oct 2026";
+const BUILD = process.env.BUILD_TAG || "Build R30 · 29 Oct 2026";
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 const write = (p, s) => { const f = path.join(ROOT, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
 const json = (p) => JSON.parse(read(p));
@@ -100,6 +100,7 @@ const TH = {
   "mc.buyNote": "เปิดสั่งซื้อเมื่อประกาศวันวางขาย ตอนนี้ยังซื้อหรือชำระเงินบนเว็บไซต์นี้ไม่ได้",
   "mc.k.material": "วัสดุและทรง", "mc.k.guide": "ตารางไซซ์", "mc.k.delivery": "การจัดส่ง", "mc.k.returns": "การคืนสินค้าและติดต่อ",
   "mc.more2": "เมิร์ชอื่น ๆ", "mc.empty": "ยังไม่มีสินค้าจำหน่าย", "mc.dropNote": "ข้อมูลทั้งหมดในหน้านี้เป็นตัวอย่างจนกว่า Certified จะประกาศรายละเอียดจริง",
+  "st.latest": "เซ็ตล่าสุด", "st.muted": "กำลังเล่นแบบปิดเสียง — เปิดเสียงได้ที่ตัวเล่น",
   "bk.type": "ประเภทการจอง", "ev.bkk": "กรุงเทพฯ", "ev.thai": "ประเทศไทย", "ev.tz": "เวลากรุงเทพฯ GMT+7",
   "ar.confirmed": "ยืนยันแล้ว", "ev.credit": "อาร์ตเวิร์กทางการ — จาก @certified_v10",
   "lost.t1": "หลง", "lost.t2": "ทางแล้ว", "lost.d": "ไม่พบหน้านี้ ลองเริ่มจากหน้าแรก หรือดูไลน์อัพ",
@@ -241,13 +242,18 @@ const title2 = (cls, k1, t1, k2, t2, tag = "h1") => `<${tag} class="display ${cl
   </${tag}>`;
 
 /* ---------- pieces ---------- */
-function videoCard(v, { level = 2, showBy = true } = {}) {
+/* Thai keys for a set's title, byline and recording date */
+function setKeys(v) {
   TH[`st.rec.${v.id}`] = "บันทึกเมื่อ " + longDateTH(v.recorded);
-  const by = v.artists.length
-    ? v.artists.map((id) => `<a href="${BASE}artists/${id}/">${A(id).name}</a>`).join(" · ")
-    : `<span data-i18n="st.by.${v.id}">${h(v.by.en)}</span>`;
   if (!v.artists.length) TH[`st.by.${v.id}`] = v.by.th;
   TH[`st.t.${v.id}`] = v.title.th;
+}
+const setBy = (v) => v.artists.length
+  ? v.artists.map((id) => `<a href="${BASE}artists/${id}/">${A(id).name}</a>`).join(" · ")
+  : `<span data-i18n="st.by.${v.id}">${h(v.by.en)}</span>`;
+function videoCard(v, { level = 2, showBy = true } = {}) {
+  setKeys(v);
+  const by = setBy(v);
   const ev = evBySlug(v.event);
   return `<article class="vcard" data-rev>
       <div class="vcard__media">
@@ -417,9 +423,10 @@ function groupSource() { return "https://www.youtube.com/@certified_v10/about"; 
 TH["ar.doorsIn"] = "ประตูเปิดอีก"; TH["ar.event"] = "รายละเอียดงาน →";
 
 /* ---------- sets ---------- */
+const latestSet = [...sets].sort((a, b) => Date.parse(b.uploaded) - Date.parse(a.uploaded))[0];
 write("sets/index.html", page({
   kind: "sets", current: "sets",
-  headOpts: { title: "DJ sets | CERTIFIED V10", desc: "Full DJ sets from Bangkok collective Certified_V10 — MAWON, OSSY, TEW and WICHAYA, recorded live at After Sun Studio and Wingstop Rave.", pathRel: "sets/", image: "assets/img/sets/-wxnD5LY9UI.jpg",
+  headOpts: { title: "DJ sets | CERTIFIED V10", desc: "Full DJ sets from Bangkok collective Certified_V10 — MAWON, OSSY, TEW and WICHAYA, recorded live at After Sun Studio and Wingstop Rave.", pathRel: "sets/", image: `assets/img/sets/${latestSet.id}.jpg`,
     ld: [{ "@context": "https://schema.org", "@type": "ItemList", name: "Certified_V10 — DJ sets", itemListElement: sets.map((v, i) => ({ "@type": "ListItem", position: i + 1, item: {
       "@type": "VideoObject", name: v.youtubeTitle || v.title.en,
       description: `${v.title.en} — full set from the official Certified V10 YouTube channel, recorded ${longDate(v.recorded)}.`,
@@ -428,6 +435,7 @@ write("sets/index.html", page({
       embedUrl: `https://www.youtube.com/embed/${v.id}`, url: `https://www.youtube.com/watch?v=${v.id}`,
     } })) }] },
   main: `
+${setLead(latestSet)}
 <section class="phead">
   ${secHead("—", "st.label", "DJ sets", "p")}
   ${title2("phead__title", "st.t1", "Hear the", "st.t2", "unit.")}
@@ -435,7 +443,7 @@ write("sets/index.html", page({
 </section>
 <section class="block" aria-label="Sets">
   <div class="vgrid">
-    ${sets.map((v) => videoCard(v)).join("\n    ")}
+    ${sets.filter((v) => v !== latestSet).map((v) => videoCard(v)).join("\n    ")}
   </div>
 </section>
 <section class="block">
@@ -445,6 +453,36 @@ write("sets/index.html", page({
   </div>
 </section>`,
 }));
+
+/* the newest upload leads the sets page as a large player that starts by itself, muted */
+function setLead(v) {
+  setKeys(v);
+  const ev = evBySlug(v.event);
+  return `<section class="setlead" aria-labelledby="lead-t">
+  <div class="setlead__wrap">
+    <p class="setlead__kicker meta"><span class="setlead__dot" aria-hidden="true"></span><span data-i18n="st.latest">Latest set</span></p>
+    <div class="vcard__media setlead__media">
+      <button class="vcard__play" type="button" data-yt="${h(v.id)}" data-title="${h(v.title.en)}" data-autoplay aria-label="${h("Play: " + v.title.en + " (" + mmss(v.seconds) + ")")}">
+        <img src="${BASE}assets/img/sets/${h(v.id)}.jpg" alt="" width="960" height="540" fetchpriority="high">
+        <span class="vcard__badge"><span class="vcard__icon" aria-hidden="true"></span><span class="meta" data-i18n="st.play">Play set</span></span>
+        <span class="vcard__len meta" aria-hidden="true">${mmss(v.seconds)}</span>
+      </button>
+    </div>
+    <div class="setlead__info">
+      <div>
+        <p class="vcard__by meta">${setBy(v)}</p>
+        <p class="setlead__title" id="lead-t" data-i18n="st.t.${v.id}">${h(v.title.en)}</p>
+      </div>
+      <div>
+        <p class="vcard__meta meta">${ev ? `<a href="${BASE}events/${ev.slug}/">${h(ev.title)}</a> · ` : ""}<span data-i18n="st.rec.${v.id}">Recorded ${h(longDate(v.recorded))}</span> · ${mmss(v.seconds)}</p>
+        <p class="vcard__genres meta">${h(v.genres)}</p>
+        <p class="setlead__muted meta" id="lead-muted" hidden data-i18n="st.muted">Playing muted — turn the sound up in the player.</p>
+        <a class="vcard__yt meta" href="https://www.youtube.com/watch?v=${h(v.id)}" target="_blank" rel="noopener"><span data-i18n="st.yt">Watch on YouTube ↗︎</span></a>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
 
 /* ---------- events ---------- */
 const past = events.filter((e) => evEnd(e) <= NOW).sort((a, b) => Date.parse(b.start) - Date.parse(a.start));

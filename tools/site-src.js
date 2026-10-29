@@ -263,25 +263,32 @@
 
   /* ---------- YouTube sets: one player at a time, started by the visitor ---------- */
   function players() {
-    var active = null;
+    var active = null, mutedNote = doc.getElementById("lead-muted");
+    function start(btn, muted) {
+      var id = btn.getAttribute("data-yt"), media = btn.parentNode, title = btn.getAttribute("data-title") || "";
+      if (active && active.media !== media) {
+        active.frame.remove(); active.btn.hidden = false;
+      }
+      var f = doc.createElement("iframe");
+      /* browsers only let a video start by itself with the sound off */
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&playsinline=1&rel=0" + (muted ? "&mute=1" : "");
+      f.title = s("playing").replace("{t}", title);
+      f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      f.allowFullscreen = true;
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      btn.hidden = true;
+      media.appendChild(f);
+      if (!muted) f.focus();
+      if (mutedNote) mutedNote.hidden = !(muted && btn.hasAttribute("data-autoplay"));
+      active = { media: media, frame: f, btn: btn };
+    }
     doc.querySelectorAll("[data-yt]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var id = btn.getAttribute("data-yt"), media = btn.parentNode, title = btn.getAttribute("data-title") || "";
-        if (active && active.media !== media) {
-          active.frame.remove(); active.btn.hidden = false;
-        }
-        var f = doc.createElement("iframe");
-        f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&playsinline=1&rel=0";
-        f.title = s("playing").replace("{t}", title);
-        f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
-        f.allowFullscreen = true;
-        f.referrerPolicy = "strict-origin-when-cross-origin";
-        btn.hidden = true;
-        media.appendChild(f);
-        f.focus();
-        active = { media: media, frame: f, btn: btn };
-      });
+      btn.addEventListener("click", function () { start(btn, false); });
     });
+    /* the newest set on the sets page starts on arrival — not for reduced motion or data saver, where it waits for a tap */
+    var lead = doc.querySelector("[data-yt][data-autoplay]");
+    var calm = (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) || (navigator.connection && navigator.connection.saveData);
+    if (lead && !calm) start(lead, true);
   }
 
   /* ---------- events: upcoming / tonight / past from the clock ---------- */
