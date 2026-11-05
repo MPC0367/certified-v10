@@ -436,46 +436,47 @@
     t.remove();
     return zoomOK;
   }
-  /* The player keeps the video's own 16:9 shape and covers its box completely, the way a photo is cropped to fill a
-     frame: never stretched, never with bars. A box wider than 16:9 (most desktops, phones turned sideways) loses a
-     strip top and bottom; a narrower one a little at the sides. While YouTube's own controls show, the strip comes
-     off the top only, so its control bar along the bottom stays in view. The covering size is an exact 16:9 in whole
-     screen pixels (a multiple of 16 by 9); when the player is scaled with transform it is also an even number of
-     pixels down (a multiple of 32 by 18), because WebKit draws a hairline across the middle of a scaled player whose
-     middle falls between two screen pixels. */
+  /* The boxes are the video's own 16:9 (the sets hero is the largest 16:9 that fits on screen), so the player simply
+     fills its box: never cropped, never stretched. Should a box ever differ from 16:9 (a card held at YouTube's 200px
+     minimum on a very narrow phone), the player keeps its 16:9 and sits whole inside it, centred on the box's black.
+     Sizes are rounded up to whole screen pixels, so at most one pixel runs past the box, out of sight. */
   function fit(f, media, controls) {
     var cs = getComputedStyle(media), bw = parseFloat(cs.width), bh = parseFloat(cs.height);
     if (!bw || !bh) return;
-    var d = window.devicePixelRatio || 1, st = f.style, pw, ph;
-    function cover(step) {
-      var k = step * Math.max(Math.ceil(bw * d / (16 * step) - 0.001), Math.ceil(bh * d / (9 * step) - 0.001));
-      pw = 16 * k / d; ph = 9 * k / d;
-    }
+    var d = window.devicePixelRatio || 1, st = f.style;
+    var cw = Math.min(bw, bh * 16 / 9), ch = cw * 9 / 16;
+    var wd = Math.ceil(cw * d - 0.01), hd = Math.ceil(ch * d - 0.01), pw = wd / d, ph = hd / d;
     function shift(box, size, share) {
       var o = Math.round((box - size) * share * d) / d;
-      if (o + size < box) o = box - size;
+      if (size < box) return o;              /* smaller than the box along this side: centred */
+      if (o + size < box) o = box - size;    /* otherwise it covers the box edge to edge */
       return Math.min(0, o);
     }
-    cover(1);
-    var need = Math.max(1920, pw * d);
+    var need = Math.max(1920, wd);
     var L = STEPS.filter(function (n) { return n >= need; })[0] || 3840;
     if (controls) while (L > pw && pw / L < 0.6) { var i = STEPS.indexOf(L); L = i > 0 ? STEPS[i - 1] : pw; }
     var how = L <= pw ? "" : zoomWorks() ? "zoom" : "transform";
-    if (how === "transform") { cover(2); if (L <= pw) how = ""; }
-    var x = shift(bw, pw, 0.5), y = shift(bh, ph, controls ? 1 : 0.5);
+    /* any overflow is shared evenly; were a real strip ever cut from top or bottom while YouTube's controls show, it
+       comes off the top so the control bar stays whole */
+    var x = shift(bw, pw, 0.5), y = shift(bh, ph, controls && ph - bh > 4 ? 1 : 0.5);
     st.right = st.bottom = "auto";
     st.left = x + "px"; st.top = y + "px";
     if (!how) { st.width = pw + "px"; st.height = ph + "px"; st.zoom = st.transform = ""; return; }
-    var z = pw / L;
-    st.width = L + "px"; st.height = L * 9 / 16 + "px";
+    /* the player itself is laid out at an exact large 16:9 (1920×1080 and so on) and drawn down to its box */
+    var H = L * 9 / 16;
+    st.width = L + "px"; st.height = H + "px";
     if (how === "zoom") {
+      var z = pw / L;
       st.transform = ""; st.zoom = String(z);
       /* zoom scales a frame's own offsets as well in some browsers and not in others: place it, check, and correct */
       st.left = x / z + "px"; st.top = y / z + "px";
       var r = f.getBoundingClientRect(), m = media.getBoundingClientRect();
       if (Math.abs(r.left - m.left - x) > 1 || Math.abs(r.top - m.top - y) > 1) { st.left = x + "px"; st.top = y + "px"; }
     } else {
-      st.zoom = ""; st.transformOrigin = "0 0"; st.transform = "scale(" + z + ")";
+      /* WebKit draws a hairline across the middle of a scaled player whose height does not come to an even number of
+         screen pixels, so the height is scaled to exactly that; across and down then differ by under a pixel's worth */
+      if (hd % 2) hd++;
+      st.zoom = ""; st.transformOrigin = "0 0"; st.transform = "scale(" + (wd / d / L) + "," + (hd / d / H) + ")";
     }
   }
   function players() {
