@@ -418,19 +418,65 @@
      controls show, the scale stays at 0.6 or more so they remain usable; the muted preview has none, so it goes all the way. */
   var STEPS = [1280, 1920, 2560, 3840];
   /* CSS zoom draws the player at the smaller size directly; scaling a picture of it instead (transform) can leave a
-     hairline seam across the video on some screens, so transform is only the fallback for browsers without zoom */
-  var ZOOM = !!(window.CSS && CSS.supports && CSS.supports("zoom", "0.5"));
+     hairline seam across the video on some screens. But WebKit (Safari, and every browser on iPad and iPhone) lays a
+     zoomed frame's page out at the shrunken size and then shrinks it again, so the player sat small in one corner of
+     its frame. A blank test frame shows which kind this browser is: zoom where the frame's page keeps the full size
+     it was given, transform everywhere else. */
+  var zoomOK = null;
+  function zoomWorks() {
+    if (zoomOK !== null) return zoomOK;
+    zoomOK = false;
+    if (!(window.CSS && CSS.supports && CSS.supports("zoom", "0.5"))) return zoomOK;
+    var t = doc.createElement("iframe");
+    t.setAttribute("aria-hidden", "true");
+    t.tabIndex = -1;
+    t.style.cssText = "position:absolute;left:-9999px;top:0;width:400px;height:100px;border:0;visibility:hidden;zoom:0.5";
+    doc.body.appendChild(t);
+    try { zoomOK = Math.abs(t.contentDocument.documentElement.clientWidth - 400) < 2; } catch (x) {}
+    t.remove();
+    return zoomOK;
+  }
+  /* The player keeps the video's own 16:9 shape and covers its box completely, the way a photo is cropped to fill a
+     frame: never stretched, never with bars. A box wider than 16:9 (most desktops, phones turned sideways) loses a
+     strip top and bottom; a narrower one a little at the sides. While YouTube's own controls show, the strip comes
+     off the top only, so its control bar along the bottom stays in view. The covering size is an exact 16:9 in whole
+     screen pixels (a multiple of 16 by 9); when the player is scaled with transform it is also an even number of
+     pixels down (a multiple of 32 by 18), because WebKit draws a hairline across the middle of a scaled player whose
+     middle falls between two screen pixels. */
   function fit(f, media, controls) {
-    var w = media.clientWidth, h = media.clientHeight;
-    if (!w || !h) return;
-    var need = Math.max(1920, w * (window.devicePixelRatio || 1));
-    var L = STEPS.filter(function (x) { return x >= need; })[0] || 3840;
-    if (controls) while (L > w && w / L < 0.6) { var i = STEPS.indexOf(L); L = i > 0 ? STEPS[i - 1] : w; }
-    if (L <= w) { f.style.width = f.style.height = f.style.transform = f.style.zoom = ""; return; }
-    f.style.width = L + "px";
-    f.style.height = Math.round(L * h / w) + "px";
-    if (ZOOM) { f.style.transform = ""; f.style.zoom = String(w / L); }
-    else { f.style.zoom = ""; f.style.transformOrigin = "0 0"; f.style.transform = "scale(" + (w / L) + ")"; }
+    var cs = getComputedStyle(media), bw = parseFloat(cs.width), bh = parseFloat(cs.height);
+    if (!bw || !bh) return;
+    var d = window.devicePixelRatio || 1, st = f.style, pw, ph;
+    function cover(step) {
+      var k = step * Math.max(Math.ceil(bw * d / (16 * step) - 0.001), Math.ceil(bh * d / (9 * step) - 0.001));
+      pw = 16 * k / d; ph = 9 * k / d;
+    }
+    function shift(box, size, share) {
+      var o = Math.round((box - size) * share * d) / d;
+      if (o + size < box) o = box - size;
+      return Math.min(0, o);
+    }
+    cover(1);
+    var need = Math.max(1920, pw * d);
+    var L = STEPS.filter(function (n) { return n >= need; })[0] || 3840;
+    if (controls) while (L > pw && pw / L < 0.6) { var i = STEPS.indexOf(L); L = i > 0 ? STEPS[i - 1] : pw; }
+    var how = L <= pw ? "" : zoomWorks() ? "zoom" : "transform";
+    if (how === "transform") { cover(2); if (L <= pw) how = ""; }
+    var x = shift(bw, pw, 0.5), y = shift(bh, ph, controls ? 1 : 0.5);
+    st.right = st.bottom = "auto";
+    st.left = x + "px"; st.top = y + "px";
+    if (!how) { st.width = pw + "px"; st.height = ph + "px"; st.zoom = st.transform = ""; return; }
+    var z = pw / L;
+    st.width = L + "px"; st.height = L * 9 / 16 + "px";
+    if (how === "zoom") {
+      st.transform = ""; st.zoom = String(z);
+      /* zoom scales a frame's own offsets as well in some browsers and not in others: place it, check, and correct */
+      st.left = x / z + "px"; st.top = y / z + "px";
+      var r = f.getBoundingClientRect(), m = media.getBoundingClientRect();
+      if (Math.abs(r.left - m.left - x) > 1 || Math.abs(r.top - m.top - y) > 1) { st.left = x + "px"; st.top = y + "px"; }
+    } else {
+      st.zoom = ""; st.transformOrigin = "0 0"; st.transform = "scale(" + z + ")";
+    }
   }
   function players() {
     var active = null, preview = null, mutedNote = doc.getElementById("lead-muted");
@@ -442,9 +488,16 @@
       pauseBtn.textContent = s(preview.paused ? "resume" : "pause");
       pauseBtn.setAttribute("aria-pressed", preview.paused ? "true" : "false");
     }
+    /* refit whenever the player's box changes size: the page's styles arriving after the player has started (WebKit
+       can run this script first), the iPad turning, the window resizing. Only once the styles are in, because until
+       then the frame itself sets the box's height and refitting would chase its own tail. */
+    var boxWatch = window.ResizeObserver ? new ResizeObserver(function () {
+      if (active && getComputedStyle(active.frame).position === "absolute") fit(active.frame, active.media, active.controls);
+    }) : null;
     function start(btn, muted, at) {
       var id = btn.getAttribute("data-yt"), media = btn.parentNode, title = btn.getAttribute("data-title") || "";
       if (active) { active.frame.remove(); active.btn.hidden = false; bg.energy(0); }
+      if (boxWatch) { boxWatch.disconnect(); boxWatch.observe(media); }
       preview = null;
       if (ctrl) ctrl.hidden = true;
       /* enablejsapi: the player reports play/pause (and the preview's position) back to the page */

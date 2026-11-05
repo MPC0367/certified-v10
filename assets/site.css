@@ -1271,7 +1271,7 @@ body[data-lang="th"] .intake__state { font-family: var(--font-th-disp); font-wei
 /* ---------- sets: the newest set leads the page ---------- */
 /* the player spans the full width straight under the nav; on very wide screens it stops at the bottom of the window */
 .setlead { padding: 0 0 clamp(8px, 2vh, 24px); }
-.setlead .setlead__media { width: 100%; aspect-ratio: auto; height: min(56.25vw, calc(100vh - var(--nav-h))); height: min(56.25vw, calc(100svh - var(--nav-h))); min-height: 200px; }
+.setlead .setlead__media { width: 100%; aspect-ratio: auto; height: min(56.25vw, calc(100vh - var(--nav-h) - var(--hud-h))); height: min(56.25vw, calc(100svh - var(--nav-h) - var(--hud-h))); min-height: 200px; } /* between the top bar and the bottom bar, so nothing of the player sits under either */
 .setlead__kicker, .setlead__info { padding-inline: var(--mx); }
 .setlead__kicker { display: flex; align-items: center; gap: 10px; color: var(--bone-70); margin-top: 22px; }
 .setlead__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
