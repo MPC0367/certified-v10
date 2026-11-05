@@ -942,18 +942,14 @@ html.intro-on .hero [data-rev] { transition-delay: calc(1.65s + var(--d, 0s)); }
    R27 — links into the artist, sets, events, booking and internship pages
    ============================================================ */
 .op__head { position: relative; }
-a.op__name { display: block; }
-a.op__name:focus-visible { outline-offset: 6px; }
-.op__go {
-  position: absolute; right: 0; top: 50%; translate: 0 -50%; white-space: nowrap;
-  color: var(--red); opacity: 0; pointer-events: none; transition: opacity .2s ease;
+/* R37 — a DJ's name is a button that picks them; their page is behind View profile */
+button.op__name { display: block; margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button.op__name:focus-visible { outline-offset: 6px; }
+.op__head { cursor: pointer; }
+@media (min-width: 901px) {
+  .op.is-on { background: var(--panel-see); }
+  .op.is-on .op__name img { transform: translateX(10px); }
 }
-.op__role { transition: opacity .2s ease; }
-@media (hover: hover) and (min-width: 901px) {
-  .op:hover .op__go, a.op__name:focus-visible .op__go { opacity: 1; }
-  .op:hover .op__role { opacity: 0; }
-}
-@media (max-width: 900px) { .op__go { display: none; } }
 .op__more { display: none; }
 @media (max-width: 900px) {
   .op__more { display: flex; align-items: center; min-height: 44px; margin: -8px 0 10px 76px; color: var(--red); }
